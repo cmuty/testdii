@@ -11,12 +11,24 @@ struct DocumentsView: View {
             VStack(spacing: 24) {
                 Spacer()
                 
-                DocumentCard(user: user)
-                    .padding(.horizontal, 24)
+                // Carousel з документами
+                TabView(selection: $currentPage) {
+                    // єДокумент
+                    DocumentCard(user: user)
+                        .padding(.horizontal, 40)
+                        .tag(0)
+                    
+                    // Картка платника податків
+                    TaxCard(user: user)
+                        .padding(.horizontal, 40)
+                        .tag(1)
+                }
+                .tabViewStyle(.page(indexDisplayMode: .never))
+                .frame(height: 600)
                 
                 // Page indicator
                 HStack(spacing: 8) {
-                    ForEach(0..<5) { index in
+                    ForEach(0..<2) { index in
                         Capsule()
                             .fill(Color.white.opacity(index == currentPage ? 0.9 : 0.4))
                             .frame(width: index == currentPage ? 32 : 8, height: 8)
