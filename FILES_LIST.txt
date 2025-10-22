@@ -1,0 +1,63 @@
+📂 Файлы проекта Дія iOS
+
+✅ СОЗДАНЫ В C:\Users\nutip\OneDrive\Desktop\DiiaApp\
+
+1. DiiaApp.swift                                    ✓
+2. ContentView.swift                                ✓
+
+Managers/
+3. AuthManager.swift                                ✓
+
+Models/
+4. User.swift                                       ✓
+
+Components/
+5. AnimatedGradientBackground.swift                 ✓
+6. GlassmorphicCard.swift                           ✓
+7. DocumentCard.swift                               ✓
+
+Utilities/
+8. Color+Hex.swift                                  ✓
+
+Views/
+9. WelcomeView.swift                                ✓
+10. AuthView.swift                                  ✓
+11. DocumentsView.swift                             ✓
+12. HomeView.swift                                  ✓
+13. MainTabView.swift                               ✓
+
+Configuration/
+14. Info.plist                                      ✓
+15. ExportOptions.plist                             ✓
+16. codemagic.yaml                                  ✓
+
+Documentation/
+17. README.md                                       ✓
+18. FILES_LIST.txt                                  ✓ (этот файл)
+
+---
+
+📋 ЧТО ДЕЛАТЬ ДАЛЬШЕ:
+
+1. Открой Xcode
+2. File → New → Project
+3. iOS → App
+4. Product Name: DiiaApp
+5. Interface: SwiftUI
+6. Создай папки в Xcode:
+   - Managers/
+   - Models/
+   - Views/
+   - Components/
+   - Utilities/
+
+7. Перетащи файлы из Desktop\DiiaApp в Xcode
+8. Замени Info.plist
+9. Нажми ⌘R - готово!
+
+---
+
+💡 БЫСТРЫЙ ПУТЬ:
+
+Просто скопируй все файлы в новый Xcode проект!
+
