@@ -33,31 +33,37 @@ Configuration/
 
 Documentation/
 17. README.md                                       ✓
-18. FILES_LIST.txt                                  ✓ (этот файл)
+18. CODEMAGIC_GUIDE.md                              ✓ Подробный гайд по Codemagic
+19. QUICK_START.md                                  ✓ Быстрый старт
+20. FIX_BUNDLE_ID.md                                ✓ Исправление Bundle ID
+21. FILES_LIST.txt                                  ✓ (этот файл)
 
 ---
 
-📋 ЧТО ДЕЛАТЬ ДАЛЬШЕ:
+📋 БИЛД ЧЕРЕЗ CODEMAGIC (рекомендуется):
 
-1. Открой Xcode
-2. File → New → Project
-3. iOS → App
-4. Product Name: DiiaApp
-5. Interface: SwiftUI
-6. Создай папки в Xcode:
-   - Managers/
-   - Models/
-   - Views/
-   - Components/
-   - Utilities/
+1. Создай Xcode проект локально (для структуры)
+2. Добавь все .swift файлы
+3. Замени Info.plist
+4. Проверь: ⌘B (должно собраться)
+5. Загрузи на GitHub
+6. Подключи к Codemagic
+7. Настрой Code Signing
+8. Start build!
+9. Получи .ipa на email
 
-7. Перетащи файлы из Desktop\DiiaApp в Xcode
-8. Замени Info.plist
-9. Нажми ⌘R - готово!
+📖 Читай: QUICK_START.md - быстрая инструкция (10 мин)
+📖 Или: CODEMAGIC_GUIDE.md - полный гайд
 
 ---
 
-💡 БЫСТРЫЙ ПУТЬ:
+⚙️ ЧТО НАСТРОЕНО ДЛЯ CODEMAGIC:
 
-Просто скопируй все файлы в новый Xcode проект!
+✅ codemagic.yaml - готов к билду
+✅ Bundle ID: com.nutipov.diia
+✅ Email: nutipovottakvot@gmail.com
+✅ Automatic signing
+✅ Development build
+
+💡 Если хочешь свой Bundle ID - измени в codemagic.yaml!
 

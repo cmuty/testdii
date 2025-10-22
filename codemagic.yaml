@@ -7,39 +7,41 @@ workflows:
     environment:
       ios_signing:
         distribution_type: development
-        bundle_identifier: com.yourteam.diia
+        bundle_identifier: com.nutipov.diia
       
       vars:
-        XCODE_WORKSPACE: "DiiaApp.xcworkspace"
+        XCODE_PROJECT: "DiiaApp.xcodeproj"
         XCODE_SCHEME: "DiiaApp"
-        APP_ID: "com.yourteam.diia"
+        BUNDLE_ID: "com.nutipov.diia"
       
-      xcode: latest
+      xcode: 15.0
       cocoapods: default
     
     scripts:
-      - name: Install dependencies
+      - name: Set Bundle ID
         script: |
-          # Если используешь CocoaPods
-          # pod install
+          echo "Building with Bundle ID: $BUNDLE_ID"
           
       - name: Build iOS app
         script: |
           xcodebuild \
-            -workspace "$XCODE_WORKSPACE" \
+            -project "$XCODE_PROJECT" \
             -scheme "$XCODE_SCHEME" \
             -sdk iphoneos \
             -configuration Release \
             -archivePath $HOME/Library/Developer/Xcode/Archives/DiiaApp.xcarchive \
-            archive
+            clean archive \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO
       
       - name: Export IPA
         script: |
           xcodebuild \
-            -exportArchive \
             -archivePath $HOME/Library/Developer/Xcode/Archives/DiiaApp.xcarchive \
-            -exportOptionsPlist ExportOptions.plist \
-            -exportPath build/ios/ipa
+            -exportArchive \
+            -exportPath build/ios/ipa \
+            -exportOptionsPlist ExportOptions.plist
     
     artifacts:
       - build/ios/ipa/*.ipa
