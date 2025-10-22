@@ -88,7 +88,7 @@ struct DocumentCard: View {
                 .padding(.bottom, 24)
             }
         }
-        .frame(maxWidth: 340, minHeight: 520)
+        .frame(maxWidth: 340, minHeight: 560)
     }
 }
 
@@ -98,28 +98,7 @@ struct MarqueeText: View {
     let text = "Документ діє під час воєнного стану. Ой у лузі червона калина похилилася, чогось наша славна Україна зажурилася. А ми ту червону калину підіймемо, а ми нашу славну Україну, гей, гей, розвеселимо! А ми тую червону калину підіймемо, а ми нашу славну Україну, гей, гей, розвеселимо! "
     
     var body: some View {
-        GeometryReader { geometry in
-            HStack(spacing: 0) {
-                ForEach(0..<4) { _ in
-                    Text(text)
-                        .font(.system(size: 14, weight: .semibold, design: .default))
-                        .foregroundColor(Color(hex: "111111"))
-                }
-            }
-            .frame(width: geometry.size.width * 4, height: 32)
-            .offset(x: offset)
-            .onAppear {
-                let textWidth = geometry.size.width
-                withAnimation(
-                    Animation.linear(duration: 35)
-                        .repeatForever(autoreverses: false)
-                ) {
-                    offset = -textWidth * 2
-                }
-            }
-        }
-        .frame(height: 32)
-        .background(
+        ZStack {
             LinearGradient(
                 colors: [
                     Color(hex: "a4eb97"),
@@ -129,7 +108,30 @@ struct MarqueeText: View {
                 startPoint: .leading,
                 endPoint: .trailing
             )
-        )
+            
+            GeometryReader { geometry in
+                Text(text + text + text)
+                    .font(.system(size: 14, weight: .semibold, design: .default))
+                    .foregroundColor(Color(hex: "111111"))
+                    .lineLimit(1)
+                    .fixedSize(horizontal: true, vertical: false)
+                    .frame(height: 32)
+                    .offset(x: offset)
+                    .onAppear {
+                        let textWidth = (text as NSString).size(
+                            withAttributes: [.font: UIFont.systemFont(ofSize: 14, weight: .semibold)]
+                        ).width
+                        
+                        withAnimation(
+                            Animation.linear(duration: 40)
+                                .repeatForever(autoreverses: false)
+                        ) {
+                            offset = -textWidth
+                        }
+                    }
+            }
+        }
+        .frame(height: 32)
         .clipped()
     }
 }
