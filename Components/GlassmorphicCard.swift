@@ -18,17 +18,45 @@ struct GlassmorphicCard<Content: View>: View {
     var body: some View {
         content
             .background(
-                RoundedRectangle(cornerRadius: cornerRadius)
-                    .fill(Color.white.opacity(opacity))
-                    .background(
-                        RoundedRectangle(cornerRadius: cornerRadius)
-                            .fill(.ultraThinMaterial)
-                    )
-                    .overlay(
-                        RoundedRectangle(cornerRadius: cornerRadius)
-                            .stroke(Color.white.opacity(0.3), lineWidth: 1)
-                    )
-                    .shadow(color: .black.opacity(0.22), radius: 15, x: 0, y: 10)
+                ZStack {
+                    // Основний glassmorphic фон
+                    RoundedRectangle(cornerRadius: cornerRadius)
+                        .fill(.ultraThinMaterial.opacity(0.6))
+                    
+                    // Білий напівпрозорий шар
+                    RoundedRectangle(cornerRadius: cornerRadius)
+                        .fill(Color.white.opacity(opacity))
+                    
+                    // Дзеркальний блиск (градієнт зверху)
+                    RoundedRectangle(cornerRadius: cornerRadius)
+                        .fill(
+                            LinearGradient(
+                                colors: [
+                                    Color.white.opacity(0.4),
+                                    Color.white.opacity(0.1),
+                                    Color.clear
+                                ],
+                                startPoint: .top,
+                                endPoint: .center
+                            )
+                        )
+                }
+                .overlay(
+                    RoundedRectangle(cornerRadius: cornerRadius)
+                        .stroke(
+                            LinearGradient(
+                                colors: [
+                                    Color.white.opacity(0.6),
+                                    Color.white.opacity(0.2)
+                                ],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            ),
+                            lineWidth: 1.5
+                        )
+                )
+                .shadow(color: .black.opacity(0.15), radius: 20, x: 0, y: 10)
+                .shadow(color: .white.opacity(0.5), radius: 5, x: 0, y: -2)
             )
     }
 }

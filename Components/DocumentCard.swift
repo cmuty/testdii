@@ -4,7 +4,7 @@ struct DocumentCard: View {
     let user: User
     
     var body: some View {
-        GlassmorphicCard(cornerRadius: 32, opacity: 0.4) {
+        GlassmorphicCard(cornerRadius: 32, opacity: 0.15) {
             VStack(alignment: .leading, spacing: 0) {
                 // Верхняя часть с фото и данными
                 VStack(alignment: .leading, spacing: 0) {
@@ -12,39 +12,39 @@ struct DocumentCard: View {
                     Text("єДокумент")
                         .font(.system(size: 28, weight: .semibold))
                         .foregroundColor(.black)
-                        .padding(.bottom, 24)
+                        .padding(.bottom, 28)
                     
                     // Фото + данные
                     HStack(alignment: .top, spacing: 20) {
-                        // Фото
+                        // Фото (увеличено)
                         RoundedRectangle(cornerRadius: 16)
                             .fill(Color.gray.opacity(0.2))
-                            .frame(width: 120, height: 156)
+                            .frame(width: 140, height: 182)
                             .overlay(
                                 Image(systemName: "person.fill")
-                                    .font(.system(size: 50))
+                                    .font(.system(size: 60))
                                     .foregroundColor(.gray.opacity(0.5))
                             )
                         
                         // Данные
-                        VStack(alignment: .leading, spacing: 12) {
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text("Дата\nнародження:")
+                        VStack(alignment: .leading, spacing: 16) {
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text("Дата")
                                     .font(.system(size: 15, weight: .medium))
                                     .foregroundColor(.black)
-                                    .lineSpacing(2)
-                                
-                                Text(user.birthDate)
+                                Text("народження:")
+                                    .font(.system(size: 15, weight: .medium))
+                                    .foregroundColor(.black)
+                                Text("07.01.2010")
                                     .font(.system(size: 15, weight: .medium))
                                     .foregroundColor(.black)
                             }
                             
-                            VStack(alignment: .leading, spacing: 2) {
+                            VStack(alignment: .leading, spacing: 4) {
                                 Text("РНОКПП:")
                                     .font(.system(size: 15, weight: .medium))
                                     .foregroundColor(.black)
-                                
-                                Text(user.taxId)
+                                Text("4018401651")
                                     .font(.system(size: 15, weight: .medium))
                                     .foregroundColor(.black)
                             }
@@ -53,26 +53,25 @@ struct DocumentCard: View {
                         
                         Spacer()
                     }
-                    .padding(.bottom, 24)
+                    .padding(.bottom, 40)
                 }
                 .padding(.horizontal, 24)
-                .padding(.top, 24)
+                .padding(.top, 28)
                 
                 // Бегущая строка
                 MarqueeText()
                 
                 // ФИО и кнопка
                 HStack(alignment: .bottom) {
-                    VStack(alignment: .leading, spacing: 4) {
+                    VStack(alignment: .leading, spacing: 2) {
                         Text(user.lastName)
-                            .font(.system(size: 30, weight: .semibold))
+                            .font(.system(size: 30, weight: .regular))
                         Text(user.firstName)
-                            .font(.system(size: 30, weight: .semibold))
+                            .font(.system(size: 30, weight: .regular))
                         Text(user.patronymic)
-                            .font(.system(size: 30, weight: .semibold))
+                            .font(.system(size: 30, weight: .regular))
                     }
                     .foregroundColor(.black)
-                    .lineSpacing(-2)
                     
                     Spacer()
                     
@@ -85,11 +84,11 @@ struct DocumentCard: View {
                     }
                 }
                 .padding(.horizontal, 24)
-                .padding(.top, 20)
-                .padding(.bottom, 28)
+                .padding(.top, 24)
+                .padding(.bottom, 32)
             }
         }
-        .frame(maxWidth: 380)
+        .frame(maxWidth: 380, minHeight: 520)
     }
 }
 
@@ -107,18 +106,19 @@ struct MarqueeText: View {
                         .foregroundColor(Color(hex: "111111"))
                 }
             }
+            .frame(width: geometry.size.width * 4)
             .offset(x: offset)
             .onAppear {
-                let baseDistance = geometry.size.width
+                let textWidth = geometry.size.width
                 withAnimation(
-                    Animation.linear(duration: 70)
+                    Animation.linear(duration: 60)
                         .repeatForever(autoreverses: false)
                 ) {
-                    offset = -baseDistance * 2
+                    offset = -textWidth * 2
                 }
             }
         }
-        .frame(height: 30)
+        .frame(height: 34)
         .background(
             LinearGradient(
                 colors: [
