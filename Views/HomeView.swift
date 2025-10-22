@@ -2,6 +2,7 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject var authManager: AuthManager
+    let user = User.mock
     
     var body: some View {
         ZStack {
@@ -10,7 +11,7 @@ struct HomeView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
                     // Приветствие
-                    Text("Привіт, \(authManager.userName) 👋")
+                    Text("Привіт, \(user.firstName)! 👋")
                         .font(.system(size: 30, weight: .bold))
                         .padding(.top, 64)
                         .padding(.bottom, 8)

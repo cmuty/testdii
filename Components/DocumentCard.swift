@@ -10,42 +10,42 @@ struct DocumentCard: View {
                 VStack(alignment: .leading, spacing: 0) {
                     // Заголовок
                     Text("єДокумент")
-                        .font(.system(size: 28, weight: .semibold))
+                        .font(.system(size: 24, weight: .semibold))
                         .foregroundColor(.black)
-                        .padding(.bottom, 28)
+                        .padding(.bottom, 20)
                     
                     // Фото + данные
-                    HStack(alignment: .top, spacing: 20) {
-                        // Фото (увеличено)
-                        RoundedRectangle(cornerRadius: 16)
+                    HStack(alignment: .top, spacing: 16) {
+                        // Фото
+                        RoundedRectangle(cornerRadius: 14)
                             .fill(Color.gray.opacity(0.2))
-                            .frame(width: 140, height: 182)
+                            .frame(width: 110, height: 145)
                             .overlay(
                                 Image(systemName: "person.fill")
-                                    .font(.system(size: 60))
+                                    .font(.system(size: 48))
                                     .foregroundColor(.gray.opacity(0.5))
                             )
                         
                         // Данные
-                        VStack(alignment: .leading, spacing: 16) {
-                            VStack(alignment: .leading, spacing: 4) {
+                        VStack(alignment: .leading, spacing: 14) {
+                            VStack(alignment: .leading, spacing: 3) {
                                 Text("Дата")
-                                    .font(.system(size: 15, weight: .medium))
+                                    .font(.system(size: 14, weight: .medium))
                                     .foregroundColor(.black)
                                 Text("народження:")
-                                    .font(.system(size: 15, weight: .medium))
+                                    .font(.system(size: 14, weight: .medium))
                                     .foregroundColor(.black)
                                 Text("07.01.2010")
-                                    .font(.system(size: 15, weight: .medium))
+                                    .font(.system(size: 14, weight: .medium))
                                     .foregroundColor(.black)
                             }
                             
-                            VStack(alignment: .leading, spacing: 4) {
+                            VStack(alignment: .leading, spacing: 3) {
                                 Text("РНОКПП:")
-                                    .font(.system(size: 15, weight: .medium))
+                                    .font(.system(size: 14, weight: .medium))
                                     .foregroundColor(.black)
                                 Text("4018401651")
-                                    .font(.system(size: 15, weight: .medium))
+                                    .font(.system(size: 14, weight: .medium))
                                     .foregroundColor(.black)
                             }
                         }
@@ -53,10 +53,10 @@ struct DocumentCard: View {
                         
                         Spacer()
                     }
-                    .padding(.bottom, 40)
+                    .padding(.bottom, 20)
                 }
-                .padding(.horizontal, 24)
-                .padding(.top, 28)
+                .padding(.horizontal, 20)
+                .padding(.top, 22)
                 
                 // Бегущая строка
                 MarqueeText()
@@ -65,11 +65,11 @@ struct DocumentCard: View {
                 HStack(alignment: .bottom) {
                     VStack(alignment: .leading, spacing: 2) {
                         Text(user.lastName)
-                            .font(.system(size: 30, weight: .regular))
+                            .font(.system(size: 26, weight: .regular))
                         Text(user.firstName)
-                            .font(.system(size: 30, weight: .regular))
+                            .font(.system(size: 26, weight: .regular))
                         Text(user.patronymic)
-                            .font(.system(size: 30, weight: .regular))
+                            .font(.system(size: 26, weight: .regular))
                     }
                     .foregroundColor(.black)
                     
@@ -77,18 +77,18 @@ struct DocumentCard: View {
                     
                     Button(action: {}) {
                         Image(systemName: "ellipsis")
-                            .font(.system(size: 18, weight: .medium))
+                            .font(.system(size: 16, weight: .medium))
                             .foregroundColor(.white)
-                            .frame(width: 36, height: 36)
+                            .frame(width: 32, height: 32)
                             .background(Circle().fill(Color.black))
                     }
                 }
-                .padding(.horizontal, 24)
-                .padding(.top, 24)
-                .padding(.bottom, 32)
+                .padding(.horizontal, 20)
+                .padding(.top, 12)
+                .padding(.bottom, 24)
             }
         }
-        .frame(maxWidth: 380, minHeight: 520)
+        .frame(maxWidth: 360, minHeight: 440)
     }
 }
 
@@ -118,7 +118,7 @@ struct MarqueeText: View {
                 }
             }
         }
-        .frame(height: 34)
+        .frame(height: 32)
         .background(
             LinearGradient(
                 colors: [
