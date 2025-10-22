@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A10000001ABC000100000026"
+               BlueprintIdentifier = "5A0000000000000000000001"
                BuildableName = "DiiaApp.app"
                BlueprintName = "DiiaApp"
                ReferencedContainer = "container:DiiaApp.xcodeproj">
@@ -26,8 +26,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      shouldAutocreateTestPlan = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES">
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -43,7 +42,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A10000001ABC000100000026"
+            BlueprintIdentifier = "5A0000000000000000000001"
             BuildableName = "DiiaApp.app"
             BlueprintName = "DiiaApp"
             ReferencedContainer = "container:DiiaApp.xcodeproj">
@@ -60,7 +59,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A10000001ABC000100000026"
+            BlueprintIdentifier = "5A0000000000000000000001"
             BuildableName = "DiiaApp.app"
             BlueprintName = "DiiaApp"
             ReferencedContainer = "container:DiiaApp.xcodeproj">

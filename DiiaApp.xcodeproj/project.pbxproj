@@ -7,43 +7,43 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A10000001ABC000100000001 /* DiiaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000001ABC000100000002 /* DiiaApp.swift */; };
-		A10000001ABC000100000003 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000001ABC000100000004 /* ContentView.swift */; };
-		A10000001ABC000100000005 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000001ABC000100000006 /* AuthManager.swift */; };
-		A10000001ABC000100000007 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000001ABC000100000008 /* User.swift */; };
-		A10000001ABC000100000009 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000001ABC00010000000A /* Color+Hex.swift */; };
-		A10000001ABC00010000000B /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000001ABC00010000000C /* WelcomeView.swift */; };
-		A10000001ABC00010000000D /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000001ABC00010000000E /* AuthView.swift */; };
-		A10000001ABC00010000000F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000001ABC000100000010 /* HomeView.swift */; };
-		A10000001ABC000100000011 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000001ABC000100000012 /* MainTabView.swift */; };
-		A10000001ABC000100000013 /* DocumentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000001ABC000100000014 /* DocumentsView.swift */; };
-		A10000001ABC000100000015 /* AnimatedGradientBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000001ABC000100000016 /* AnimatedGradientBackground.swift */; };
-		A10000001ABC000100000017 /* DocumentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000001ABC000100000018 /* DocumentCard.swift */; };
-		A10000001ABC000100000019 /* GlassmorphicCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000001ABC00010000001A /* GlassmorphicCard.swift */; };
-		A10000001ABC00010000001F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A10000001ABC000100000030 /* Assets.xcassets */; };
+		2A0000000000000000000001 /* DiiaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0000000000000000000001 /* DiiaApp.swift */; };
+		2A0000000000000000000002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0000000000000000000002 /* ContentView.swift */; };
+		2A0000000000000000000003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B0000000000000000000003 /* Assets.xcassets */; };
+		2A0000000000000000000004 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0000000000000000000004 /* AuthManager.swift */; };
+		2A0000000000000000000005 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0000000000000000000005 /* User.swift */; };
+		2A0000000000000000000006 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0000000000000000000006 /* Color+Hex.swift */; };
+		2A0000000000000000000007 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0000000000000000000007 /* WelcomeView.swift */; };
+		2A0000000000000000000008 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0000000000000000000008 /* AuthView.swift */; };
+		2A0000000000000000000009 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0000000000000000000009 /* HomeView.swift */; };
+		2A000000000000000000000A /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B000000000000000000000A /* MainTabView.swift */; };
+		2A000000000000000000000B /* DocumentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B000000000000000000000B /* DocumentsView.swift */; };
+		2A000000000000000000000C /* AnimatedGradientBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B000000000000000000000C /* AnimatedGradientBackground.swift */; };
+		2A000000000000000000000D /* DocumentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B000000000000000000000D /* DocumentCard.swift */; };
+		2A000000000000000000000E /* GlassmorphicCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B000000000000000000000E /* GlassmorphicCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A10000001ABC000100000002 /* DiiaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiiaApp.swift; sourceTree = "<group>"; };
-		A10000001ABC000100000004 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		A10000001ABC000100000006 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
-		A10000001ABC000100000008 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		A10000001ABC00010000000A /* Color+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
-		A10000001ABC00010000000C /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
-		A10000001ABC00010000000E /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
-		A10000001ABC000100000010 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		A10000001ABC000100000012 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
-		A10000001ABC000100000014 /* DocumentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsView.swift; sourceTree = "<group>"; };
-		A10000001ABC000100000016 /* AnimatedGradientBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedGradientBackground.swift; sourceTree = "<group>"; };
-		A10000001ABC000100000018 /* DocumentCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentCard.swift; sourceTree = "<group>"; };
-		A10000001ABC00010000001A /* GlassmorphicCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassmorphicCard.swift; sourceTree = "<group>"; };
-		A10000001ABC00010000001B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A10000001ABC00010000001C /* DiiaApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiiaApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A10000001ABC000100000030 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2B0000000000000000000001 /* DiiaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiiaApp.swift; sourceTree = "<group>"; };
+		2B0000000000000000000002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		2B0000000000000000000003 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2B0000000000000000000004 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		2B0000000000000000000005 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		2B0000000000000000000006 /* Color+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
+		2B0000000000000000000007 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		2B0000000000000000000008 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
+		2B0000000000000000000009 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		2B000000000000000000000A /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		2B000000000000000000000B /* DocumentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsView.swift; sourceTree = "<group>"; };
+		2B000000000000000000000C /* AnimatedGradientBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedGradientBackground.swift; sourceTree = "<group>"; };
+		2B000000000000000000000D /* DocumentCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentCard.swift; sourceTree = "<group>"; };
+		2B000000000000000000000E /* GlassmorphicCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassmorphicCard.swift; sourceTree = "<group>"; };
+		2B000000000000000000000F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2C0000000000000000000001 /* DiiaApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiiaApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		A10000001ABC00010000001D /* Frameworks */ = {
+		3A0000000000000000000001 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -53,93 +53,93 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A10000001ABC00010000001E /* DiiaApp */ = {
+		4A0000000000000000000001 = {
 			isa = PBXGroup;
 			children = (
-				A10000001ABC00010000001B /* Info.plist */,
-				A10000001ABC000100000002 /* DiiaApp.swift */,
-				A10000001ABC000100000004 /* ContentView.swift */,
-				A10000001ABC00010000001F /* Managers */,
-				A10000001ABC000100000020 /* Models */,
-				A10000001ABC000100000021 /* Views */,
-				A10000001ABC000100000022 /* Components */,
-				A10000001ABC000100000023 /* Utilities */,
-				A10000001ABC000100000030 /* Assets.xcassets */,
+				4A0000000000000000000002 /* DiiaApp */,
+				4A0000000000000000000003 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		A10000001ABC00010000001F /* Managers */ = {
+		4A0000000000000000000002 /* DiiaApp */ = {
 			isa = PBXGroup;
 			children = (
-				A10000001ABC000100000006 /* AuthManager.swift */,
+				2B000000000000000000000F /* Info.plist */,
+				2B0000000000000000000001 /* DiiaApp.swift */,
+				2B0000000000000000000002 /* ContentView.swift */,
+				2B0000000000000000000003 /* Assets.xcassets */,
+				4A0000000000000000000004 /* Managers */,
+				4A0000000000000000000005 /* Models */,
+				4A0000000000000000000006 /* Views */,
+				4A0000000000000000000007 /* Components */,
+				4A0000000000000000000008 /* Utilities */,
 			);
-			path = Managers;
 			sourceTree = "<group>";
 		};
-		A10000001ABC000100000020 /* Models */ = {
+		4A0000000000000000000003 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A10000001ABC000100000008 /* User.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		A10000001ABC000100000021 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				A10000001ABC00010000000C /* WelcomeView.swift */,
-				A10000001ABC00010000000E /* AuthView.swift */,
-				A10000001ABC000100000010 /* HomeView.swift */,
-				A10000001ABC000100000012 /* MainTabView.swift */,
-				A10000001ABC000100000014 /* DocumentsView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		A10000001ABC000100000022 /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				A10000001ABC000100000016 /* AnimatedGradientBackground.swift */,
-				A10000001ABC000100000018 /* DocumentCard.swift */,
-				A10000001ABC00010000001A /* GlassmorphicCard.swift */,
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
-		A10000001ABC000100000023 /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-				A10000001ABC00010000000A /* Color+Hex.swift */,
-			);
-			path = Utilities;
-			sourceTree = "<group>";
-		};
-		A10000001ABC000100000024 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				A10000001ABC00010000001C /* DiiaApp.app */,
+				2C0000000000000000000001 /* DiiaApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A10000001ABC000100000025 = {
+		4A0000000000000000000004 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				A10000001ABC00010000001E /* DiiaApp */,
-				A10000001ABC000100000024 /* Products */,
+				2B0000000000000000000004 /* AuthManager.swift */,
 			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		4A0000000000000000000005 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2B0000000000000000000005 /* User.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4A0000000000000000000006 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2B0000000000000000000007 /* WelcomeView.swift */,
+				2B0000000000000000000008 /* AuthView.swift */,
+				2B0000000000000000000009 /* HomeView.swift */,
+				2B000000000000000000000A /* MainTabView.swift */,
+				2B000000000000000000000B /* DocumentsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4A0000000000000000000007 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				2B000000000000000000000C /* AnimatedGradientBackground.swift */,
+				2B000000000000000000000D /* DocumentCard.swift */,
+				2B000000000000000000000E /* GlassmorphicCard.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		4A0000000000000000000008 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				2B0000000000000000000006 /* Color+Hex.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A10000001ABC000100000026 /* DiiaApp */ = {
+		5A0000000000000000000001 /* DiiaApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A10000001ABC000100000027 /* Build configuration list for PBXNativeTarget "DiiaApp" */;
+			buildConfigurationList = 5A0000000000000000000002 /* Build configuration list for PBXNativeTarget "DiiaApp" */;
 			buildPhases = (
-				A10000001ABC000100000028 /* Sources */,
-				A10000001ABC00010000001D /* Frameworks */,
-				A10000001ABC000100000029 /* Resources */,
+				6A0000000000000000000001 /* Sources */,
+				3A0000000000000000000001 /* Frameworks */,
+				6A0000000000000000000002 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -147,25 +147,25 @@
 			);
 			name = DiiaApp;
 			productName = DiiaApp;
-			productReference = A10000001ABC00010000001C /* DiiaApp.app */;
+			productReference = 2C0000000000000000000001 /* DiiaApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		A10000001ABC00010000002A /* Project object */ = {
+		7A0000000000000000000001 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
-					A10000001ABC000100000026 = {
+					5A0000000000000000000001 = {
 						CreatedOnToolsVersion = 15.0;
 					};
 				};
 			};
-			buildConfigurationList = A10000001ABC00010000002B /* Build configuration list for PBXProject "DiiaApp" */;
+			buildConfigurationList = 7A0000000000000000000002 /* Build configuration list for PBXProject "DiiaApp" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = uk;
 			hasScannedForEncodings = 0;
@@ -173,56 +173,55 @@
 				uk,
 				Base,
 			);
-			mainGroup = A10000001ABC000100000025;
-			productRefGroup = A10000001ABC000100000024 /* Products */;
+			mainGroup = 4A0000000000000000000001;
+			productRefGroup = 4A0000000000000000000003 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A10000001ABC000100000026 /* DiiaApp */,
+				5A0000000000000000000001 /* DiiaApp */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		A10000001ABC000100000029 /* Resources */ = {
+		6A0000000000000000000002 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A10000001ABC00010000001F /* Assets.xcassets in Resources */,
+				2A0000000000000000000003 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		A10000001ABC000100000028 /* Sources */ = {
+		6A0000000000000000000001 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A10000001ABC000100000001 /* DiiaApp.swift in Sources */,
-				A10000001ABC000100000003 /* ContentView.swift in Sources */,
-				A10000001ABC000100000005 /* AuthManager.swift in Sources */,
-				A10000001ABC000100000007 /* User.swift in Sources */,
-				A10000001ABC000100000009 /* Color+Hex.swift in Sources */,
-				A10000001ABC00010000000B /* WelcomeView.swift in Sources */,
-				A10000001ABC00010000000D /* AuthView.swift in Sources */,
-				A10000001ABC00010000000F /* HomeView.swift in Sources */,
-				A10000001ABC000100000011 /* MainTabView.swift in Sources */,
-				A10000001ABC000100000013 /* DocumentsView.swift in Sources */,
-				A10000001ABC000100000015 /* AnimatedGradientBackground.swift in Sources */,
-				A10000001ABC000100000017 /* DocumentCard.swift in Sources */,
-				A10000001ABC000100000019 /* GlassmorphicCard.swift in Sources */,
+				2A0000000000000000000001 /* DiiaApp.swift in Sources */,
+				2A0000000000000000000002 /* ContentView.swift in Sources */,
+				2A0000000000000000000004 /* AuthManager.swift in Sources */,
+				2A0000000000000000000005 /* User.swift in Sources */,
+				2A0000000000000000000006 /* Color+Hex.swift in Sources */,
+				2A0000000000000000000007 /* WelcomeView.swift in Sources */,
+				2A0000000000000000000008 /* AuthView.swift in Sources */,
+				2A0000000000000000000009 /* HomeView.swift in Sources */,
+				2A000000000000000000000A /* MainTabView.swift in Sources */,
+				2A000000000000000000000B /* DocumentsView.swift in Sources */,
+				2A000000000000000000000C /* AnimatedGradientBackground.swift in Sources */,
+				2A000000000000000000000D /* DocumentCard.swift in Sources */,
+				2A000000000000000000000E /* GlassmorphicCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		A10000001ABC00010000002C /* Debug */ = {
+		8A0000000000000000000001 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -255,8 +254,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -271,21 +269,19 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
-		A10000001ABC00010000002D /* Release */ = {
+		8A0000000000000000000002 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -318,8 +314,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -328,16 +323,16 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		A10000001ABC00010000002E /* Debug */ = {
+		8A0000000000000000000003 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -352,7 +347,6 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -367,7 +361,7 @@
 			};
 			name = Debug;
 		};
-		A10000001ABC00010000002F /* Release */ = {
+		8A0000000000000000000004 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -382,7 +376,6 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -400,26 +393,26 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A10000001ABC000100000027 /* Build configuration list for PBXNativeTarget "DiiaApp" */ = {
+		5A0000000000000000000002 /* Build configuration list for PBXNativeTarget "DiiaApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A10000001ABC00010000002E /* Debug */,
-				A10000001ABC00010000002F /* Release */,
+				8A0000000000000000000003 /* Debug */,
+				8A0000000000000000000004 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A10000001ABC00010000002B /* Build configuration list for PBXProject "DiiaApp" */ = {
+		7A0000000000000000000002 /* Build configuration list for PBXProject "DiiaApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A10000001ABC00010000002C /* Debug */,
-				A10000001ABC00010000002D /* Release */,
+				8A0000000000000000000001 /* Debug */,
+				8A0000000000000000000002 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = A10000001ABC00010000002A /* Project object */;
+	rootObject = 7A0000000000000000000001 /* Project object */;
 }
 

@@ -1,18 +1,15 @@
 workflows:
   ios-diia-workflow:
-    name: Дія iOS Build (для Sideloadly/AltStore)
+    name: Diia iOS Build
     max_build_duration: 60
     instance_type: mac_mini_m1
-    
     environment:
       vars:
         XCODE_PROJECT: "DiiaApp.xcodeproj"
         XCODE_SCHEME: "DiiaApp"
         BUNDLE_ID: "com.nutipov.diia"
-      
       xcode: 15.0
       cocoapods: default
-    
     triggering:
       events:
         - push
@@ -20,36 +17,11 @@ workflows:
       branch_patterns:
         - pattern: '*'
           include: true
-    
     scripts:
-      - name: Информация о сборке
+      - name: Build
         script: |
           set -e
           set -x
-          
-          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-          echo "🇺🇦 Сборка Дії для Sideloadly/AltStore"
-          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-          echo "Bundle ID: $BUNDLE_ID"
-          echo "Scheme: $XCODE_SCHEME"
-          echo ""
-          xcodebuild -version
-          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-      
-      - name: Сборка приложения (без подписи)
-        script: |
-          set -e
-          set -x
-          
-          echo "📦 Начинаем сборку..."
-          
-          # Очищаем предыдущие сборки
-          xcodebuild clean \
-            -project "$XCODE_PROJECT" \
-            -scheme "$XCODE_SCHEME"
-          
-          # Создаем архив БЕЗ code signing
-          # Это позволит Sideloadly/AltStore подписать его позже
           xcodebuild archive \
             -project "$XCODE_PROJECT" \
             -scheme "$XCODE_SCHEME" \
@@ -58,81 +30,19 @@ workflows:
             -configuration Release \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
-            CODE_SIGNING_ALLOWED=NO \
-            AD_HOC_CODE_SIGNING_ALLOWED=NO
-          
-          echo "✅ Архив создан успешно!"
+            CODE_SIGNING_ALLOWED=NO
       
-      - name: Создание IPA для Sideloadly/AltStore
+      - name: Create IPA
         script: |
           set -e
           set -x
-          
-          echo "📱 Создаем IPA файл..."
-          
-          # Создаем директорию для IPA
           mkdir -p "$HOME/build/ipa"
-          
-          # Проверяем наличие приложения в архиве
-          APP_PATH="$HOME/build/DiiaApp.xcarchive/Products/Applications/DiiaApp.app"
-          
-          if [ -d "$APP_PATH" ]; then
-            echo "✅ Приложение найдено: $APP_PATH"
-            
-            # Создаем Payload директорию (стандарт для iOS IPA)
-            cd "$HOME/build"
-            mkdir -p Payload
-            
-            # Копируем приложение в Payload
-            cp -r "$APP_PATH" Payload/
-            
-            # Упаковываем в IPA
-            echo "📦 Упаковываем в IPA..."
-            zip -r "$HOME/build/ipa/DiiaApp.ipa" Payload
-            
-            # Очищаем временные файлы
-            rm -rf Payload
-            
-            # Проверяем результат
-            if [ -f "$HOME/build/ipa/DiiaApp.ipa" ]; then
-              echo ""
-              echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-              echo "✅ IPA создан успешно!"
-              echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-              echo "📁 Расположение: $HOME/build/ipa/DiiaApp.ipa"
-              echo "📊 Размер файла:"
-              ls -lh "$HOME/build/ipa/DiiaApp.ipa"
-              echo ""
-              echo "📲 Установка:"
-              echo "   1. Скачай DiiaApp.ipa из Artifacts"
-              echo "   2. Открой Sideloadly или AltStore"
-              echo "   3. Перетащи IPA и введи свой Apple ID"
-              echo "   4. Готово! 🇺🇦"
-              echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-            else
-              echo "❌ Ошибка: IPA не был создан"
-              exit 1
-            fi
-          else
-            echo "❌ Ошибка: Приложение не найдено в архиве"
-            echo "Проверяем содержимое архива:"
-            ls -la "$HOME/build/DiiaApp.xcarchive/Products/Applications/" || echo "Директория не найдена"
-            exit 1
-          fi
-      
-      - name: Информация о файлах
-        script: |
-          echo ""
-          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-          echo "📦 Созданные файлы:"
-          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-          echo ""
-          echo "📱 IPA файл:"
-          ls -lh "$HOME/build/ipa/" || echo "IPA не найден"
-          echo ""
-          echo "📂 Архив:"
-          ls -lh "$HOME/build/DiiaApp.xcarchive" || echo "Архив не найден"
-          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          cd "$HOME/build"
+          mkdir -p Payload
+          cp -r DiiaApp.xcarchive/Products/Applications/DiiaApp.app Payload/
+          zip -r ipa/DiiaApp.ipa Payload
+          rm -rf Payload
+          ls -lh ipa/DiiaApp.ipa
     
     artifacts:
       - $HOME/build/ipa/*.ipa
