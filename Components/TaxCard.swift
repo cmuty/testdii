@@ -7,37 +7,42 @@ struct TaxCard: View {
         GlassmorphicCard(cornerRadius: 32, opacity: 0.15) {
             VStack(alignment: .leading, spacing: 0) {
                 // Заголовок
-                Text("Картка платника податків")
-                    .font(.system(size: 20, weight: .semibold))
-                    .foregroundColor(.black)
-                    .padding(.bottom, 24)
-                    .padding(.horizontal, 20)
-                    .padding(.top, 22)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Картка платника")
+                        .font(.system(size: 22, weight: .regular))
+                        .foregroundColor(.black)
+                    Text("податків")
+                        .font(.system(size: 22, weight: .regular))
+                        .foregroundColor(.black)
+                }
+                .padding(.bottom, 20)
+                .padding(.horizontal, 20)
+                .padding(.top, 22)
                 
                 // РНОКПП заголовок
                 VStack(alignment: .leading, spacing: 16) {
                     Text("РНОКПП")
-                        .font(.system(size: 15, weight: .medium))
+                        .font(.system(size: 13, weight: .regular))
                         .foregroundColor(.black)
                     
                     // ФІО
                     VStack(alignment: .leading, spacing: 4) {
                         Text(user.lastName)
-                            .font(.system(size: 20, weight: .medium))
+                            .font(.system(size: 20, weight: .regular))
                         Text(user.firstName)
-                            .font(.system(size: 20, weight: .medium))
+                            .font(.system(size: 20, weight: .regular))
                         Text(user.patronymic)
-                            .font(.system(size: 20, weight: .medium))
+                            .font(.system(size: 20, weight: .regular))
                     }
                     .foregroundColor(.black)
                     
                     // Дата народження
                     VStack(alignment: .leading, spacing: 4) {
                         Text("Дата народження:")
-                            .font(.system(size: 15, weight: .medium))
+                            .font(.system(size: 15, weight: .regular))
                             .foregroundColor(.black)
                         Text("07.01.2010")
-                            .font(.system(size: 15, weight: .medium))
+                            .font(.system(size: 15, weight: .regular))
                             .foregroundColor(.black)
                     }
                 }
@@ -77,7 +82,7 @@ struct TaxCard: View {
                 .padding(.bottom, 28)
             }
         }
-        .frame(maxWidth: 340, minHeight: 440)
+        .frame(maxWidth: 360, minHeight: 460)
     }
 }
 
@@ -117,7 +122,7 @@ struct TaxMarqueeText: View {
                         ).width
                         
                         withAnimation(
-                            Animation.linear(duration: 40)
+                            Animation.linear(duration: 30)
                                 .repeatForever(autoreverses: false)
                         ) {
                             offset = -textWidth

@@ -3,6 +3,7 @@ import SwiftUI
 struct DocumentsView: View {
     let user = User.mock
     @State private var currentPage = 0
+    @State private var dragOffset: CGFloat = 0
     
     var body: some View {
         ZStack {
@@ -15,23 +16,27 @@ struct DocumentsView: View {
                 TabView(selection: $currentPage) {
                     // єДокумент
                     DocumentCard(user: user)
-                        .padding(.horizontal, 40)
+                        .scaleEffect(currentPage == 0 ? 1.0 : 0.85)
+                        .animation(.spring(response: 0.3), value: currentPage)
+                        .padding(.horizontal, 30)
                         .tag(0)
                     
                     // Картка платника податків
                     TaxCard(user: user)
-                        .padding(.horizontal, 40)
+                        .scaleEffect(currentPage == 1 ? 1.0 : 0.85)
+                        .animation(.spring(response: 0.3), value: currentPage)
+                        .padding(.horizontal, 30)
                         .tag(1)
                 }
                 .tabViewStyle(.page(indexDisplayMode: .never))
-                .frame(height: 600)
+                .frame(height: 680)
                 
-                // Page indicator
+                // Page indicator (точки)
                 HStack(spacing: 8) {
                     ForEach(0..<2) { index in
-                        Capsule()
+                        Circle()
                             .fill(Color.white.opacity(index == currentPage ? 0.9 : 0.4))
-                            .frame(width: index == currentPage ? 32 : 8, height: 8)
+                            .frame(width: 8, height: 8)
                             .animation(.spring(), value: currentPage)
                     }
                 }

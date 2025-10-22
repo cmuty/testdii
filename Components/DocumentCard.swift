@@ -88,7 +88,7 @@ struct DocumentCard: View {
                 .padding(.bottom, 24)
             }
         }
-        .frame(maxWidth: 340, minHeight: 560)
+        .frame(maxWidth: 360, minHeight: 640)
     }
 }
 
