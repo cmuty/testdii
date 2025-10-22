@@ -12,11 +12,9 @@
 	<true/>
 	<key>compileBitcode</key>
 	<false/>
-	<key>provisioningProfiles</key>
-	<dict>
-		<key>com.nutipov.diia</key>
-		<string>match Development com.nutipov.diia</string>
-	</dict>
+	<key>signingCertificate</key>
+	<string>Apple Development</string>
+	<key>teamID</key>
+	<string></string>
 </dict>
 </plist>
-

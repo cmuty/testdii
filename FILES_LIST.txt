@@ -1,69 +1,90 @@
-📂 Файлы проекта Дія iOS
+📁 Структура проекту DiiaApp
 
-✅ СОЗДАНЫ В C:\Users\nutip\OneDrive\Desktop\DiiaApp\
+┌─ Основні файли проекту
+│
+├── DiiaApp.swift                          # Entry point додатку
+├── ContentView.swift                      # Головний view
+├── Info.plist                             # Конфігурація додатку
+│
+├─ 📱 Views (Екрани додатку)
+│  ├── WelcomeView.swift                   # Привітальний екран
+│  ├── AuthView.swift                      # Екран аутентифікації
+│  ├── HomeView.swift                      # Головний екран
+│  ├── MainTabView.swift                   # Tab bar навігація
+│  └── DocumentsView.swift                 # Екран документів
+│
+├─ 🎨 Components (UI компоненти)
+│  ├── AnimatedGradientBackground.swift    # Анімований градієнт
+│  ├── DocumentCard.swift                  # Картка документа
+│  └── GlassmorphicCard.swift              # Скляний ефект
+│
+├─ 🔧 Managers (Бізнес логіка)
+│  └── AuthManager.swift                   # Менеджер аутентифікації
+│
+├─ 📊 Models (Моделі даних)
+│  └── User.swift                          # Модель користувача
+│
+├─ 🛠️ Utilities (Допоміжні функції)
+│  └── Color+Hex.swift                     # Розширення для кольорів
+│
+├─ 🎯 Xcode Project
+│  ├── DiiaApp.xcodeproj/
+│  │   ├── project.pbxproj                 # Конфігурація проекту
+│  │   ├── project.xcworkspace/            # Workspace
+│  │   └── xcshareddata/
+│  │       └── xcschemes/
+│  │           └── DiiaApp.xcscheme        # Схема збірки
+│  │
+│  └── Assets.xcassets/                    # Ресурси (іконки, кольори)
+│      ├── AppIcon.appiconset/
+│      ├── AccentColor.colorset/
+│      └── Contents.json
+│
+├─ ⚙️ Codemagic (CI/CD)
+│  ├── codemagic.yaml                      # Конфігурація білду
+│  └── ExportOptions.plist                 # Параметри експорту IPA
+│
+├─ 📖 Документація
+│  ├── README.md                           # Головний README
+│  ├── QUICK_START.md                      # Швидкий старт (10 хв)
+│  ├── SIDELOADLY_GUIDE.md                 # Гід по Sideloadly/AltStore
+│  ├── CODEMAGIC_SETUP.md                  # Налаштування Codemagic
+│  ├── CODEMAGIC_GUIDE.md                  # Детальний гід Codemagic
+│  ├── FIX_BUNDLE_ID.md                    # Як змінити Bundle ID
+│  ├── SETUP_GUIDE.md                      # Гід по налаштуванню
+│  └── FILES_LIST.txt                      # Цей файл :)
+│
+└─ 🗂️ Git
+   └── .gitignore                          # Ігноровані файли
 
-1. DiiaApp.swift                                    ✓
-2. ContentView.swift                                ✓
+═══════════════════════════════════════════════════════════════
 
-Managers/
-3. AuthManager.swift                                ✓
+📊 Статистика:
 
-Models/
-4. User.swift                                       ✓
+Загальна кількість файлів:
+- 🔵 Swift файли: 13
+- 📄 Конфігураційні: 5
+- 📖 Документація: 8
+- 🎨 Assets: 3
 
-Components/
-5. AnimatedGradientBackground.swift                 ✓
-6. GlassmorphicCard.swift                           ✓
-7. DocumentCard.swift                               ✓
+Розмір проекту: ~50-100 KB (без .xcodeproj)
 
-Utilities/
-8. Color+Hex.swift                                  ✓
+═══════════════════════════════════════════════════════════════
 
-Views/
-9. WelcomeView.swift                                ✓
-10. AuthView.swift                                  ✓
-11. DocumentsView.swift                             ✓
-12. HomeView.swift                                  ✓
-13. MainTabView.swift                               ✓
+🚀 Швидкі посилання:
 
-Configuration/
-14. Info.plist                                      ✓
-15. ExportOptions.plist                             ✓
-16. codemagic.yaml                                  ✓
+Для старту:
+→ QUICK_START.md - почни звідси!
 
-Documentation/
-17. README.md                                       ✓
-18. CODEMAGIC_GUIDE.md                              ✓ Подробный гайд по Codemagic
-19. QUICK_START.md                                  ✓ Быстрый старт
-20. FIX_BUNDLE_ID.md                                ✓ Исправление Bundle ID
-21. FILES_LIST.txt                                  ✓ (этот файл)
+Для встановлення:
+→ SIDELOADLY_GUIDE.md - Sideloadly/AltStore
 
----
+Для білду:
+→ CODEMAGIC_SETUP.md - налаштування Codemagic
 
-📋 БИЛД ЧЕРЕЗ CODEMAGIC (рекомендуется):
+Для розробки:
+→ README.md - вся інформація
 
-1. Создай Xcode проект локально (для структуры)
-2. Добавь все .swift файлы
-3. Замени Info.plist
-4. Проверь: ⌘B (должно собраться)
-5. Загрузи на GitHub
-6. Подключи к Codemagic
-7. Настрой Code Signing
-8. Start build!
-9. Получи .ipa на email
+═══════════════════════════════════════════════════════════════
 
-📖 Читай: QUICK_START.md - быстрая инструкция (10 мин)
-📖 Или: CODEMAGIC_GUIDE.md - полный гайд
-
----
-
-⚙️ ЧТО НАСТРОЕНО ДЛЯ CODEMAGIC:
-
-✅ codemagic.yaml - готов к билду
-✅ Bundle ID: com.nutipov.diia
-✅ Email: nutipovottakvot@gmail.com
-✅ Automatic signing
-✅ Development build
-
-💡 Если хочешь свой Bundle ID - измени в codemagic.yaml!
-
+🇺🇦 Made with ❤️ in Ukraine
