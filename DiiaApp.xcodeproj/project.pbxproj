@@ -21,6 +21,7 @@
 		2A000000000000000000000C /* AnimatedGradientBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B000000000000000000000C /* AnimatedGradientBackground.swift */; };
 		2A000000000000000000000D /* DocumentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B000000000000000000000D /* DocumentCard.swift */; };
 		2A000000000000000000000E /* GlassmorphicCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B000000000000000000000E /* GlassmorphicCard.swift */; };
+		2A000000000000000000000F /* TaxCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B000000000000000000000F /* TaxCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,7 +39,8 @@
 		2B000000000000000000000C /* AnimatedGradientBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedGradientBackground.swift; sourceTree = "<group>"; };
 		2B000000000000000000000D /* DocumentCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentCard.swift; sourceTree = "<group>"; };
 		2B000000000000000000000E /* GlassmorphicCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassmorphicCard.swift; sourceTree = "<group>"; };
-		2B000000000000000000000F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2B000000000000000000000F /* TaxCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxCard.swift; sourceTree = "<group>"; };
+		2B0000000000000000000010 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C0000000000000000000001 /* DiiaApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiiaApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -64,7 +66,7 @@
 		4A0000000000000000000002 /* DiiaApp */ = {
 			isa = PBXGroup;
 			children = (
-				2B000000000000000000000F /* Info.plist */,
+				2B0000000000000000000010 /* Info.plist */,
 				2B0000000000000000000001 /* DiiaApp.swift */,
 				2B0000000000000000000002 /* ContentView.swift */,
 				2B0000000000000000000003 /* Assets.xcassets */,
@@ -118,6 +120,7 @@
 				2B000000000000000000000C /* AnimatedGradientBackground.swift */,
 				2B000000000000000000000D /* DocumentCard.swift */,
 				2B000000000000000000000E /* GlassmorphicCard.swift */,
+				2B000000000000000000000F /* TaxCard.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -212,6 +215,7 @@
 				2A000000000000000000000C /* AnimatedGradientBackground.swift in Sources */,
 				2A000000000000000000000D /* DocumentCard.swift in Sources */,
 				2A000000000000000000000E /* GlassmorphicCard.swift in Sources */,
+				2A000000000000000000000F /* TaxCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
