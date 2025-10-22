@@ -88,7 +88,7 @@ struct DocumentCard: View {
                 .padding(.bottom, 24)
             }
         }
-        .frame(maxWidth: 360, minHeight: 440)
+        .frame(maxWidth: 340, minHeight: 480)
     }
 }
 
@@ -106,12 +106,12 @@ struct MarqueeText: View {
                         .foregroundColor(Color(hex: "111111"))
                 }
             }
-            .frame(width: geometry.size.width * 4)
+            .frame(width: geometry.size.width * 4, height: 32)
             .offset(x: offset)
             .onAppear {
                 let textWidth = geometry.size.width
                 withAnimation(
-                    Animation.linear(duration: 60)
+                    Animation.linear(duration: 35)
                         .repeatForever(autoreverses: false)
                 ) {
                     offset = -textWidth * 2

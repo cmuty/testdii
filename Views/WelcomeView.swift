@@ -2,50 +2,40 @@ import SwiftUI
 
 struct WelcomeView: View {
     @EnvironmentObject var authManager: AuthManager
+    @State private var scale: CGFloat = 0.8
+    @State private var opacity: Double = 0
     
     var body: some View {
         ZStack {
             AnimatedGradientBackground()
             
-            VStack {
-                Spacer()
-                
-                Text("Привіт 👋")
-                    .font(.system(size: 60, weight: .bold))
+            VStack(spacing: 24) {
+                Text("Дія")
+                    .font(.system(size: 72, weight: .bold))
                     .foregroundColor(.black)
                 
-                Spacer()
+                Text("🇺🇦")
+                    .font(.system(size: 80))
+            }
+            .scaleEffect(scale)
+            .opacity(opacity)
+            .onAppear {
+                // Анімація появи
+                withAnimation(.easeOut(duration: 0.6)) {
+                    scale = 1.0
+                    opacity = 1.0
+                }
                 
-                HStack(spacing: 16) {
-                    Button(action: {
-                        authManager.markWelcomeSeen()
-                    }) {
-                        Text("Дія")
-                            .font(.system(size: 24, weight: .semibold))
-                            .foregroundColor(.white)
-                            .frame(width: 128, height: 128)
-                            .background(Color.black)
-                            .cornerRadius(24)
+                // Автоматично переходимо далі через 1.5 секунди
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    withAnimation(.easeOut(duration: 0.3)) {
+                        opacity = 0
                     }
-                    
-                    Button(action: {}) {
-                        Text("🇺🇦")
-                            .font(.system(size: 50))
-                            .frame(width: 128, height: 128)
-                            .background(
-                                RoundedRectangle(cornerRadius: 24)
-                                    .fill(Color.white.opacity(0.7))
-                                    .background(.ultraThinMaterial)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 24)
-                                            .stroke(Color.white.opacity(0.3), lineWidth: 2)
-                                    )
-                            )
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        authManager.markWelcomeSeen()
                     }
                 }
-                .padding(.bottom, 80)
             }
-            .padding()
         }
     }
 }
