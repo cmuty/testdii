@@ -38,8 +38,19 @@ workflows:
           set -x
           mkdir -p "$HOME/build/ipa"
           cd "$HOME/build"
+          
+          # Перевіряємо що Assets є в архіві
+          echo "Checking for Assets in archive..."
+          find DiiaApp.xcarchive -name "Assets.car" -o -name "AppIcon*"
+          
           mkdir -p Payload
           cp -r DiiaApp.xcarchive/Products/Applications/DiiaApp.app Payload/
+          
+          # Перевіряємо що Assets скопіювались в .app
+          echo "Checking Assets in .app bundle..."
+          ls -la Payload/DiiaApp.app/ || true
+          find Payload/DiiaApp.app -name "Assets.car" -o -name "AppIcon*" || true
+          
           zip -r ipa/DiiaApp.ipa Payload
           rm -rf Payload
           ls -lh ipa/DiiaApp.ipa
