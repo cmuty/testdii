@@ -199,93 +199,96 @@ struct PassportCardBack: View {
     }
     
     var body: some View {
-        GlassmorphicCard(cornerRadius: 32, opacity: 0.15) {
-            VStack(spacing: 0) {
-                Spacer()
-                    .frame(height: 40)
-                
-                // Timer text
-                Text("Код діятиме ще \(timeString) хв")
-                    .font(.system(size: 16, weight: .regular))
-                    .foregroundColor(.gray)
-                    .padding(.bottom, 24)
-                
-                // QR or Barcode
-                if showingQR {
-                    if let qrImage = generateQRCode(from: verificationData.url) {
-                        Image(uiImage: qrImage)
-                            .interpolation(.none)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 250, height: 250)
-                    }
-                } else {
-                    VStack(spacing: 16) {
-                        if let barcodeImage = generateBarcode(from: verificationData.barcodeNumber) {
-                            Image(uiImage: barcodeImage)
+        RoundedRectangle(cornerRadius: 32)
+            .fill(Color.white)
+            .overlay(
+                VStack(spacing: 0) {
+                    Spacer()
+                        .frame(height: 40)
+                    
+                    // Timer text
+                    Text("Код діятиме ще \(timeString) хв")
+                        .font(.system(size: 16, weight: .regular))
+                        .foregroundColor(.gray)
+                        .padding(.bottom, 24)
+                    
+                    // QR or Barcode
+                    if showingQR {
+                        if let qrImage = generateQRCode(from: verificationData.url) {
+                            Image(uiImage: qrImage)
                                 .interpolation(.none)
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 280, height: 80)
+                                .frame(width: 250, height: 250)
                         }
-                        
-                        Text(verificationData.barcodeFormatted)
-                            .font(.system(size: 20, weight: .medium))
-                            .foregroundColor(.black)
-                            .tracking(4)
-                    }
-                }
-                
-                Spacer()
-                
-                // Toggle buttons
-                HStack(spacing: 40) {
-                    Button(action: {
-                        withAnimation(.spring(response: 0.3)) {
-                            showingQR = true
-                        }
-                    }) {
-                        VStack(spacing: 8) {
-                            Circle()
-                                .fill(showingQR ? Color.black : Color.gray.opacity(0.3))
-                                .frame(width: 56, height: 56)
-                                .overlay(
-                                    Image(systemName: "qrcode")
-                                        .font(.system(size: 24))
-                                        .foregroundColor(.white)
-                                )
+                    } else {
+                        VStack(spacing: 16) {
+                            if let barcodeImage = generateBarcode(from: verificationData.barcodeNumber) {
+                                Image(uiImage: barcodeImage)
+                                    .interpolation(.none)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 280, height: 80)
+                            }
                             
-                            Text("QR-код")
-                                .font(.system(size: 15, weight: .regular))
+                            Text(verificationData.barcodeFormatted)
+                                .font(.system(size: 20, weight: .medium))
                                 .foregroundColor(.black)
+                                .tracking(4)
                         }
                     }
                     
-                    Button(action: {
-                        withAnimation(.spring(response: 0.3)) {
-                            showingQR = false
+                    Spacer()
+                    
+                    // Toggle buttons
+                    HStack(spacing: 40) {
+                        Button(action: {
+                            withAnimation(.spring(response: 0.3)) {
+                                showingQR = true
+                            }
+                        }) {
+                            VStack(spacing: 8) {
+                                Circle()
+                                    .fill(showingQR ? Color.black : Color.gray.opacity(0.3))
+                                    .frame(width: 56, height: 56)
+                                    .overlay(
+                                        Image(systemName: "qrcode")
+                                            .font(.system(size: 24))
+                                            .foregroundColor(.white)
+                                    )
+                                
+                                Text("QR-код")
+                                    .font(.system(size: 15, weight: .regular))
+                                    .foregroundColor(.black)
+                            }
                         }
-                    }) {
-                        VStack(spacing: 8) {
-                            Circle()
-                                .fill(!showingQR ? Color.black : Color.gray.opacity(0.3))
-                                .frame(width: 56, height: 56)
-                                .overlay(
-                                    Image(systemName: "barcode")
-                                        .font(.system(size: 24))
-                                        .foregroundColor(.white)
-                                )
-                            
-                            Text("Штрихкод")
-                                .font(.system(size: 15, weight: .regular))
-                                .foregroundColor(.black)
+                        
+                        Button(action: {
+                            withAnimation(.spring(response: 0.3)) {
+                                showingQR = false
+                            }
+                        }) {
+                            VStack(spacing: 8) {
+                                Circle()
+                                    .fill(!showingQR ? Color.black : Color.gray.opacity(0.3))
+                                    .frame(width: 56, height: 56)
+                                    .overlay(
+                                        Image(systemName: "barcode")
+                                            .font(.system(size: 24))
+                                            .foregroundColor(.white)
+                                    )
+                                
+                                Text("Штрихкод")
+                                    .font(.system(size: 15, weight: .regular))
+                                    .foregroundColor(.black)
+                            }
                         }
                     }
+                    .padding(.bottom, 40)
                 }
-                .padding(.bottom, 40)
-            }
-        }
-        .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0)) // Mirror the back
+            )
+            .frame(width: 360, height: 450)
+            .shadow(color: Color.black.opacity(0.1), radius: 20, x: 0, y: 10)
     }
     
     func generateQRCode(from string: String) -> UIImage? {
