@@ -58,10 +58,10 @@ struct DocumentCard: View {
                 .padding(.horizontal, 20)
                 .padding(.top, 22)
                 
+                Spacer()
+                
                 // Бегущая строка
                 MarqueeText()
-                
-                Spacer()
                 
                 // ФИО и кнопка
                 HStack(alignment: .bottom) {
@@ -86,11 +86,11 @@ struct DocumentCard: View {
                     }
                 }
                 .padding(.horizontal, 20)
-                .padding(.top, 12)
+                .padding(.top, 8)
                 .padding(.bottom, 24)
             }
         }
-        .frame(maxWidth: 360, minHeight: 700)
+        .frame(maxWidth: 360, minHeight: 580)
     }
 }
 
