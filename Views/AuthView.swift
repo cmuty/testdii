@@ -175,4 +175,3 @@ struct AuthView: View {
         }
     }
 }
-
