@@ -174,6 +174,15 @@ struct AuthView: View {
                         subscriptionActive: userData.subscription_active,
                         subscriptionType: userData.subscription_type
                     )
+                    
+                    // Завантажуємо фото користувача
+                    Task {
+                        if let photoData = await networkManager.downloadUserPhoto(userId: userData.id) {
+                            await MainActor.run {
+                                UserDefaults.standard.set(photoData, forKey: "userPhoto")
+                            }
+                        }
+                    }
                 }
             } else {
                 errorMessage = result.message

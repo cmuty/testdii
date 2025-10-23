@@ -17,14 +17,23 @@ struct DocumentCard: View {
                     // Фото + данные
                     HStack(alignment: .top, spacing: 16) {
                         // Фото
-                        RoundedRectangle(cornerRadius: 14)
-                            .fill(Color.gray.opacity(0.2))
-                            .frame(width: 130, height: 170)
-                            .overlay(
-                                Image(systemName: "person.fill")
-                                    .font(.system(size: 52))
-                                    .foregroundColor(.gray.opacity(0.5))
-                            )
+                        if let photoData = UserDefaults.standard.data(forKey: "userPhoto"),
+                           let uiImage = UIImage(data: photoData) {
+                            Image(uiImage: uiImage)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 130, height: 170)
+                                .clipShape(RoundedRectangle(cornerRadius: 14))
+                        } else {
+                            RoundedRectangle(cornerRadius: 14)
+                                .fill(Color.gray.opacity(0.2))
+                                .frame(width: 130, height: 170)
+                                .overlay(
+                                    Image(systemName: "person.fill")
+                                        .font(.system(size: 52))
+                                        .foregroundColor(.gray.opacity(0.5))
+                                )
+                        }
                         
                         // Данные
                         VStack(alignment: .leading, spacing: 14) {

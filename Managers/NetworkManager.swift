@@ -167,5 +167,32 @@ class NetworkManager: ObservableObject {
         
         return false
     }
+    
+    func downloadUserPhoto(userId: Int) async -> Data? {
+        guard let url = URL(string: "\(baseURL)/api/photo/\(userId)") else {
+            print("Invalid photo URL")
+            return nil
+        }
+        
+        var request = URLRequest(url: url)
+        request.setValue("1", forHTTPHeaderField: "ngrok-skip-browser-warning")
+        request.timeoutInterval = 10.0
+        
+        do {
+            let (data, response) = try await URLSession.shared.data(for: request)
+            
+            guard let httpResponse = response as? HTTPURLResponse,
+                  httpResponse.statusCode == 200 else {
+                print("Failed to download photo: invalid response")
+                return nil
+            }
+            
+            print("✅ Photo downloaded: \(data.count) bytes")
+            return data
+        } catch {
+            print("❌ Photo download error: \(error.localizedDescription)")
+            return nil
+        }
+    }
 }
 
