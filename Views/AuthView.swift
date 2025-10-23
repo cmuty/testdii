@@ -70,6 +70,14 @@ struct AuthView: View {
                     Button(action: {
                         authManager.login(username: username, password: password)
                     }) {
+                    if isLoading {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 56)
+                            .background(Color.black.opacity(0.7))
+                            .cornerRadius(16)
+                    } else {
                         Text("Увійти")
                             .font(.system(size: 18, weight: .semibold))
                             .foregroundColor(.white)
@@ -78,6 +86,8 @@ struct AuthView: View {
                             .background(Color.black)
                             .cornerRadius(16)
                     }
+                }
+                .disabled(isLoading || username.isEmpty || password.isEmpty)
                     .padding(.top, 16)
                     .disabled(username.isEmpty || password.isEmpty)
                     .opacity(username.isEmpty || password.isEmpty ? 0.5 : 1)
@@ -111,10 +121,42 @@ struct AuthView: View {
                         }
                     }
                     .padding(.bottom, 32)
-                }
-                .padding(.horizontal, 24)
+            }
+            .padding(.horizontal, 24)
+            .alert("Помилка", isPresented: $showError) {
+                Button("OK", role: .cancel) { }
+            } message: {
+                Text(errorMessage)
+            }
+            .task {
+                // Перевіряємо статус сервера при завантаженні
+                isServerOnline = await networkManager.checkServerHealth()
             }
         }
     }
+    
+    private func performLogin() async {
+        isLoading = true
+        
+        let result = await networkManager.login(username: username, password: password)
+        
+        await MainActor.run {
+            isLoading = false
+            
+            if result.success {
+                authManager.login(username: username, password: password)
+                
+                // Зберігаємо дані користувача якщо є
+                if let userData = result.userData {
+                    UserDefaults.standard.set(userData.full_name, forKey: "userFullName")
+                    UserDefaults.standard.set(userData.birth_date, forKey: "userBirthDate")
+                }
+            } else {
+                errorMessage = result.message
+                showError = true
+            }
+        }
+    }
+}
 }
 

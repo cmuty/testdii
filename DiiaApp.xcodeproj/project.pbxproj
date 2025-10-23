@@ -24,6 +24,7 @@
 		2A000000000000000000000F /* TaxCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B000000000000000000000F /* TaxCard.swift */; };
 		2A0000000000000000000010 /* PassportCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0000000000000000000011 /* PassportCard.swift */; };
 		2A0000000000000000000011 /* SignatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0000000000000000000012 /* SignatureView.swift */; };
+		2A0000000000000000000012 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0000000000000000000013 /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		2B0000000000000000000010 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2B0000000000000000000011 /* PassportCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportCard.swift; sourceTree = "<group>"; };
 		2B0000000000000000000012 /* SignatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignatureView.swift; sourceTree = "<group>"; };
+		2B0000000000000000000013 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		2C0000000000000000000001 /* DiiaApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiiaApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -224,6 +226,7 @@
 				2A000000000000000000000F /* TaxCard.swift in Sources */,
 				2A0000000000000000000010 /* PassportCard.swift in Sources */,
 				2A0000000000000000000011 /* SignatureView.swift in Sources */,
+				2A0000000000000000000012 /* NetworkManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
