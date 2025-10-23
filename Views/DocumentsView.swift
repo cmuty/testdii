@@ -96,8 +96,6 @@ struct DocumentsView: View {
                 isPresented: $showFullInfo,
                 user: user
             )
-            .presentationDetents([.large])
-            .presentationDragIndicator(.visible)
         }
     }
 }
