@@ -3,29 +3,13 @@ import SwiftUI
 class GradientManager: ObservableObject {
     static let shared = GradientManager()
     
-    @Published var colorIndex = 0
+    @Published var rotation: Double = 0
     
-    let colorSets: [[Color]] = [
-        [
-            Color(hex: "6ea8ff"), // Синій
-            Color(hex: "ffd966"), // Жовтий
-            Color(hex: "ff99cc")  // Рожевий
-        ],
-        [
-            Color(hex: "ffd966"), // Жовтий
-            Color(hex: "ff99cc"), // Рожевий
-            Color(hex: "c299ff")  // Бузковий
-        ],
-        [
-            Color(hex: "ff99cc"), // Рожевий
-            Color(hex: "c299ff"), // Бузковий
-            Color(hex: "6ea8ff")  // Синій
-        ],
-        [
-            Color(hex: "c299ff"), // Бузковий
-            Color(hex: "6ea8ff"), // Синій
-            Color(hex: "ffd966")  // Жовтий
-        ]
+    let colors: [Color] = [
+        Color(hex: "6ea8ff"), // Синій
+        Color(hex: "ffd966"), // Жовтий
+        Color(hex: "ff99cc"), // Рожевий
+        Color(hex: "c299ff")  // Бузковий
     ]
     
     private var timer: Timer?
@@ -36,16 +20,12 @@ class GradientManager: ObservableObject {
     
     func startAnimation() {
         timer?.invalidate()
-        timer = Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { [weak self] _ in
-            guard let self = self else { return }
-            withAnimation(.easeInOut(duration: 2.5)) {
-                self.colorIndex = (self.colorIndex + 1) % self.colorSets.count
-            }
+        withAnimation(
+            .linear(duration: 8)
+            .repeatForever(autoreverses: false)
+        ) {
+            rotation = 360
         }
-    }
-    
-    var currentColors: [Color] {
-        colorSets[colorIndex]
     }
 }
 
@@ -53,10 +33,10 @@ struct AnimatedGradientBackground: View {
     @ObservedObject private var gradientManager = GradientManager.shared
     
     var body: some View {
-        LinearGradient(
-            colors: gradientManager.currentColors,
-            startPoint: .topLeading,
-            endPoint: .bottomTrailing
+        AngularGradient(
+            gradient: Gradient(colors: gradientManager.colors),
+            center: .center,
+            angle: .degrees(gradientManager.rotation)
         )
         .ignoresSafeArea()
     }
