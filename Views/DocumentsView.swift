@@ -40,7 +40,7 @@ struct DocumentsView: View {
                             .animation(.spring(response: 0.4, dampingFraction: 0.75), value: currentPage)
                     }
                 }
-                .padding(.bottom, 16)
+                .padding(.top, 16)
                 
                 Spacer()
             }
