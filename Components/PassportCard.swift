@@ -3,6 +3,7 @@ import CoreImage.CIFilterBuiltins
 
 struct PassportCard: View {
     let user: User
+    let onMenuTap: () -> Void
     @State private var isFlipped = false
     @State private var showingQR = true // true = QR, false = Barcode
     @State private var verificationData = VerificationData()
@@ -12,7 +13,7 @@ struct PassportCard: View {
     var body: some View {
         ZStack {
             // Front side
-            PassportCardFront(user: user)
+            PassportCardFront(user: user, onMenuTap: onMenuTap)
                 .opacity(isFlipped ? 0 : 1)
                 .rotation3DEffect(
                     .degrees(isFlipped ? 180 : 0),
@@ -67,7 +68,7 @@ struct PassportCard: View {
 // MARK: - Front Side
 struct PassportCardFront: View {
     let user: User
-    @State private var showMenu = false
+    let onMenuTap: () -> Void
     
     var body: some View {
         GlassmorphicCard(cornerRadius: 32, opacity: 0.15) {
@@ -170,11 +171,7 @@ struct PassportCardFront: View {
                     
                     Spacer()
                     
-                    Button(action: {
-                        withAnimation(.spring(response: 0.3)) {
-                            showMenu = true
-                        }
-                    }) {
+                    Button(action: onMenuTap) {
                         Image(systemName: "ellipsis")
                             .font(.system(size: 16, weight: .medium))
                             .foregroundColor(.white)
@@ -187,12 +184,6 @@ struct PassportCardFront: View {
                 .padding(.bottom, 24)
             }
         }
-        .overlay(
-            DocumentMenuSheet(
-                isPresented: $showMenu,
-                documentName: "Паспорт громадянина України"
-            )
-        )
     }
     
     func loadSignature() -> UIImage? {

@@ -8,8 +8,9 @@ struct DocumentMenuSheet: View {
         ZStack {
             // Blur background
             if isPresented {
-                Color.black.opacity(0.4)
+                BlurView(style: .systemUltraThinMaterialDark)
                     .ignoresSafeArea()
+                    .transition(.opacity)
                     .onTapGesture {
                         withAnimation(.spring(response: 0.3)) {
                             isPresented = false
@@ -132,6 +133,20 @@ struct DocumentMenuItem: View {
             .frame(height: 56)
             .contentShape(Rectangle())
         }
+    }
+}
+
+// MARK: - Blur View (UIKit wrapper)
+struct BlurView: UIViewRepresentable {
+    let style: UIBlurEffect.Style
+    
+    func makeUIView(context: Context) -> UIVisualEffectView {
+        let view = UIVisualEffectView(effect: UIBlurEffect(style: style))
+        return view
+    }
+    
+    func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
+        uiView.effect = UIBlurEffect(style: style)
     }
 }
 
