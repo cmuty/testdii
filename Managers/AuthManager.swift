@@ -5,6 +5,7 @@ class AuthManager: ObservableObject {
     @Published var isAuthenticated: Bool = false
     @Published var hasSeenWelcome: Bool = false
     @Published var userName: String = ""
+    @Published var hasSignature: Bool = false
     
     private let userDefaults = UserDefaults.standard
     
@@ -16,6 +17,7 @@ class AuthManager: ObservableObject {
         isAuthenticated = userDefaults.bool(forKey: "isAuthenticated")
         hasSeenWelcome = userDefaults.bool(forKey: "hasSeenWelcome")
         userName = userDefaults.string(forKey: "userName") ?? ""
+        hasSignature = userDefaults.data(forKey: "userSignature") != nil
     }
     
     func login(username: String, password: String) {
@@ -26,6 +28,7 @@ class AuthManager: ObservableObject {
         
         userDefaults.set(true, forKey: "isAuthenticated")
         userDefaults.set(username, forKey: "userName")
+        userDefaults.set(Date(), forKey: "lastLoginDate")
     }
     
     func logout() {
@@ -37,6 +40,10 @@ class AuthManager: ObservableObject {
     func markWelcomeSeen() {
         hasSeenWelcome = true
         userDefaults.set(true, forKey: "hasSeenWelcome")
+    }
+    
+    func completeSignature() {
+        hasSignature = true
     }
 }
 

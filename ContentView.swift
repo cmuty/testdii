@@ -5,12 +5,14 @@ struct ContentView: View {
     
     var body: some View {
         Group {
-            if authManager.isAuthenticated {
-                MainTabView()
-            } else if authManager.hasSeenWelcome {
-                AuthView()
-            } else {
+            if !authManager.hasSeenWelcome {
                 WelcomeView()
+            } else if !authManager.isAuthenticated {
+                AuthView()
+            } else if !authManager.hasSignature {
+                SignatureView()
+            } else {
+                MainTabView()
             }
         }
         .animation(.easeInOut, value: authManager.isAuthenticated)
