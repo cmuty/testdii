@@ -2,6 +2,7 @@ import SwiftUI
 
 struct TaxCard: View {
     let user: User
+    @State private var showMenu = false
     
     var body: some View {
         GlassmorphicCard(cornerRadius: 32, opacity: 0.15) {
@@ -71,7 +72,11 @@ struct TaxCard: View {
                     
                     Spacer()
                     
-                    Button(action: {}) {
+                    Button(action: {
+                        withAnimation(.spring(response: 0.3)) {
+                            showMenu = true
+                        }
+                    }) {
                         Image(systemName: "ellipsis")
                             .font(.system(size: 16, weight: .medium))
                             .foregroundColor(.white)
@@ -85,6 +90,12 @@ struct TaxCard: View {
             }
         }
         .frame(width: 360, height: 470)
+        .overlay(
+            DocumentMenuSheet(
+                isPresented: $showMenu,
+                documentName: "Картка платника податків"
+            )
+        )
     }
 }
 

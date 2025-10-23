@@ -23,12 +23,7 @@ struct PassportCard: View {
             PassportCardBack(
                 showingQR: $showingQR,
                 verificationData: verificationData,
-                timeRemaining: timeRemaining,
-                onCodeTypeChanged: {
-                    // Сбрасываем таймер при переключении
-                    verificationData = VerificationData()
-                    timeRemaining = 180
-                }
+                timeRemaining: timeRemaining
             )
             .opacity(isFlipped ? 1 : 0)
             .rotation3DEffect(
@@ -72,6 +67,7 @@ struct PassportCard: View {
 // MARK: - Front Side
 struct PassportCardFront: View {
     let user: User
+    @State private var showMenu = false
     
     var body: some View {
         GlassmorphicCard(cornerRadius: 32, opacity: 0.15) {
@@ -174,21 +170,29 @@ struct PassportCardFront: View {
                     
                     Spacer()
                     
-                    Button(action: {}) {
+                    Button(action: {
+                        withAnimation(.spring(response: 0.3)) {
+                            showMenu = true
+                        }
+                    }) {
                         Image(systemName: "ellipsis")
                             .font(.system(size: 16, weight: .medium))
                             .foregroundColor(.white)
                             .frame(width: 32, height: 32)
                             .background(Circle().fill(Color.black))
                     }
-                    .onTapGesture { }
-                    .simultaneousGesture(TapGesture().onEnded { })
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 8)
                 .padding(.bottom, 24)
             }
         }
+        .overlay(
+            DocumentMenuSheet(
+                isPresented: $showMenu,
+                documentName: "Паспорт громадянина України"
+            )
+        )
     }
     
     func loadSignature() -> UIImage? {
@@ -202,7 +206,6 @@ struct PassportCardBack: View {
     @Binding var showingQR: Bool
     let verificationData: VerificationData
     let timeRemaining: TimeInterval
-    let onCodeTypeChanged: () -> Void
     
     var timeString: String {
         let minutes = Int(timeRemaining) / 60
@@ -258,7 +261,6 @@ struct PassportCardBack: View {
                         Button(action: {
                             withAnimation(.spring(response: 0.3)) {
                                 showingQR = true
-                                onCodeTypeChanged()
                             }
                         }) {
                             VStack(spacing: 8) {
@@ -280,7 +282,6 @@ struct PassportCardBack: View {
                         Button(action: {
                             withAnimation(.spring(response: 0.3)) {
                                 showingQR = false
-                                onCodeTypeChanged()
                             }
                         }) {
                             VStack(spacing: 8) {

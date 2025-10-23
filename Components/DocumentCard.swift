@@ -2,6 +2,7 @@ import SwiftUI
 
 struct DocumentCard: View {
     let user: User
+    @State private var showMenu = false
     
     var body: some View {
         GlassmorphicCard(cornerRadius: 32, opacity: 0.15) {
@@ -87,7 +88,11 @@ struct DocumentCard: View {
                     
                     Spacer()
                     
-                    Button(action: {}) {
+                    Button(action: {
+                        withAnimation(.spring(response: 0.3)) {
+                            showMenu = true
+                        }
+                    }) {
                         Image(systemName: "ellipsis")
                             .font(.system(size: 16, weight: .medium))
                             .foregroundColor(.white)
@@ -101,6 +106,12 @@ struct DocumentCard: View {
             }
         }
         .frame(width: 360, height: 470)
+        .overlay(
+            DocumentMenuSheet(
+                isPresented: $showMenu,
+                documentName: "єДокумент"
+            )
+        )
     }
 }
 
