@@ -10,7 +10,7 @@ struct DocumentCard: View {
                 VStack(alignment: .leading, spacing: 0) {
                     // Заголовок
                     Text("єДокумент")
-                        .font(.system(size: 24, weight: .bold, design: .default))
+                        .font(.system(size: 24, weight: .regular, design: .default))
                         .foregroundColor(.black)
                         .padding(.bottom, 20)
                     
@@ -68,11 +68,11 @@ struct DocumentCard: View {
                 HStack(alignment: .bottom) {
                     VStack(alignment: .leading, spacing: 2) {
                         Text(user.lastName)
-                            .font(.system(size: 26, weight: .bold, design: .default))
+                            .font(.system(size: 26, weight: .regular, design: .default))
                         Text(user.firstName)
-                            .font(.system(size: 26, weight: .bold, design: .default))
+                            .font(.system(size: 26, weight: .regular, design: .default))
                         Text(user.patronymic)
-                            .font(.system(size: 26, weight: .bold, design: .default))
+                            .font(.system(size: 26, weight: .regular, design: .default))
                     }
                     .foregroundColor(.black)
                     
