@@ -32,6 +32,7 @@ struct DocumentsView: View {
                             .tag(1)
                     }
                     .tabViewStyle(.page(indexDisplayMode: .never))
+                    .frame(height: 550)
                     
                     // Page indicator (точки)
                     HStack(spacing: 8) {

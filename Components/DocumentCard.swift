@@ -59,6 +59,7 @@ struct DocumentCard: View {
                 .padding(.top, 22)
                 
                 Spacer()
+                    .frame(minHeight: 40)
                 
                 // Бегущая строка
                 MarqueeText()
@@ -90,7 +91,7 @@ struct DocumentCard: View {
                 .padding(.bottom, 24)
             }
         }
-        .frame(width: 360, height: 450)
+        .frame(width: 360, height: 470)
     }
 }
 
