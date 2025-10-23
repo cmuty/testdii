@@ -23,7 +23,12 @@ struct PassportCard: View {
             PassportCardBack(
                 showingQR: $showingQR,
                 verificationData: verificationData,
-                timeRemaining: timeRemaining
+                timeRemaining: timeRemaining,
+                onCodeTypeChanged: {
+                    // Сбрасываем таймер при переключении
+                    verificationData = VerificationData()
+                    timeRemaining = 180
+                }
             )
             .opacity(isFlipped ? 1 : 0)
             .rotation3DEffect(
@@ -35,6 +40,12 @@ struct PassportCard: View {
         .onTapGesture {
             withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
                 isFlipped.toggle()
+                
+                // Сбрасываем таймер при перевороте на обратную сторону
+                if isFlipped {
+                    verificationData = VerificationData()
+                    timeRemaining = 180
+                }
             }
         }
         .onAppear {
@@ -191,6 +202,7 @@ struct PassportCardBack: View {
     @Binding var showingQR: Bool
     let verificationData: VerificationData
     let timeRemaining: TimeInterval
+    let onCodeTypeChanged: () -> Void
     
     var timeString: String {
         let minutes = Int(timeRemaining) / 60
@@ -200,7 +212,7 @@ struct PassportCardBack: View {
     
     var body: some View {
         RoundedRectangle(cornerRadius: 32)
-            .fill(Color.white)
+            .fill(Color(red: 1.0, green: 1.0, blue: 1.0)) // Чисто белый как фон QR/штрихкода
             .overlay(
                 VStack(spacing: 0) {
                     Spacer()
@@ -222,20 +234,21 @@ struct PassportCardBack: View {
                                 .frame(width: 250, height: 250)
                         }
                     } else {
-                        VStack(spacing: 16) {
+                        VStack(spacing: 20) {
                             if let barcodeImage = generateBarcode(from: verificationData.barcodeNumber) {
                                 Image(uiImage: barcodeImage)
                                     .interpolation(.none)
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(width: 280, height: 80)
+                                    .frame(width: 320, height: 100)
                             }
                             
                             Text(verificationData.barcodeFormatted)
-                                .font(.system(size: 20, weight: .medium))
+                                .font(.system(size: 22, weight: .medium))
                                 .foregroundColor(.black)
-                                .tracking(4)
+                                .tracking(5)
                         }
+                        .padding(.horizontal, 20)
                     }
                     
                     Spacer()
@@ -245,6 +258,7 @@ struct PassportCardBack: View {
                         Button(action: {
                             withAnimation(.spring(response: 0.3)) {
                                 showingQR = true
+                                onCodeTypeChanged()
                             }
                         }) {
                             VStack(spacing: 8) {
@@ -266,6 +280,7 @@ struct PassportCardBack: View {
                         Button(action: {
                             withAnimation(.spring(response: 0.3)) {
                                 showingQR = false
+                                onCodeTypeChanged()
                             }
                         }) {
                             VStack(spacing: 8) {
