@@ -71,8 +71,16 @@ struct MenuView: View {
     
     var body: some View {
         ZStack {
-            Color(UIColor.systemGroupedBackground)
-                .ignoresSafeArea()
+            // Gradient background
+            LinearGradient(
+                gradient: Gradient(colors: [
+                    Color(hex: "C8E6F5"),
+                    Color(hex: "E8F5FC")
+                ]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+            .ignoresSafeArea()
             
             ScrollView {
                 VStack(alignment: .leading, spacing: 0) {
@@ -177,7 +185,7 @@ struct MenuView: View {
                     
                     // Вийти button
                     Button(action: {
-                        authManager.logout()
+                    authManager.logout()
                     }) {
                         Text("Вийти")
                             .font(.system(size: 17, weight: .semibold, design: .default))

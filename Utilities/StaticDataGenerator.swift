@@ -76,7 +76,7 @@ class StaticDataGenerator {
         return "00000000-00000"
     }
     
-    // Дата выдачи паспорта (дата рождения + примерно 7 дней)
+    // Дата выдачи паспорта (дата рождения + 14 лет)
     func getPassportIssueDate(birthDate: String) -> String {
         if let saved = UserDefaults.standard.string(forKey: "userPassportIssueDate") {
             return saved
@@ -95,10 +95,9 @@ class StaticDataGenerator {
             return "01.01.2020"
         }
         
-        // Добавляем от 5 до 10 дней после 14-летия
+        // Добавляем ровно 14 лет
         var components = DateComponents()
         components.year = 14
-        components.day = Int.random(in: 5...10)
         
         guard let issueDate = Calendar.current.date(byAdding: components, to: birth) else {
             return "01.01.2020"
@@ -137,7 +136,7 @@ class StaticDataGenerator {
         return authority
     }
     
-    // Дата регистрации (рождение + 4 года + случайные месяцы)
+    // Дата регистрации (рождение + 2 года)
     func getRegistrationDate(birthDate: String) -> String {
         if let saved = UserDefaults.standard.string(forKey: "userRegistrationDate") {
             return saved
@@ -156,11 +155,9 @@ class StaticDataGenerator {
             return "01.01.2010"
         }
         
-        // Добавляем 4 года + случайное количество месяцев (0-12)
+        // Добавляем ровно 2 года
         var components = DateComponents()
-        components.year = 4
-        components.month = Int.random(in: 0...12)
-        components.day = Int.random(in: 1...28)
+        components.year = 2
         
         guard let regDate = Calendar.current.date(byAdding: components, to: birth) else {
             return "01.01.2010"
