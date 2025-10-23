@@ -49,6 +49,8 @@ struct TaxCard: View {
                 .padding(.horizontal, 20)
                 .padding(.bottom, 28)
                 
+                Spacer()
+                
                 // Бегущая строка
                 TaxMarqueeText()
                 
@@ -82,7 +84,7 @@ struct TaxCard: View {
                 .padding(.bottom, 28)
             }
         }
-        .frame(maxWidth: 360, minHeight: 500)
+        .frame(maxWidth: 360, minHeight: 430)
     }
 }
 
