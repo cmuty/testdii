@@ -9,6 +9,8 @@ struct ContentView: View {
                 WelcomeView()
             } else if !authManager.isAuthenticated {
                 AuthView()
+            } else if !authManager.subscriptionActive {
+                NoSubscriptionView()
             } else if !authManager.hasSignature {
                 SignatureView()
             } else {
