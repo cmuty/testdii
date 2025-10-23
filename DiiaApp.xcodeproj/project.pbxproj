@@ -22,6 +22,8 @@
 		2A000000000000000000000D /* DocumentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B000000000000000000000D /* DocumentCard.swift */; };
 		2A000000000000000000000E /* GlassmorphicCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B000000000000000000000E /* GlassmorphicCard.swift */; };
 		2A000000000000000000000F /* TaxCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B000000000000000000000F /* TaxCard.swift */; };
+		2A0000000000000000000010 /* PassportCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0000000000000000000011 /* PassportCard.swift */; };
+		2A0000000000000000000011 /* SignatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0000000000000000000012 /* SignatureView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +43,8 @@
 		2B000000000000000000000E /* GlassmorphicCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassmorphicCard.swift; sourceTree = "<group>"; };
 		2B000000000000000000000F /* TaxCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxCard.swift; sourceTree = "<group>"; };
 		2B0000000000000000000010 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2B0000000000000000000011 /* PassportCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportCard.swift; sourceTree = "<group>"; };
+		2B0000000000000000000012 /* SignatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignatureView.swift; sourceTree = "<group>"; };
 		2C0000000000000000000001 /* DiiaApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiiaApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -110,6 +114,7 @@
 				2B0000000000000000000009 /* HomeView.swift */,
 				2B000000000000000000000A /* MainTabView.swift */,
 				2B000000000000000000000B /* DocumentsView.swift */,
+				2B0000000000000000000012 /* SignatureView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -121,6 +126,7 @@
 				2B000000000000000000000D /* DocumentCard.swift */,
 				2B000000000000000000000E /* GlassmorphicCard.swift */,
 				2B000000000000000000000F /* TaxCard.swift */,
+				2B0000000000000000000011 /* PassportCard.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -216,6 +222,8 @@
 				2A000000000000000000000D /* DocumentCard.swift in Sources */,
 				2A000000000000000000000E /* GlassmorphicCard.swift in Sources */,
 				2A000000000000000000000F /* TaxCard.swift in Sources */,
+				2A0000000000000000000010 /* PassportCard.swift in Sources */,
+				2A0000000000000000000011 /* SignatureView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
