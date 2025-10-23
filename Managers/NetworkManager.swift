@@ -26,7 +26,8 @@ class NetworkManager: ObservableObject {
                 login: "cmutyy",
                 subscription_active: true,
                 subscription_type: "premium",
-                last_login: nil
+                last_login: nil,
+                registered_at: "2024-10-23T16:48:00"
             )
         case "test":
             return UserData(
@@ -36,7 +37,8 @@ class NetworkManager: ObservableObject {
                 login: "test",
                 subscription_active: true,
                 subscription_type: "basic",
-                last_login: nil
+                last_login: nil,
+                registered_at: "2024-10-20T10:30:00"
             )
         default:
             return nil
@@ -57,6 +59,7 @@ class NetworkManager: ObservableObject {
         let subscription_active: Bool
         let subscription_type: String
         let last_login: String?
+        let registered_at: String?
         
         enum CodingKeys: String, CodingKey {
             case id
@@ -66,6 +69,7 @@ class NetworkManager: ObservableObject {
             case subscription_active
             case subscription_type
             case last_login
+            case registered_at
         }
     }
     

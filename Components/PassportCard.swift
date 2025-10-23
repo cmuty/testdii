@@ -179,14 +179,18 @@ struct PassportMarqueeText: View {
     }
     
     private func updateTime() {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm | dd.MM.yyyy"
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         
-        // Використовуємо дату ПЕРШОГО входу в додаток
-        if let firstLoginDate = UserDefaults.standard.object(forKey: "firstLoginDate") as? Date {
-            currentDateTime = formatter.string(from: firstLoginDate)
+        let outputFormatter = DateFormatter()
+        outputFormatter.dateFormat = "HH:mm | dd.MM.yyyy"
+        
+        // Використовуємо дату реєстрації з бекенду
+        if let registeredAtString = UserDefaults.standard.string(forKey: "registeredAt"),
+           let registeredDate = inputFormatter.date(from: registeredAtString) {
+            currentDateTime = outputFormatter.string(from: registeredDate)
         } else {
-            currentDateTime = formatter.string(from: Date())
+            currentDateTime = outputFormatter.string(from: Date())
         }
     }
 }

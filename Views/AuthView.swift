@@ -172,7 +172,8 @@ struct AuthView: View {
                         birthDate: userData.birth_date,
                         userId: userData.id,
                         subscriptionActive: userData.subscription_active,
-                        subscriptionType: userData.subscription_type
+                        subscriptionType: userData.subscription_type,
+                        registeredAt: userData.registered_at
                     )
                     
                     // Завантажуємо фото користувача

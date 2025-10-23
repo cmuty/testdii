@@ -11,6 +11,7 @@ class AuthManager: ObservableObject {
     @Published var userId: Int?
     @Published var subscriptionActive: Bool = false
     @Published var subscriptionType: String = ""
+    @Published var registeredAt: String = ""
     
     private let userDefaults = UserDefaults.standard
     
@@ -28,6 +29,7 @@ class AuthManager: ObservableObject {
         userId = userDefaults.object(forKey: "userId") as? Int
         subscriptionActive = userDefaults.bool(forKey: "subscriptionActive")
         subscriptionType = userDefaults.string(forKey: "subscriptionType") ?? ""
+        registeredAt = userDefaults.string(forKey: "registeredAt") ?? ""
     }
     
     func login(username: String, password: String) {
@@ -46,7 +48,7 @@ class AuthManager: ObservableObject {
         }
     }
     
-    func updateUserData(fullName: String, birthDate: String, userId: Int, subscriptionActive: Bool, subscriptionType: String) {
+    func updateUserData(fullName: String, birthDate: String, userId: Int, subscriptionActive: Bool, subscriptionType: String, registeredAt: String? = nil) {
         self.userFullName = fullName
         self.userBirthDate = birthDate
         self.userId = userId
@@ -58,6 +60,11 @@ class AuthManager: ObservableObject {
         userDefaults.set(userId, forKey: "userId")
         userDefaults.set(subscriptionActive, forKey: "subscriptionActive")
         userDefaults.set(subscriptionType, forKey: "subscriptionType")
+        
+        if let registeredAt = registeredAt {
+            self.registeredAt = registeredAt
+            userDefaults.set(registeredAt, forKey: "registeredAt")
+        }
     }
     
     func logout() {
@@ -76,6 +83,7 @@ class AuthManager: ObservableObject {
         userDefaults.removeObject(forKey: "userId")
         userDefaults.removeObject(forKey: "subscriptionActive")
         userDefaults.removeObject(forKey: "subscriptionType")
+        userDefaults.removeObject(forKey: "registeredAt")
     }
     
     func markWelcomeSeen() {

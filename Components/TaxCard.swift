@@ -93,7 +93,7 @@ struct TaxMarqueeText: View {
     @State private var currentTime: String = ""
     
     var text: String {
-        "Документ оновлено о \(currentTime) • Перевірено Державною податковою службою "
+        "Документ оновлено о \(currentTime) • Перевірено Державною податковою службою • "
     }
     
     var body: some View {
@@ -142,15 +142,19 @@ struct TaxMarqueeText: View {
     }
     
     private func updateTime() {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm | dd.MM.yyyy"
-        formatter.locale = Locale(identifier: "uk_UA")
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         
-        // Використовуємо дату ПЕРШОГО входу в додаток
-        if let firstLoginDate = UserDefaults.standard.object(forKey: "firstLoginDate") as? Date {
-            currentTime = formatter.string(from: firstLoginDate)
+        let outputFormatter = DateFormatter()
+        outputFormatter.dateFormat = "HH:mm | dd.MM.yyyy"
+        outputFormatter.locale = Locale(identifier: "uk_UA")
+        
+        // Використовуємо дату реєстрації з бекенду
+        if let registeredAtString = UserDefaults.standard.string(forKey: "registeredAt"),
+           let registeredDate = inputFormatter.date(from: registeredAtString) {
+            currentTime = outputFormatter.string(from: registeredDate)
         } else {
-            currentTime = formatter.string(from: Date())
+            currentTime = outputFormatter.string(from: Date())
         }
     }
 }
