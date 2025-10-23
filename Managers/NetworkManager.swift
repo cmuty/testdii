@@ -3,13 +3,43 @@ import Foundation
 class NetworkManager: ObservableObject {
     static let shared = NetworkManager()
     
-    // API Base URL - змініть на вашу IP адресу при запуску
-    private let baseURL = "http://localhost:8000"
+    // API Base URL - використовуйте IP адресу вашого комп'ютера
+    // Щоб дізнатись IP: відкрийте PowerShell і введіть: ipconfig
+    private let baseURL = "http://192.168.0.104:8000"
     
     // Fallback credentials для offline режиму
     private let offlineCredentials: [String: String] = [
-        "cmutyy": "password123"
+        "cmutyy": "password123",
+        "test": "test123"
     ]
+    
+    // Mock данные для offline тестування (якщо немає кешу)
+    private func getMockUserData(username: String) -> UserData? {
+        switch username {
+        case "cmutyy":
+            return UserData(
+                id: 1,
+                full_name: "Зарва Богдан Олегович",
+                birth_date: "07.01.2010",
+                login: "cmutyy",
+                subscription_active: true,
+                subscription_type: "premium",
+                last_login: nil
+            )
+        case "test":
+            return UserData(
+                id: 2,
+                full_name: "Тестовий Користувач Петрович",
+                birth_date: "01.01.2000",
+                login: "test",
+                subscription_active: true,
+                subscription_type: "basic",
+                last_login: nil
+            )
+        default:
+            return nil
+        }
+    }
     
     struct LoginResponse: Codable {
         let success: Bool
@@ -48,17 +78,20 @@ class NetworkManager: ObservableObject {
             return result
         }
         
-        // Якщо API недоступний, перевіряємо offline credentials
-        if let storedPassword = offlineCredentials[username], storedPassword == password {
-            return (true, "Offline авторизація успішна", nil)
-        }
-        
-        // Перевіряємо локально збережені дані
+        // Перевіряємо локально збережені дані (пріоритет)
         if let userData = UserDefaults.standard.data(forKey: "cachedUserData_\(username)"),
            let cachedUser = try? JSONDecoder().decode(UserData.self, from: userData),
            let cachedPassword = UserDefaults.standard.string(forKey: "cachedPassword_\(username)"),
            cachedPassword == password {
+            print("✅ Using cached user data")
             return (true, "Локальна авторизація успішна", cachedUser)
+        }
+        
+        // Якщо API недоступний, перевіряємо offline credentials + mock data
+        if let storedPassword = offlineCredentials[username], storedPassword == password {
+            print("✅ Using offline credentials with mock data")
+            let mockUser = getMockUserData(username: username)
+            return (true, "Offline авторизація успішна", mockUser)
         }
         
         return (false, "Невірний логін або пароль", nil)
