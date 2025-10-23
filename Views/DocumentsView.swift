@@ -14,26 +14,54 @@ struct DocumentsView: View {
                 
                 VStack(spacing: 16) {
                     // Carousel з документами
-                    TabView(selection: $currentPage) {
-                        // єДокумент
-                        DocumentCard(user: user)
-                            .padding(.horizontal, 20)
-                            .scaleEffect(currentPage == 0 ? 1.0 : 0.88)
-                            .opacity(currentPage == 0 ? 1.0 : 0.7)
-                            .animation(.spring(response: 0.5, dampingFraction: 0.75), value: currentPage)
-                            .tag(0)
-                        
-                        // Картка платника податків
-                        TaxCard(user: user)
-                            .padding(.horizontal, 20)
-                            .scaleEffect(currentPage == 1 ? 1.0 : 0.88)
-                            .opacity(currentPage == 1 ? 1.0 : 0.7)
-                            .animation(.spring(response: 0.5, dampingFraction: 0.75), value: currentPage)
-                            .tag(1)
+                    GeometryReader { geometry in
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 20) {
+                                // єДокумент
+                                DocumentCard(user: user)
+                                    .frame(width: geometry.size.width - 60)
+                                    .scaleEffect(currentPage == 0 ? 1.0 : 0.88)
+                                    .opacity(currentPage == 0 ? 1.0 : 0.7)
+                                    .animation(.spring(response: 0.5, dampingFraction: 0.75), value: currentPage)
+                                    .onTapGesture {
+                                        withAnimation {
+                                            currentPage = 0
+                                        }
+                                    }
+                                
+                                // Картка платника податків
+                                TaxCard(user: user)
+                                    .frame(width: geometry.size.width - 60)
+                                    .scaleEffect(currentPage == 1 ? 1.0 : 0.88)
+                                    .opacity(currentPage == 1 ? 1.0 : 0.7)
+                                    .animation(.spring(response: 0.5, dampingFraction: 0.75), value: currentPage)
+                                    .onTapGesture {
+                                        withAnimation {
+                                            currentPage = 1
+                                        }
+                                    }
+                            }
+                            .padding(.horizontal, 30)
+                        }
+                        .content.offset(x: -CGFloat(currentPage) * (geometry.size.width - 40))
+                        .animation(.spring(response: 0.5, dampingFraction: 0.75), value: currentPage)
+                        .gesture(
+                            DragGesture()
+                                .onEnded { value in
+                                    let threshold = geometry.size.width / 3
+                                    if value.translation.width < -threshold && currentPage < 1 {
+                                        withAnimation {
+                                            currentPage += 1
+                                        }
+                                    } else if value.translation.width > threshold && currentPage > 0 {
+                                        withAnimation {
+                                            currentPage -= 1
+                                        }
+                                    }
+                                }
+                        )
                     }
-                    .tabViewStyle(.page(indexDisplayMode: .never))
                     .frame(height: 550)
-                    .padding(.horizontal, -10)
                     
                     // Page indicator (точки)
                     HStack(spacing: 8) {
