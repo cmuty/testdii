@@ -15,42 +15,20 @@ struct WelcomeView: View {
                 // Привіт + емодзі
                 HStack(spacing: 8) {
                     Text("Привіт")
-                        .font(.system(size: 48, weight: .bold))
+                        .font(.system(size: 48, weight: .regular, design: .default))
                         .foregroundColor(.black)
                     Text("👋")
                         .font(.system(size: 48))
                 }
                 
-                // Іконки Дія внизу
-                HStack(spacing: 20) {
-                    // Чорна іконка
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 28)
-                            .fill(Color.black)
-                            .frame(width: 100, height: 100)
-                        
-                        Text("Дія")
-                            .font(.system(size: 28, weight: .bold))
-                            .foregroundColor(.white)
-                    }
-                    
-                    // Біла іконка з тризубом
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 28)
-                            .fill(Color.white)
-                            .frame(width: 100, height: 100)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 28)
-                                    .stroke(Color.black, lineWidth: 3)
-                            )
-                        
-                        Image(systemName: "shield.fill")
-                            .font(.system(size: 50))
-                            .foregroundColor(.black)
-                    }
-                }
-                
                 Spacer()
+                
+                // Іконка Дія внизу по середині
+                Image("DiiaIcon")
+                    .resizable()
+                    .frame(width: 120, height: 120)
+                    .cornerRadius(28)
+                    .padding(.bottom, 60)
             }
             .scaleEffect(scale)
             .opacity(opacity)
