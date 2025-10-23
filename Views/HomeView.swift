@@ -24,7 +24,7 @@ struct HomeView: View {
                 VStack(alignment: .leading, spacing: 16) {
                     // Приветствие
                     Text("Привіт, \(firstName) 👋")
-                        .font(.system(size: 32, weight: .bold, design: .default))
+                        .font(.system(size: 36, weight: .regular, design: .default))
                         .padding(.top, 64)
                         .padding(.bottom, 8)
                     
@@ -32,50 +32,55 @@ struct HomeView: View {
                     Button(action: {
                         print("Незламність")
                     }) {
-                        HStack(spacing: 12) {
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text("Незламність")
-                                    .font(.system(size: 18, weight: .semibold, design: .default))
-                                    .foregroundColor(.black)
-                                Text("Мапа Пунктів Незламності та укриттів.\nЗаява про відсутній зв'язок.")
-                                    .font(.system(size: 14, weight: .regular, design: .default))
-                                    .foregroundColor(.gray)
-                                    .lineLimit(3)
-                                
-                                HStack(spacing: 8) {
-                                    Circle()
-                                        .fill(Color.blue)
-                                        .frame(width: 36, height: 36)
-                                        .overlay(
-                                            Image(systemName: "shield.fill")
-                                                .font(.system(size: 18))
-                                                .foregroundColor(.white)
-                                        )
+                        ZStack(alignment: .bottomTrailing) {
+                            HStack(spacing: 12) {
+                                VStack(alignment: .leading, spacing: 8) {
+                                    Text("Незламність")
+                                        .font(.system(size: 22, weight: .regular, design: .default))
+                                        .foregroundColor(.black)
+                                    Text("Мапа Пунктів Незламності та укриттів.\nЗаява про відсутній зв'язок.")
+                                        .font(.system(size: 14, weight: .regular, design: .default))
+                                        .foregroundColor(.gray)
+                                        .lineLimit(3)
                                     
-                                    Circle()
-                                        .fill(Color.yellow)
-                                        .frame(width: 36, height: 36)
-                                        .overlay(
-                                            Image(systemName: "bolt.fill")
-                                                .font(.system(size: 18))
-                                                .foregroundColor(.white)
-                                        )
+                                    HStack(spacing: -8) {
+                                        Circle()
+                                            .fill(Color.blue)
+                                            .frame(width: 32, height: 32)
+                                            .overlay(
+                                                Image(systemName: "shield.fill")
+                                                    .font(.system(size: 16))
+                                                    .foregroundColor(.white)
+                                            )
+                                            .zIndex(1)
+                                        
+                                        Circle()
+                                            .fill(Color.yellow)
+                                            .frame(width: 32, height: 32)
+                                            .overlay(
+                                                Image(systemName: "bolt.fill")
+                                                    .font(.system(size: 16))
+                                                    .foregroundColor(.white)
+                                            )
+                                    }
+                                    .padding(.top, 4)
                                 }
-                                .padding(.top, 4)
+                                
+                                Spacer()
                             }
+                            .padding(16)
                             
-                            Spacer()
-                            
+                            // Стрелка в правом нижнем углу
                             Circle()
                                 .fill(Color.black)
-                                .frame(width: 32, height: 32)
+                                .frame(width: 28, height: 28)
                                 .overlay(
                                     Image(systemName: "arrow.right")
-                                        .font(.system(size: 14, weight: .semibold))
+                                        .font(.system(size: 12, weight: .semibold))
                                         .foregroundColor(.white)
                                 )
+                                .padding(12)
                         }
-                        .padding(16)
                         .background(
                             RoundedRectangle(cornerRadius: 16)
                                 .fill(Color.white.opacity(0.7))
