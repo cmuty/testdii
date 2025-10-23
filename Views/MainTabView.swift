@@ -64,19 +64,7 @@ struct MainTabView: View {
     }
 }
 
-struct ServicesView: View {
-    var body: some View {
-        ZStack {
-            AnimatedGradientBackground()
-            
-            VStack {
-                Text("Сервіси")
-                    .font(.largeTitle)
-                    .bold()
-            }
-        }
-    }
-}
+// ServicesView moved to separate file
 
 struct MenuView: View {
     @EnvironmentObject var authManager: AuthManager
