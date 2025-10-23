@@ -16,104 +16,104 @@ struct DocumentFullInfoView: View {
                         // Title
                         HStack {
                             Text("єДокумент")
-                                .font(.system(size: 34, weight: .regular, design: .default))
+                                .font(.system(size: 28, weight: .regular, design: .default))
                             Spacer()
                         }
                         .padding(.horizontal, 20)
                         .padding(.top, 8)
                         
-                        // Бегущая строка
+                        // Бегущая строка (на всю ширину)
                         MarqueeTextInfo()
                             .padding(.bottom, 8)
                         
-                        // ФИО Card
-                        VStack(alignment: .leading, spacing: 12) {
-                            HStack(alignment: .top, spacing: 16) {
-                                // Photo
+                        // ФИО Card (увеличенная)
+                        VStack(alignment: .leading, spacing: 16) {
+                            // ФИО над фото
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(user.lastName + " " + user.firstName)
+                                    .font(.system(size: 22, weight: .regular, design: .default))
+                                Text(user.patronymic)
+                                    .font(.system(size: 22, weight: .regular, design: .default))
+                                
+                                Text(transliterate(user.firstName) + " " + transliterate(user.lastName))
+                                    .font(.system(size: 18, weight: .regular, design: .default))
+                                    .foregroundColor(.black.opacity(0.7))
+                                    .padding(.top, 4)
+                            }
+                            
+                            HStack(alignment: .top, spacing: 20) {
+                                // Photo (увеличенное)
                                 if let photoData = UserDefaults.standard.data(forKey: "userPhoto"),
                                    let uiImage = UIImage(data: photoData) {
                                     Image(uiImage: uiImage)
                                         .resizable()
                                         .aspectRatio(contentMode: .fill)
-                                        .frame(width: 100, height: 130)
+                                        .frame(width: 140, height: 180)
                                         .clipShape(RoundedRectangle(cornerRadius: 12))
                                 } else {
                                     RoundedRectangle(cornerRadius: 12)
                                         .fill(Color.gray.opacity(0.2))
-                                        .frame(width: 100, height: 130)
+                                        .frame(width: 140, height: 180)
                                 }
                                 
-                                VStack(alignment: .leading, spacing: 16) {
-                                    // Ukrainian name
-                                    VStack(alignment: .leading, spacing: 2) {
-                                        Text(user.lastName + " " + user.firstName)
-                                            .font(.system(size: 18, weight: .regular))
-                                        Text(user.patronymic)
-                                            .font(.system(size: 18, weight: .regular))
-                                        
-                                        Text(transliterate(user.lastName) + " " + transliterate(user.firstName))
-                                            .font(.system(size: 16, weight: .regular))
-                                            .foregroundColor(.black)
-                                            .padding(.top, 4)
-                                    }
-                                    
-                                    // Birth date
-                                    VStack(alignment: .leading, spacing: 2) {
-                                        Text("Дата")
-                                            .font(.system(size: 14, weight: .regular))
-                                        Text("народження:")
-                                            .font(.system(size: 14, weight: .regular))
-                                        Text("Date of birth")
-                                            .font(.system(size: 13, weight: .regular))
-                                            .foregroundColor(.gray)
-                                        Text(user.birthDate)
-                                            .font(.system(size: 14, weight: .medium))
-                                    }
+                                // Birth date справа от фото
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text("Дата")
+                                        .font(.system(size: 16, weight: .regular, design: .default))
+                                    Text("народження:")
+                                        .font(.system(size: 16, weight: .regular, design: .default))
+                                    Text("Date of birth")
+                                        .font(.system(size: 14, weight: .regular, design: .default))
+                                        .foregroundColor(.gray)
+                                    Text(user.birthDate)
+                                        .font(.system(size: 16, weight: .regular, design: .default))
+                                        .padding(.top, 4)
                                 }
+                                
+                                Spacer()
                             }
                         }
-                        .padding(16)
+                        .padding(20)
                         .background(Color.white.opacity(0.6))
                         .cornerRadius(12)
                         .padding(.horizontal, 20)
                         
-                        // Sex Card
-                        VStack(spacing: 0) {
+                        // Объединенная карточка: Стать + РНОКПП + Документ
+                        VStack(alignment: .leading, spacing: 12) {
+                            // Стать
                             HStack {
                                 VStack(alignment: .leading, spacing: 2) {
                                     Text("Стать:")
-                                        .font(.system(size: 16, weight: .regular))
+                                        .font(.system(size: 16, weight: .regular, design: .default))
                                     Text("Sex")
-                                        .font(.system(size: 14, weight: .regular))
+                                        .font(.system(size: 14, weight: .regular, design: .default))
                                         .foregroundColor(.gray)
                                 }
                                 
                                 Spacer()
                                 
-                                VStack(alignment: .trailing, spacing: 2) {
+                                VStack(alignment: .center, spacing: 2) {
                                     Text("Ч")
-                                        .font(.system(size: 16, weight: .regular))
+                                        .font(.system(size: 16, weight: .regular, design: .default))
                                     Text("M")
-                                        .font(.system(size: 14, weight: .regular))
+                                        .font(.system(size: 14, weight: .regular, design: .default))
                                         .foregroundColor(.gray)
                                 }
+                                .frame(maxWidth: .infinity)
                             }
-                            .padding(16)
-                        }
-                        .background(Color.white.opacity(0.6))
-                        .cornerRadius(12)
-                        .padding(.horizontal, 20)
-                        
-                        // РНОКПП Card
-                        VStack(alignment: .leading, spacing: 8) {
+                            
+                            Divider()
+                                .padding(.vertical, 4)
+                            
+                            // РНОКПП
                             HStack {
                                 Text("РНОКПП (ІПН):")
-                                    .font(.system(size: 16, weight: .regular))
+                                    .font(.system(size: 16, weight: .regular, design: .default))
                                 
                                 Spacer()
                                 
                                 Text(user.taxId)
-                                    .font(.system(size: 16, weight: .medium))
+                                    .font(.system(size: 14, weight: .regular, design: .default))
                                 
                                 Button(action: {
                                     UIPasteboard.general.string = user.taxId
@@ -127,15 +127,18 @@ struct DocumentFullInfoView: View {
                             Divider()
                                 .padding(.vertical, 4)
                             
-                            Text("Документ, що посвідчує особу:")
-                                .font(.system(size: 15, weight: .regular))
-                                .foregroundColor(.black)
-                            
-                            Text("Паспорт громадянина України")
-                                .font(.system(size: 15, weight: .regular))
-                            
-                            Text(generatePassportNumber())
-                                .font(.system(size: 15, weight: .regular))
+                            // Документ
+                            VStack(alignment: .leading, spacing: 6) {
+                                Text("Документ, що посвідчує особу:")
+                                    .font(.system(size: 15, weight: .regular, design: .default))
+                                    .foregroundColor(.black)
+                                
+                                Text("Паспорт громадянина України")
+                                    .font(.system(size: 15, weight: .regular, design: .default))
+                                
+                                Text(generatePassportNumber())
+                                    .font(.system(size: 15, weight: .regular, design: .default))
+                            }
                         }
                         .padding(16)
                         .background(Color.white.opacity(0.6))
@@ -145,10 +148,10 @@ struct DocumentFullInfoView: View {
                         // Address Card
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Місце проживання зазначене в банку:")
-                                .font(.system(size: 15, weight: .medium))
+                                .font(.system(size: 15, weight: .regular, design: .default))
                             
                             Text("Україна, область Харківська, місто Харків, провулок Білостоцький, буд 47")
-                                .font(.system(size: 15, weight: .regular))
+                                .font(.system(size: 15, weight: .regular, design: .default))
                                 .foregroundColor(.black.opacity(0.8))
                         }
                         .padding(16)
@@ -270,11 +273,11 @@ struct MarqueeTextInfo: View {
                     .offset(x: offset)
                     .onAppear {
                         let textWidth = (text as NSString).size(
-                            withAttributes: [.font: UIFont.systemFont(ofSize: 14, weight: .semibold)]
+                            withAttributes: [.font: UIFont.systemFont(ofSize: 14, weight: .regular)]
                         ).width
                         
                         withAnimation(
-                            Animation.linear(duration: 30)
+                            Animation.linear(duration: 50)
                                 .repeatForever(autoreverses: false)
                         ) {
                             offset = -textWidth
@@ -283,8 +286,6 @@ struct MarqueeTextInfo: View {
             }
         }
         .frame(height: 32)
-        .cornerRadius(8)
-        .padding(.horizontal, 20)
         .clipped()
     }
 }
