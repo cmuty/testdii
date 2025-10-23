@@ -84,7 +84,7 @@ struct TaxCard: View {
                 .padding(.bottom, 28)
             }
         }
-        .frame(maxWidth: 360, minHeight: 430)
+        .frame(maxWidth: 360, height: 430)
     }
 }
 
