@@ -37,9 +37,12 @@ struct WelcomeView: View {
                     // Біла іконка з тризубом
                     ZStack {
                         RoundedRectangle(cornerRadius: 28)
-                            .stroke(Color.black, lineWidth: 3)
                             .fill(Color.white)
                             .frame(width: 100, height: 100)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 28)
+                                    .stroke(Color.black, lineWidth: 3)
+                            )
                         
                         Image(systemName: "shield.fill")
                             .font(.system(size: 50))
