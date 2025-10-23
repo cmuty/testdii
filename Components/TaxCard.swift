@@ -84,7 +84,7 @@ struct TaxCard: View {
                 .padding(.bottom, 28)
             }
         }
-        .frame(width: 360, height: 450)
+        .frame(width: 360, height: 470)
     }
 }
 
@@ -110,7 +110,7 @@ struct TaxMarqueeText: View {
             
             GeometryReader { geometry in
                 Text(text + text + text)
-                    .font(.system(size: 14, weight: .semibold, design: .default))
+                    .font(.system(size: 14, weight: .regular, design: .default))
                     .foregroundColor(Color(hex: "111111"))
                     .lineLimit(1)
                     .fixedSize(horizontal: true, vertical: false)

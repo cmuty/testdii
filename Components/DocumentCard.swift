@@ -114,7 +114,7 @@ struct MarqueeText: View {
             
             GeometryReader { geometry in
                 Text(text + text + text)
-                    .font(.system(size: 14, weight: .semibold, design: .default))
+                    .font(.system(size: 14, weight: .regular, design: .default))
                     .foregroundColor(Color(hex: "111111"))
                     .lineLimit(1)
                     .fixedSize(horizontal: true, vertical: false)
