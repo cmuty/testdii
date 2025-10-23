@@ -107,6 +107,7 @@ class NetworkManager: ObservableObject {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("1", forHTTPHeaderField: "ngrok-skip-browser-warning")
         request.timeoutInterval = 5.0 // 5 секунд timeout
         
         let loginRequest = LoginRequest(login: username, password: password)
@@ -152,6 +153,7 @@ class NetworkManager: ObservableObject {
         }
         
         var request = URLRequest(url: url)
+        request.setValue("1", forHTTPHeaderField: "ngrok-skip-browser-warning")
         request.timeoutInterval = 3.0
         
         do {
