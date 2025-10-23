@@ -1,9 +1,9 @@
 import SwiftUI
 
-struct AnimatedGradientBackground: View {
-    @State private var startPoint: UnitPoint = .topLeading
-    @State private var endPoint: UnitPoint = .bottomTrailing
-    @State private var colorIndex = 0
+class GradientManager: ObservableObject {
+    static let shared = GradientManager()
+    
+    @Published var colorIndex = 0
     
     let colorSets: [[Color]] = [
         [
@@ -28,24 +28,37 @@ struct AnimatedGradientBackground: View {
         ]
     ]
     
-    var body: some View {
-        LinearGradient(
-            colors: currentColors,
-            startPoint: startPoint,
-            endPoint: endPoint
-        )
-        .ignoresSafeArea()
-        .onAppear {
-            Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { _ in
-                withAnimation(.easeInOut(duration: 2.5)) {
-                    colorIndex = (colorIndex + 1) % colorSets.count
-                }
+    private var timer: Timer?
+    
+    private init() {
+        startAnimation()
+    }
+    
+    func startAnimation() {
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { [weak self] _ in
+            guard let self = self else { return }
+            withAnimation(.easeInOut(duration: 2.5)) {
+                self.colorIndex = (self.colorIndex + 1) % self.colorSets.count
             }
         }
     }
     
     var currentColors: [Color] {
         colorSets[colorIndex]
+    }
+}
+
+struct AnimatedGradientBackground: View {
+    @StateObject private var gradientManager = GradientManager.shared
+    
+    var body: some View {
+        LinearGradient(
+            colors: gradientManager.currentColors,
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+        .ignoresSafeArea()
     }
 }
 
