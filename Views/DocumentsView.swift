@@ -5,6 +5,7 @@ struct DocumentsView: View {
     @State private var currentPage = 0
     @State private var dragOffset: CGFloat = 0
     @State private var showMenu = false
+    @State private var showFullInfo = false
     @State private var currentDocumentName = ""
     
     // Создаём User из данных AuthManager
@@ -63,7 +64,7 @@ struct DocumentsView: View {
                     }
                     .tabViewStyle(.page(indexDisplayMode: .never))
                     .frame(height: 550)
-                    .blur(radius: showMenu ? 3 : 0)
+                    .blur(radius: showMenu ? 1 : 0)
                     
                     // Page indicator (точки)
                     HStack(spacing: 8) {
@@ -74,7 +75,7 @@ struct DocumentsView: View {
                                 .animation(.spring(response: 0.4, dampingFraction: 0.75), value: currentPage)
                         }
                     }
-                    .blur(radius: showMenu ? 3 : 0)
+                    .blur(radius: showMenu ? 1 : 0)
                 }
                 
                 Spacer()
@@ -83,9 +84,20 @@ struct DocumentsView: View {
             // Menu overlay поверх всего
             DocumentMenuSheet(
                 isPresented: $showMenu,
-                documentName: currentDocumentName
+                documentName: currentDocumentName,
+                onFullInfoTap: {
+                    showFullInfo = true
+                }
             )
             .zIndex(100)
+        }
+        .sheet(isPresented: $showFullInfo) {
+            DocumentFullInfoView(
+                isPresented: $showFullInfo,
+                user: user
+            )
+            .presentationDetents([.large])
+            .presentationDragIndicator(.visible)
         }
     }
 }

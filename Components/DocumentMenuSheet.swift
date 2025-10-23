@@ -3,6 +3,7 @@ import SwiftUI
 struct DocumentMenuSheet: View {
     @Binding var isPresented: Bool
     let documentName: String
+    let onFullInfoTap: () -> Void
     
     var body: some View {
         ZStack {
@@ -28,8 +29,8 @@ struct DocumentMenuSheet: View {
                                 icon: "doc.text",
                                 title: "Повна інформація"
                             ) {
-                                print("Повна інформація")
                                 isPresented = false
+                                onFullInfoTap()
                             }
                             
                             Divider()
@@ -156,7 +157,8 @@ struct BlurView: UIViewRepresentable {
         
         DocumentMenuSheet(
             isPresented: .constant(true),
-            documentName: "Паспорт"
+            documentName: "Паспорт",
+            onFullInfoTap: {}
         )
     }
 }

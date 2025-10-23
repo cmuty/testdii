@@ -27,6 +27,7 @@
 		2A0000000000000000000012 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0000000000000000000013 /* NetworkManager.swift */; };
 		2A0000000000000000000013 /* ServicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0000000000000000000014 /* ServicesView.swift */; };
 		2A0000000000000000000014 /* DocumentMenuSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0000000000000000000015 /* DocumentMenuSheet.swift */; };
+		2A0000000000000000000015 /* DocumentFullInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0000000000000000000016 /* DocumentFullInfoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		2B0000000000000000000013 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		2B0000000000000000000014 /* ServicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesView.swift; sourceTree = "<group>"; };
 		2B0000000000000000000015 /* DocumentMenuSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentMenuSheet.swift; sourceTree = "<group>"; };
+		2B0000000000000000000016 /* DocumentFullInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentFullInfoView.swift; sourceTree = "<group>"; };
 		2C0000000000000000000001 /* DiiaApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiiaApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -123,6 +125,7 @@
 				2B000000000000000000000B /* DocumentsView.swift */,
 				2B0000000000000000000012 /* SignatureView.swift */,
 				2B0000000000000000000014 /* ServicesView.swift */,
+				2B0000000000000000000016 /* DocumentFullInfoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -236,6 +239,7 @@
 				2A0000000000000000000012 /* NetworkManager.swift in Sources */,
 				2A0000000000000000000013 /* ServicesView.swift in Sources */,
 				2A0000000000000000000014 /* DocumentMenuSheet.swift in Sources */,
+				2A0000000000000000000015 /* DocumentFullInfoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
