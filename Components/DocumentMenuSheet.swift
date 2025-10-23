@@ -3,6 +3,7 @@ import SwiftUI
 enum DocumentType {
     case standard
     case taxCard
+    case passport
 }
 
 struct DocumentMenuSheet: View {
@@ -119,6 +120,55 @@ struct DocumentMenuSheet: View {
                                     }
                                 }
                                 .padding(.vertical, 16)
+                            }
+                            .background(
+                                RoundedRectangle(cornerRadius: 16)
+                                    .fill(Color.white)
+                            )
+                            .padding(.horizontal, 20)
+                        } else if documentType == .passport {
+                            // Меню для Паспорта
+                            VStack(spacing: 0) {
+                                DocumentMenuItem(
+                                    icon: "doc.text",
+                                    title: "Повна інформація"
+                                ) {
+                                    isPresented = false
+                                    onFullInfoTap()
+                                }
+                                
+                                Divider()
+                                    .padding(.leading, 60)
+                                
+                                DocumentMenuItem(
+                                    icon: "arrow.up.arrow.down",
+                                    title: "Змінити порядок документів"
+                                ) {
+                                    print("Змінити порядок документів")
+                                    isPresented = false
+                                }
+                                
+                                Divider()
+                                    .padding(.leading, 60)
+                                
+                                DocumentMenuItem(
+                                    icon: "star",
+                                    title: "Оцінити документ"
+                                ) {
+                                    print("Оцінити документ")
+                                    isPresented = false
+                                }
+                                
+                                Divider()
+                                    .padding(.leading, 60)
+                                
+                                DocumentMenuItem(
+                                    icon: "questionmark.circle",
+                                    title: "Питання та відповіді"
+                                ) {
+                                    print("Питання та відповіді")
+                                    isPresented = false
+                                }
                             }
                             .background(
                                 RoundedRectangle(cornerRadius: 16)

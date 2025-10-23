@@ -205,12 +205,7 @@ struct DocumentFullInfoView: View {
     }
     
     private func generatePassportNumber() -> String {
-        let numbers = [0, 1, 2, 3]
-        var result = ""
-        for _ in 0..<9 {
-            result += String(numbers.randomElement() ?? 0)
-        }
-        return result
+        return StaticDataGenerator.shared.getPassportNumber()
     }
     
     private func generateStaticQRCode() -> UIImage? {

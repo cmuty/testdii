@@ -29,6 +29,8 @@
 		2A0000000000000000000014 /* DocumentMenuSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0000000000000000000015 /* DocumentMenuSheet.swift */; };
 		2A0000000000000000000015 /* DocumentFullInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0000000000000000000016 /* DocumentFullInfoView.swift */; };
 		2A0000000000000000000017 /* VerificationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0000000000000000000017 /* VerificationData.swift */; };
+		2A0000000000000000000018 /* StaticDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0000000000000000000018 /* StaticDataGenerator.swift */; };
+		2A0000000000000000000019 /* PassportFullInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0000000000000000000019 /* PassportFullInfoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +57,8 @@
 		2B0000000000000000000015 /* DocumentMenuSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentMenuSheet.swift; sourceTree = "<group>"; };
 		2B0000000000000000000016 /* DocumentFullInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentFullInfoView.swift; sourceTree = "<group>"; };
 		2B0000000000000000000017 /* VerificationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationData.swift; sourceTree = "<group>"; };
+		2B0000000000000000000018 /* StaticDataGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticDataGenerator.swift; sourceTree = "<group>"; };
+		2B0000000000000000000019 /* PassportFullInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportFullInfoView.swift; sourceTree = "<group>"; };
 		2C0000000000000000000001 /* DiiaApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiiaApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -129,6 +133,7 @@
 				2B0000000000000000000012 /* SignatureView.swift */,
 				2B0000000000000000000014 /* ServicesView.swift */,
 				2B0000000000000000000016 /* DocumentFullInfoView.swift */,
+				2B0000000000000000000019 /* PassportFullInfoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -150,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				2B0000000000000000000006 /* Color+Hex.swift */,
+				2B0000000000000000000018 /* StaticDataGenerator.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -229,6 +235,7 @@
 				2A0000000000000000000005 /* User.swift in Sources */,
 				2A0000000000000000000017 /* VerificationData.swift in Sources */,
 				2A0000000000000000000006 /* Color+Hex.swift in Sources */,
+				2A0000000000000000000018 /* StaticDataGenerator.swift in Sources */,
 				2A0000000000000000000007 /* WelcomeView.swift in Sources */,
 				2A0000000000000000000008 /* AuthView.swift in Sources */,
 				2A0000000000000000000009 /* HomeView.swift in Sources */,
@@ -244,6 +251,7 @@
 				2A0000000000000000000013 /* ServicesView.swift in Sources */,
 				2A0000000000000000000014 /* DocumentMenuSheet.swift in Sources */,
 				2A0000000000000000000015 /* DocumentFullInfoView.swift in Sources */,
+				2A0000000000000000000019 /* PassportFullInfoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

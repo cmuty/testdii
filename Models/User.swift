@@ -9,7 +9,7 @@ struct User {
     let photoName: String
     
     // Создаём User из данных AuthManager
-    init(from authManager: AuthManager, taxId: String = "4018401651") {
+    init(from authManager: AuthManager) {
         // Парсим ФИО из full_name (формат: "Прізвище Ім'я По батькові")
         let nameParts = authManager.userFullName.components(separatedBy: " ")
         
@@ -33,7 +33,7 @@ struct User {
         }
         
         self.birthDate = authManager.userBirthDate
-        self.taxId = taxId
+        self.taxId = StaticDataGenerator.shared.getRNOKPP()
         self.photoName = "user_photo"
     }
     

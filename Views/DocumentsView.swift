@@ -6,6 +6,7 @@ struct DocumentsView: View {
     @State private var dragOffset: CGFloat = 0
     @State private var showMenu = false
     @State private var showFullInfo = false
+    @State private var showPassportFullInfo = false
     @State private var currentDocumentName = ""
     @State private var taxCardFlipped = false
     @State private var taxCardShowingQR = true
@@ -19,6 +20,7 @@ struct DocumentsView: View {
     private var currentDocumentType: DocumentType {
         switch currentPage {
         case 1: return .taxCard
+        case 2: return .passport
         default: return .standard
         }
     }
@@ -102,7 +104,11 @@ struct DocumentsView: View {
                 documentName: currentDocumentName,
                 documentType: currentDocumentType,
                 onFullInfoTap: {
-                    showFullInfo = true
+                    if currentPage == 2 {
+                        showPassportFullInfo = true
+                    } else {
+                        showFullInfo = true
+                    }
                 },
                 onQRTap: {
                     taxCardShowingQR = true
@@ -122,6 +128,12 @@ struct DocumentsView: View {
         .sheet(isPresented: $showFullInfo) {
             DocumentFullInfoView(
                 isPresented: $showFullInfo,
+                user: user
+            )
+        }
+        .sheet(isPresented: $showPassportFullInfo) {
+            PassportFullInfoView(
+                isPresented: $showPassportFullInfo,
                 user: user
             )
         }
