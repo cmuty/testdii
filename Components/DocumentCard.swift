@@ -10,7 +10,7 @@ struct DocumentCard: View {
                 VStack(alignment: .leading, spacing: 0) {
                     // Заголовок
                     Text("єДокумент")
-                        .font(.system(size: 24, weight: .regular, design: .default))
+                        .font(.system(size: 28, weight: .regular, design: .default))
                         .foregroundColor(.black)
                         .padding(.bottom, 20)
                     
