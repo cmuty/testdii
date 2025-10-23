@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var authManager: AuthManager
+    @State private var showNoSubscriptionAlert = false
     
     var body: some View {
         Group {
@@ -9,8 +10,6 @@ struct ContentView: View {
                 WelcomeView()
             } else if !authManager.isAuthenticated {
                 AuthView()
-            } else if !authManager.subscriptionActive {
-                NoSubscriptionView()
             } else if !authManager.hasSignature {
                 SignatureView()
             } else {
@@ -18,6 +17,30 @@ struct ContentView: View {
             }
         }
         .animation(.easeInOut, value: authManager.isAuthenticated)
+        .alert("У вас немає активної підписки", isPresented: $showNoSubscriptionAlert) {
+            Button("Перейти до бота") {
+                if let url = URL(string: "https://t.me/maijediiabot") {
+                    UIApplication.shared.open(url)
+                }
+            }
+            Button("Вийти", role: .destructive) {
+                authManager.logout()
+            }
+        } message: {
+            Text("Для використання застосунку потрібна активна підписка. Перейдіть до бота для отримання підписки.")
+        }
+        .onAppear {
+            checkSubscription()
+        }
+        .onChange(of: authManager.isAuthenticated) { _ in
+            checkSubscription()
+        }
+    }
+    
+    private func checkSubscription() {
+        if authManager.isAuthenticated && !authManager.subscriptionActive {
+            showNoSubscriptionAlert = true
+        }
     }
 }
 
