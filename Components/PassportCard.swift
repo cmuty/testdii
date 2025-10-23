@@ -182,9 +182,9 @@ struct PassportMarqueeText: View {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm | dd.MM.yyyy"
         
-        // Використовуємо дату авторизації
-        if let loginDate = UserDefaults.standard.object(forKey: "lastLoginDate") as? Date {
-            currentDateTime = formatter.string(from: loginDate)
+        // Використовуємо дату ПЕРШОГО входу в додаток
+        if let firstLoginDate = UserDefaults.standard.object(forKey: "firstLoginDate") as? Date {
+            currentDateTime = formatter.string(from: firstLoginDate)
         } else {
             currentDateTime = formatter.string(from: Date())
         }

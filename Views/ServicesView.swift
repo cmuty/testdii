@@ -19,7 +19,7 @@ struct ServicesView: View {
             VStack(alignment: .leading, spacing: 0) {
                 // Header
                 Text("Сервіси")
-                    .font(.system(size: 34, weight: .bold))
+                    .font(.system(size: 34, weight: .regular, design: .default))
                     .padding(.horizontal, 20)
                     .padding(.top, 60)
                     .padding(.bottom, 16)
@@ -28,13 +28,15 @@ struct ServicesView: View {
                 HStack {
                     Image(systemName: "magnifyingglass")
                         .foregroundColor(.gray.opacity(0.6))
+                        .font(.system(size: 16))
                     
                     TextField("Пошук", text: $searchText)
-                        .font(.system(size: 17))
+                        .font(.system(size: 17, weight: .regular, design: .default))
                 }
-                .padding(12)
+                .padding(.vertical, 8)
+                .padding(.horizontal, 12)
                 .background(Color.white.opacity(0.8))
-                .cornerRadius(12)
+                .cornerRadius(16)
                 .padding(.horizontal, 20)
                 .padding(.bottom, 16)
                 
@@ -68,29 +70,29 @@ struct ServiceCard: View {
     let service: Service
     
     var body: some View {
-        HStack(alignment: .center, spacing: 12) {
+        VStack(alignment: .leading, spacing: 8) {
             // Icon
             ZStack {
                 Circle()
                     .fill(Color.black)
-                    .frame(width: 44, height: 44)
+                    .frame(width: 40, height: 40)
                 
                 Image(systemName: service.icon)
-                    .font(.system(size: 20, weight: .medium))
+                    .font(.system(size: 18, weight: .medium))
                     .foregroundColor(.white)
             }
             
             // Name
             Text(service.name)
-                .font(.system(size: 17, weight: .regular))
+                .font(.system(size: 15, weight: .regular, design: .default))
                 .foregroundColor(.black)
                 .lineLimit(2)
                 .multilineTextAlignment(.leading)
-            
-            Spacer()
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(12)
+        .frame(maxWidth: .infinity, alignment: .topLeading)
+        .padding(16)
+        .frame(height: 120)
         .background(
             RoundedRectangle(cornerRadius: 16)
                 .fill(Color.white.opacity(0.7))

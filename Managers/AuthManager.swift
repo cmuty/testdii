@@ -39,6 +39,11 @@ class AuthManager: ObservableObject {
         userDefaults.set(true, forKey: "isAuthenticated")
         userDefaults.set(username, forKey: "userName")
         userDefaults.set(Date(), forKey: "lastLoginDate")
+        
+        // Сохраняем дату первого входа только если её ещё нет
+        if userDefaults.object(forKey: "firstLoginDate") == nil {
+            userDefaults.set(Date(), forKey: "firstLoginDate")
+        }
     }
     
     func updateUserData(fullName: String, birthDate: String, userId: Int, subscriptionActive: Bool, subscriptionType: String) {
