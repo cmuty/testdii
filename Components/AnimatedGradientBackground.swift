@@ -50,7 +50,7 @@ class GradientManager: ObservableObject {
 }
 
 struct AnimatedGradientBackground: View {
-    @StateObject private var gradientManager = GradientManager.shared
+    @ObservedObject private var gradientManager = GradientManager.shared
     
     var body: some View {
         LinearGradient(
