@@ -35,7 +35,7 @@ struct DocumentCard: View {
                                 Text("народження:")
                                     .font(.system(size: 14, weight: .medium))
                                     .foregroundColor(.black)
-                                Text("07.01.2010")
+                                Text(user.birthDate)
                                     .font(.system(size: 14, weight: .medium))
                                     .foregroundColor(.black)
                             }
@@ -44,7 +44,7 @@ struct DocumentCard: View {
                                 Text("РНОКПП:")
                                     .font(.system(size: 14, weight: .medium))
                                     .foregroundColor(.black)
-                                Text("4018401651")
+                                Text(user.taxId)
                                     .font(.system(size: 14, weight: .medium))
                                     .foregroundColor(.black)
                             }

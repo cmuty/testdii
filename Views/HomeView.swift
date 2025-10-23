@@ -2,7 +2,14 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject var authManager: AuthManager
-    let user = User.mock
+    
+    // Получаем имя из полного имени (первое слово)
+    private var firstName: String {
+        if !authManager.userFullName.isEmpty {
+            return authManager.userFullName.components(separatedBy: " ").first ?? authManager.userName
+        }
+        return authManager.userName
+    }
     
     var body: some View {
         ZStack {
@@ -11,7 +18,7 @@ struct HomeView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
                     // Приветствие
-                    Text("Привіт, \(user.firstName)! 👋")
+                    Text("Привіт, \(firstName)! 👋")
                         .font(.system(size: 30, weight: .bold))
                         .padding(.top, 64)
                         .padding(.bottom, 8)

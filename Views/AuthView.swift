@@ -150,6 +150,7 @@ struct AuthView: View {
                 isServerOnline = await networkManager.checkServerHealth()
             }
         }
+        }
     }
     
     private func performLogin() async {
@@ -161,12 +162,18 @@ struct AuthView: View {
             isLoading = false
             
             if result.success {
+                // Спочатку виконуємо login
                 authManager.login(username: username, password: password)
                 
-                // Зберігаємо дані користувача якщо є
+                // Потім зберігаємо додаткові дані користувача якщо є
                 if let userData = result.userData {
-                    UserDefaults.standard.set(userData.full_name, forKey: "userFullName")
-                    UserDefaults.standard.set(userData.birth_date, forKey: "userBirthDate")
+                    authManager.updateUserData(
+                        fullName: userData.full_name,
+                        birthDate: userData.birth_date,
+                        userId: userData.id,
+                        subscriptionActive: userData.subscription_active,
+                        subscriptionType: userData.subscription_type
+                    )
                 }
             } else {
                 errorMessage = result.message

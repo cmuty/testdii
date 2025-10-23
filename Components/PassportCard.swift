@@ -40,7 +40,7 @@ struct PassportCard: View {
                                 Text("народження:")
                                     .font(.system(size: 14, weight: .medium))
                                     .foregroundColor(.black)
-                                Text("07.01.2010")
+                                Text(user.birthDate)
                                     .font(.system(size: 14, weight: .medium))
                                     .foregroundColor(.black)
                             }

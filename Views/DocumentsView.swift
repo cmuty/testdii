@@ -1,9 +1,14 @@
 import SwiftUI
 
 struct DocumentsView: View {
-    let user = User.mock
+    @EnvironmentObject var authManager: AuthManager
     @State private var currentPage = 0
     @State private var dragOffset: CGFloat = 0
+    
+    // Создаём User из данных AuthManager
+    private var user: User {
+        User(from: authManager)
+    }
     
     var body: some View {
         ZStack {

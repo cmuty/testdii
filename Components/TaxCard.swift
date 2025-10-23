@@ -41,7 +41,7 @@ struct TaxCard: View {
                         Text("Дата народження:")
                             .font(.system(size: 15, weight: .regular))
                             .foregroundColor(.black)
-                        Text("07.01.2010")
+                        Text(user.birthDate)
                             .font(.system(size: 15, weight: .regular))
                             .foregroundColor(.black)
                     }
@@ -56,12 +56,12 @@ struct TaxCard: View {
                 
                 // РНОКПП внизу
                 HStack(alignment: .center) {
-                    Text("4018401651")
+                    Text(user.taxId)
                         .font(.system(size: 36, weight: .medium))
                         .foregroundColor(.black)
                     
                     Button(action: {
-                        UIPasteboard.general.string = "4018401651"
+                        UIPasteboard.general.string = user.taxId
                     }) {
                         Image(systemName: "doc.on.doc")
                             .font(.system(size: 20))
