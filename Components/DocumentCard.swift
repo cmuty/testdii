@@ -61,6 +61,8 @@ struct DocumentCard: View {
                 // Бегущая строка
                 MarqueeText()
                 
+                Spacer()
+                
                 // ФИО и кнопка
                 HStack(alignment: .bottom) {
                     VStack(alignment: .leading, spacing: 2) {
