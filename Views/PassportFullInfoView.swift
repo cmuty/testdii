@@ -303,7 +303,7 @@ struct PassportFullInfoView: View {
                                 Text("Place of birth")
                                     .font(.system(size: 14, weight: .regular, design: .default))
                                     .foregroundColor(.gray)
-                                Text("М. МАРГАНЕ ДНІПРОПЕТРОВСЬКА")
+                                Text("М. ХАРКІВ ХАРКІВСЬКА")
                                     .font(.system(size: 15, weight: .regular, design: .default))
                                 Text("ОБЛАСТЬ УКРАЇНА")
                                     .font(.system(size: 15, weight: .regular, design: .default))
@@ -318,11 +318,11 @@ struct PassportFullInfoView: View {
                                 Text("Legal address")
                                     .font(.system(size: 14, weight: .regular, design: .default))
                                     .foregroundColor(.gray)
-                                Text("УКРАЇНА ДНІПРОПЕТРОВСЬКА ОБЛАСТЬ")
+                                Text("УКРАЇНА ХАРКІВСЬКА ОБЛАСТЬ")
                                     .font(.system(size: 15, weight: .regular, design: .default))
-                                Text("НІКОПОЛЬСЬКИЙ РАЙОН М. МАРГАНЕ")
+                                Text("ХАРКІВСЬКИЙ РАЙОН М. ХАРКІВ")
                                     .font(.system(size: 15, weight: .regular, design: .default))
-                                Text("ПРОВ. СЛАВНИЙ БУД. 2")
+                                Text("ПРОВ. БІЛОСТОЦЬКИЙ БУД 47")
                                     .font(.system(size: 15, weight: .regular, design: .default))
                             }
                             

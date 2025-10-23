@@ -107,20 +107,20 @@ class StaticDataGenerator {
         return formatter.string(from: issueDate)
     }
     
-    // Дата истечения паспорта (дата выдачи + 4 года)
+    // Дата истечения паспорта (дата выдачи + 8 лет)
     func getPassportExpiryDate(issueDate: String) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyyy"
         
         guard let issue = formatter.date(from: issueDate) else {
-            return "01.01.2028"
+            return "01.01.2032"
         }
         
         var components = DateComponents()
-        components.year = 4
+        components.year = 8
         
         guard let expiryDate = Calendar.current.date(byAdding: components, to: issue) else {
-            return "01.01.2028"
+            return "01.01.2032"
         }
         
         return formatter.string(from: expiryDate)
