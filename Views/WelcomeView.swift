@@ -9,13 +9,45 @@ struct WelcomeView: View {
         ZStack {
             AnimatedGradientBackground()
             
-            VStack(spacing: 24) {
-                Text("Дія")
-                    .font(.system(size: 72, weight: .bold))
-                    .foregroundColor(.black)
+            VStack(spacing: 40) {
+                Spacer()
                 
-                Text("🇺🇦")
-                    .font(.system(size: 80))
+                // Привіт + емодзі
+                HStack(spacing: 8) {
+                    Text("Привіт")
+                        .font(.system(size: 48, weight: .bold))
+                        .foregroundColor(.black)
+                    Text("👋")
+                        .font(.system(size: 48))
+                }
+                
+                // Іконки Дія внизу
+                HStack(spacing: 20) {
+                    // Чорна іконка
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 28)
+                            .fill(Color.black)
+                            .frame(width: 100, height: 100)
+                        
+                        Text("Дія")
+                            .font(.system(size: 28, weight: .bold))
+                            .foregroundColor(.white)
+                    }
+                    
+                    // Біла іконка з тризубом
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 28)
+                            .stroke(Color.black, lineWidth: 3)
+                            .fill(Color.white)
+                            .frame(width: 100, height: 100)
+                        
+                        Image(systemName: "shield.fill")
+                            .font(.system(size: 50))
+                            .foregroundColor(.black)
+                    }
+                }
+                
+                Spacer()
             }
             .scaleEffect(scale)
             .opacity(opacity)

@@ -43,6 +43,9 @@ struct MainTabView: View {
             appearance.configureWithOpaqueBackground()
             appearance.backgroundColor = UIColor.black
             
+            // Збільшуємо висоту TabBar
+            UITabBar.appearance().frame.size.height = 100
+            
             // Цвет невыбранных иконок
             appearance.stackedLayoutAppearance.normal.iconColor = UIColor.white.withAlphaComponent(0.5)
             appearance.stackedLayoutAppearance.normal.titleTextAttributes = [
