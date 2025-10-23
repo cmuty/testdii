@@ -19,10 +19,10 @@ struct DocumentCard: View {
                         // Фото
                         RoundedRectangle(cornerRadius: 14)
                             .fill(Color.gray.opacity(0.2))
-                            .frame(width: 110, height: 145)
+                            .frame(width: 130, height: 170)
                             .overlay(
                                 Image(systemName: "person.fill")
-                                    .font(.system(size: 48))
+                                    .font(.system(size: 52))
                                     .foregroundColor(.gray.opacity(0.5))
                             )
                         

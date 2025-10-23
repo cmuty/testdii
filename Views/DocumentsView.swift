@@ -9,7 +9,7 @@ struct DocumentsView: View {
         ZStack {
             AnimatedGradientBackground()
             
-            VStack(spacing: 24) {
+            VStack(spacing: 12) {
                 Spacer()
                 
                 // Carousel з документами
@@ -17,14 +17,14 @@ struct DocumentsView: View {
                     // єДокумент
                     DocumentCard(user: user)
                         .scaleEffect(currentPage == 0 ? 1.0 : 0.85)
-                        .animation(.spring(response: 0.3), value: currentPage)
+                        .animation(.spring(response: 0.5, dampingFraction: 0.75), value: currentPage)
                         .padding(.horizontal, 30)
                         .tag(0)
                     
                     // Картка платника податків
                     TaxCard(user: user)
                         .scaleEffect(currentPage == 1 ? 1.0 : 0.85)
-                        .animation(.spring(response: 0.3), value: currentPage)
+                        .animation(.spring(response: 0.5, dampingFraction: 0.75), value: currentPage)
                         .padding(.horizontal, 30)
                         .tag(1)
                 }
@@ -36,10 +36,10 @@ struct DocumentsView: View {
                         Circle()
                             .fill(Color.white.opacity(index == currentPage ? 0.9 : 0.4))
                             .frame(width: 8, height: 8)
-                            .animation(.spring(), value: currentPage)
+                            .animation(.spring(response: 0.4, dampingFraction: 0.75), value: currentPage)
                     }
                 }
-                .padding(.bottom, 24)
+                .padding(.bottom, 16)
                 
                 Spacer()
             }
