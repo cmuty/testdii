@@ -96,24 +96,25 @@ struct SignatureView: View {
     }
     
     func saveSignature() {
-        let renderer = ImageRenderer(content: 
-            Canvas { context, size in
-                for path in paths {
-                    context.stroke(
-                        path,
-                        with: .color(.black),
-                        lineWidth: 3
-                    )
-                }
-            }
-            .frame(width: 300, height: 200)
-            .background(Color.clear)
-        )
+        let size = CGSize(width: 300, height: 200)
+        let renderer = UIGraphicsImageRenderer(size: size)
         
-        if let uiImage = renderer.uiImage {
-            if let pngData = uiImage.pngData() {
-                UserDefaults.standard.set(pngData, forKey: "userSignature")
+        let image = renderer.image { ctx in
+            // Прозрачный фон
+            UIColor.clear.setFill()
+            ctx.fill(CGRect(origin: .zero, size: size))
+            
+            // Рисуем пути
+            UIColor.black.setStroke()
+            for path in paths {
+                let bezierPath = UIBezierPath(cgPath: path.cgPath)
+                bezierPath.lineWidth = 3
+                bezierPath.stroke()
             }
+        }
+        
+        if let pngData = image.pngData() {
+            UserDefaults.standard.set(pngData, forKey: "userSignature")
         }
     }
 }
