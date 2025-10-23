@@ -7,10 +7,20 @@ struct DocumentsView: View {
     @State private var showMenu = false
     @State private var showFullInfo = false
     @State private var currentDocumentName = ""
+    @State private var taxCardFlipped = false
+    @State private var taxCardShowingQR = true
     
     // Создаём User из данных AuthManager
     private var user: User {
         User(from: authManager)
+    }
+    
+    // Определяем тип документа по текущей странице
+    private var currentDocumentType: DocumentType {
+        switch currentPage {
+        case 1: return .taxCard
+        default: return .standard
+        }
     }
     
     var body: some View {
@@ -37,12 +47,17 @@ struct DocumentsView: View {
                         .tag(0)
                         
                         // Картка платника податків
-                        TaxCard(user: user) {
-                            currentDocumentName = "Картка платника податків"
-                            withAnimation(.spring(response: 0.3)) {
-                                showMenu = true
-                            }
-                        }
+                        TaxCard(
+                            user: user,
+                            onMenuTap: {
+                                currentDocumentName = "Картка платника податків"
+                                withAnimation(.spring(response: 0.3)) {
+                                    showMenu = true
+                                }
+                            },
+                            isFlipped: $taxCardFlipped,
+                            showingQR: $taxCardShowingQR
+                        )
                         .padding(.horizontal, 30)
                         .scaleEffect(currentPage == 1 ? 1.0 : 0.88)
                         .opacity(currentPage == 1 ? 1.0 : 0.7)
@@ -85,8 +100,21 @@ struct DocumentsView: View {
             DocumentMenuSheet(
                 isPresented: $showMenu,
                 documentName: currentDocumentName,
+                documentType: currentDocumentType,
                 onFullInfoTap: {
                     showFullInfo = true
+                },
+                onQRTap: {
+                    taxCardShowingQR = true
+                    withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
+                        taxCardFlipped = true
+                    }
+                },
+                onBarcodeTap: {
+                    taxCardShowingQR = false
+                    withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
+                        taxCardFlipped = true
+                    }
                 }
             )
             .zIndex(100)

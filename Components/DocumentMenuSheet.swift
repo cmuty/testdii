@@ -1,9 +1,33 @@
 import SwiftUI
 
+enum DocumentType {
+    case standard
+    case taxCard
+}
+
 struct DocumentMenuSheet: View {
     @Binding var isPresented: Bool
     let documentName: String
+    let documentType: DocumentType
     let onFullInfoTap: () -> Void
+    let onQRTap: (() -> Void)?
+    let onBarcodeTap: (() -> Void)?
+    
+    init(
+        isPresented: Binding<Bool>,
+        documentName: String,
+        documentType: DocumentType = .standard,
+        onFullInfoTap: @escaping () -> Void,
+        onQRTap: (() -> Void)? = nil,
+        onBarcodeTap: (() -> Void)? = nil
+    ) {
+        self._isPresented = isPresented
+        self.documentName = documentName
+        self.documentType = documentType
+        self.onFullInfoTap = onFullInfoTap
+        self.onQRTap = onQRTap
+        self.onBarcodeTap = onBarcodeTap
+    }
     
     var body: some View {
         ZStack {
@@ -24,64 +48,144 @@ struct DocumentMenuSheet: View {
                     // Menu container
                     VStack(spacing: 0) {
                         // Menu items
-                        VStack(spacing: 0) {
-                            DocumentMenuItem(
-                                icon: "doc.text",
-                                title: "Повна інформація"
-                            ) {
-                                isPresented = false
-                                onFullInfoTap()
+                        if documentType == .taxCard {
+                            // Меню для Картка платника податків
+                            VStack(spacing: 0) {
+                                DocumentMenuItem(
+                                    icon: "arrow.up.arrow.down",
+                                    title: "Змінити порядок документів"
+                                ) {
+                                    print("Змінити порядок документів")
+                                    isPresented = false
+                                }
+                                
+                                Divider()
+                                    .padding(.leading, 60)
+                                
+                                DocumentMenuItem(
+                                    icon: "questionmark.circle",
+                                    title: "Питання та відповіді"
+                                ) {
+                                    print("Питання та відповіді")
+                                    isPresented = false
+                                }
+                                
+                                // Темная разделительная линия
+                                Divider()
+                                    .background(Color.gray.opacity(0.2))
+                                    .frame(height: 1)
+                                    .padding(.vertical, 8)
+                                
+                                // QR-код и Штрихкод
+                                HStack(spacing: 40) {
+                                    Button(action: {
+                                        onQRTap?()
+                                        isPresented = false
+                                    }) {
+                                        VStack(spacing: 8) {
+                                            Circle()
+                                                .fill(Color.black)
+                                                .frame(width: 56, height: 56)
+                                                .overlay(
+                                                    Image(systemName: "qrcode")
+                                                        .font(.system(size: 24))
+                                                        .foregroundColor(.white)
+                                                )
+                                            
+                                            Text("QR-код")
+                                                .font(.system(size: 15, weight: .regular))
+                                                .foregroundColor(.black)
+                                        }
+                                    }
+                                    
+                                    Button(action: {
+                                        onBarcodeTap?()
+                                        isPresented = false
+                                    }) {
+                                        VStack(spacing: 8) {
+                                            Circle()
+                                                .fill(Color.black)
+                                                .frame(width: 56, height: 56)
+                                                .overlay(
+                                                    Image(systemName: "barcode")
+                                                        .font(.system(size: 24))
+                                                        .foregroundColor(.white)
+                                                )
+                                            
+                                            Text("Штрихкод")
+                                                .font(.system(size: 15, weight: .regular))
+                                                .foregroundColor(.black)
+                                        }
+                                    }
+                                }
+                                .padding(.vertical, 16)
                             }
-                            
-                            Divider()
-                                .padding(.leading, 60)
-                            
-                            DocumentMenuItem(
-                                icon: "qrcode",
-                                title: "Код для перевірки"
-                            ) {
-                                print("Код для перевірки")
-                                isPresented = false
+                            .background(
+                                RoundedRectangle(cornerRadius: 16)
+                                    .fill(Color.white)
+                            )
+                            .padding(.horizontal, 20)
+                        } else {
+                            // Стандартное меню для других документов
+                            VStack(spacing: 0) {
+                                DocumentMenuItem(
+                                    icon: "doc.text",
+                                    title: "Повна інформація"
+                                ) {
+                                    isPresented = false
+                                    onFullInfoTap()
+                                }
+                                
+                                Divider()
+                                    .padding(.leading, 60)
+                                
+                                DocumentMenuItem(
+                                    icon: "qrcode",
+                                    title: "Код для перевірки"
+                                ) {
+                                    print("Код для перевірки")
+                                    isPresented = false
+                                }
+                                
+                                Divider()
+                                    .padding(.leading, 60)
+                                
+                                DocumentMenuItem(
+                                    icon: "arrow.up.arrow.down",
+                                    title: "Змінити порядок документів"
+                                ) {
+                                    print("Змінити порядок документів")
+                                    isPresented = false
+                                }
+                                
+                                Divider()
+                                    .padding(.leading, 60)
+                                
+                                DocumentMenuItem(
+                                    icon: "star",
+                                    title: "Оцінити документ"
+                                ) {
+                                    print("Оцінити документ")
+                                    isPresented = false
+                                }
+                                
+                                Divider()
+                                    .padding(.leading, 60)
+                                
+                                DocumentMenuItem(
+                                    icon: "questionmark.circle",
+                                    title: "Питання та відповіді"
+                                ) {
+                                    print("Питання та відповіді")
+                                    isPresented = false
+                                }
                             }
-                            
-                            Divider()
-                                .padding(.leading, 60)
-                            
-                            DocumentMenuItem(
-                                icon: "arrow.up.arrow.down",
-                                title: "Змінити порядок документів"
-                            ) {
-                                print("Змінити порядок документів")
-                                isPresented = false
-                            }
-                            
-                            Divider()
-                                .padding(.leading, 60)
-                            
-                            DocumentMenuItem(
-                                icon: "star",
-                                title: "Оцінити документ"
-                            ) {
-                                print("Оцінити документ")
-                                isPresented = false
-                            }
-                            
-                            Divider()
-                                .padding(.leading, 60)
-                            
-                            DocumentMenuItem(
-                                icon: "questionmark.circle",
-                                title: "Питання та відповіді"
-                            ) {
-                                print("Питання та відповіді")
-                                isPresented = false
-                            }
+                            .background(
+                                RoundedRectangle(cornerRadius: 16)
+                                    .fill(Color.white)
+                            )
+                            .padding(.horizontal, 20)
                         }
-                        .background(
-                            RoundedRectangle(cornerRadius: 16)
-                                .fill(Color.white)
-                        )
-                        .padding(.horizontal, 20)
                         
                         // Close button
                         Button(action: {

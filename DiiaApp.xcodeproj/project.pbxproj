@@ -28,6 +28,7 @@
 		2A0000000000000000000013 /* ServicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0000000000000000000014 /* ServicesView.swift */; };
 		2A0000000000000000000014 /* DocumentMenuSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0000000000000000000015 /* DocumentMenuSheet.swift */; };
 		2A0000000000000000000015 /* DocumentFullInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0000000000000000000016 /* DocumentFullInfoView.swift */; };
+		2A0000000000000000000017 /* VerificationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0000000000000000000017 /* VerificationData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		2B0000000000000000000014 /* ServicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesView.swift; sourceTree = "<group>"; };
 		2B0000000000000000000015 /* DocumentMenuSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentMenuSheet.swift; sourceTree = "<group>"; };
 		2B0000000000000000000016 /* DocumentFullInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentFullInfoView.swift; sourceTree = "<group>"; };
+		2B0000000000000000000017 /* VerificationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationData.swift; sourceTree = "<group>"; };
 		2C0000000000000000000001 /* DiiaApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiiaApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -111,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				2B0000000000000000000005 /* User.swift */,
+				2B0000000000000000000017 /* VerificationData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -224,6 +227,7 @@
 				2A0000000000000000000002 /* ContentView.swift in Sources */,
 				2A0000000000000000000004 /* AuthManager.swift in Sources */,
 				2A0000000000000000000005 /* User.swift in Sources */,
+				2A0000000000000000000017 /* VerificationData.swift in Sources */,
 				2A0000000000000000000006 /* Color+Hex.swift in Sources */,
 				2A0000000000000000000007 /* WelcomeView.swift in Sources */,
 				2A0000000000000000000008 /* AuthView.swift in Sources */,
