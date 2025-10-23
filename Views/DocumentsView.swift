@@ -16,20 +16,21 @@ struct DocumentsView: View {
                 TabView(selection: $currentPage) {
                     // єДокумент
                     DocumentCard(user: user)
+                        .padding(.horizontal, 30)
                         .scaleEffect(currentPage == 0 ? 1.0 : 0.88)
                         .opacity(currentPage == 0 ? 1.0 : 0.7)
-                        .padding(.horizontal, 30)
+                        .animation(.spring(response: 0.5, dampingFraction: 0.75), value: currentPage)
                         .tag(0)
                     
                     // Картка платника податків
                     TaxCard(user: user)
+                        .padding(.horizontal, 30)
                         .scaleEffect(currentPage == 1 ? 1.0 : 0.88)
                         .opacity(currentPage == 1 ? 1.0 : 0.7)
-                        .padding(.horizontal, 30)
+                        .animation(.spring(response: 0.5, dampingFraction: 0.75), value: currentPage)
                         .tag(1)
                 }
                 .tabViewStyle(.page(indexDisplayMode: .never))
-                .animation(.spring(response: 0.6, dampingFraction: 0.8), value: currentPage)
                 
                 // Page indicator (точки)
                 HStack(spacing: 8) {
