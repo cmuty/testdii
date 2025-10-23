@@ -96,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				2B0000000000000000000004 /* AuthManager.swift */,
+				2B0000000000000000000013 /* NetworkManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
