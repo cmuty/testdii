@@ -151,6 +151,7 @@ struct HomeView: View {
                                     time: "23 жовтня, 17:15",
                                     title: "Заміна водійського посвідчення\nтимчасово на паузі"
                                 )
+                                .padding(.horizontal, 2)
                                 .tag(0)
                                 
                                 NewsCard(
@@ -158,10 +159,11 @@ struct HomeView: View {
                                     time: "Сьогодні, 10:30",
                                     title: "Долучайтесь до бета-тесту нової\nкатегорії Реєстру збитків"
                                 )
+                                .padding(.horizontal, 2)
                                 .tag(1)
                             }
                             .tabViewStyle(.page(indexDisplayMode: .never))
-                            .frame(height: 200)
+                            .frame(height: 210)
                             
                             // Custom page indicator
                             HStack(spacing: 8) {
