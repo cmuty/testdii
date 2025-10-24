@@ -46,20 +46,20 @@ struct HomeView: View {
                                     HStack(spacing: -8) {
                                         Circle()
                                             .fill(Color.blue)
-                                            .frame(width: 32, height: 32)
+                                            .frame(width: 28, height: 28)
                                             .overlay(
                                                 Image(systemName: "shield.fill")
-                                                    .font(.system(size: 16))
+                                                    .font(.system(size: 14))
                                                     .foregroundColor(.white)
                                             )
                                             .zIndex(1)
                                         
                                         Circle()
                                             .fill(Color.yellow)
-                                            .frame(width: 32, height: 32)
+                                            .frame(width: 28, height: 28)
                                             .overlay(
                                                 Image(systemName: "bolt.fill")
-                                                    .font(.system(size: 16))
+                                                    .font(.system(size: 14))
                                                     .foregroundColor(.white)
                                             )
                                     }
@@ -100,7 +100,7 @@ struct HomeView: View {
                     }) {
                         ZStack {
                             // Background image
-                            Image("liniya-droniv-1024x659")
+                            Image("liniya-droniv")
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .frame(height: 180)
@@ -116,7 +116,7 @@ struct HomeView: View {
                                 
                                 HStack {
                                     Text("Змінити хід подій")
-                                        .font(.system(size: 17, weight: .semibold, design: .default))
+                                        .font(.system(size: 17, weight: .regular, design: .default))
                                         .foregroundColor(.white)
                                     
                                     Spacer()
@@ -141,7 +141,7 @@ struct HomeView: View {
                     // Що нового
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Що нового?")
-                            .font(.system(size: 22, weight: .bold, design: .default))
+                            .font(.system(size: 22, weight: .regular, design: .default))
                         
                         TabView(selection: $currentNewsIndex) {
                             NewsCard(
@@ -166,7 +166,7 @@ struct HomeView: View {
                     // Популярні послуги
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Популярні послуги")
-                            .font(.system(size: 22, weight: .bold, design: .default))
+                            .font(.system(size: 22, weight: .regular, design: .default))
                         
                         VStack(spacing: 0) {
                             PopularServiceButton(title: "Опитування") {
@@ -217,7 +217,7 @@ struct ServiceButton: View {
                 )
             
             Text(title)
-                .font(.system(size: 12, weight: .regular, design: .default))
+                .font(.system(size: 13, weight: .regular, design: .default))
                 .foregroundColor(.black)
                 .multilineTextAlignment(.center)
                 .lineLimit(2)
@@ -260,7 +260,7 @@ struct NewsCard: View {
                     .foregroundColor(.gray)
                 
                 Text(title)
-                    .font(.system(size: 17, weight: .semibold, design: .default))
+                    .font(.system(size: 17, weight: .regular, design: .default))
                     .foregroundColor(.black)
                     .lineLimit(2)
             }
