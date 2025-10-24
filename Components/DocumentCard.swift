@@ -1,6 +1,54 @@
 import SwiftUI
+import CoreImage.CIFilterBuiltins
 
 struct DocumentCard: View {
+    let user: User
+    let onMenuTap: () -> Void
+    @State private var isFlipped = false
+    @State private var barcodeNumber = ""
+    
+    var body: some View {
+        ZStack {
+            // Front side
+            DocumentCardFront(user: user, onMenuTap: onMenuTap)
+                .opacity(isFlipped ? 0 : 1)
+                .rotation3DEffect(
+                    .degrees(isFlipped ? 180 : 0),
+                    axis: (x: 0, y: 1, z: 0)
+                )
+            
+            // Back side
+            DocumentCardBack(barcodeNumber: barcodeNumber)
+                .opacity(isFlipped ? 1 : 0)
+                .rotation3DEffect(
+                    .degrees(isFlipped ? 0 : -180),
+                    axis: (x: 0, y: 1, z: 0)
+                )
+        }
+        .frame(width: 360, height: 470)
+        .onTapGesture {
+            withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
+                isFlipped.toggle()
+                
+                // Генерируем новый штрихкод при перевороте
+                if isFlipped {
+                    barcodeNumber = generateBarcodeNumber()
+                }
+            }
+        }
+    }
+    
+    private func generateBarcodeNumber() -> String {
+        var result = ""
+        for _ in 0..<13 {
+            result += String(Int.random(in: 0...9))
+        }
+        return result
+    }
+}
+
+// MARK: - Front Side
+struct DocumentCardFront: View {
     let user: User
     let onMenuTap: () -> Void
     
@@ -40,22 +88,22 @@ struct DocumentCard: View {
                         VStack(alignment: .leading, spacing: 14) {
                             VStack(alignment: .leading, spacing: 3) {
                                 Text("Дата")
-                                    .font(.system(size: 14, weight: .medium))
+                                    .font(.system(size: 16, weight: .regular, design: .default))
                                     .foregroundColor(.black)
                                 Text("народження:")
-                                    .font(.system(size: 14, weight: .medium))
+                                    .font(.system(size: 16, weight: .regular, design: .default))
                                     .foregroundColor(.black)
                                 Text(user.birthDate)
-                                    .font(.system(size: 14, weight: .medium))
+                                    .font(.system(size: 16, weight: .regular, design: .default))
                                     .foregroundColor(.black)
                             }
                             
                             VStack(alignment: .leading, spacing: 3) {
                                 Text("РНОКПП:")
-                                    .font(.system(size: 14, weight: .medium))
+                                    .font(.system(size: 16, weight: .regular, design: .default))
                                     .foregroundColor(.black)
                                 Text(user.taxId)
-                                    .font(.system(size: 14, weight: .medium))
+                                    .font(.system(size: 16, weight: .regular, design: .default))
                                     .foregroundColor(.black)
                             }
                         }
@@ -146,6 +194,51 @@ struct MarqueeText: View {
         }
         .frame(height: 32)
         .clipped()
+    }
+}
+
+// MARK: - Back Side
+struct DocumentCardBack: View {
+    let barcodeNumber: String
+    
+    var body: some View {
+        RoundedRectangle(cornerRadius: 32)
+            .fill(Color(red: 1.0, green: 1.0, blue: 1.0))
+            .overlay(
+                VStack(spacing: 0) {
+                    Spacer()
+                    
+                    // Штрихкод
+                    if let barcodeImage = generateBarcode(from: barcodeNumber.isEmpty ? "1234567890123" : barcodeNumber) {
+                        Image(uiImage: barcodeImage)
+                            .interpolation(.none)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 320, height: 150)
+                            .padding(.horizontal, 20)
+                    }
+                    
+                    Spacer()
+                }
+            )
+            .frame(width: 360, height: 470)
+            .shadow(color: Color.black.opacity(0.1), radius: 20, x: 0, y: 10)
+    }
+    
+    func generateBarcode(from string: String) -> UIImage? {
+        let context = CIContext()
+        let filter = CIFilter.code128BarcodeGenerator()
+        filter.message = Data(string.utf8)
+        
+        if let outputImage = filter.outputImage {
+            let transform = CGAffineTransform(scaleX: 3, y: 3)
+            let scaledImage = outputImage.transformed(by: transform)
+            
+            if let cgImage = context.createCGImage(scaledImage, from: scaledImage.extent) {
+                return UIImage(cgImage: cgImage)
+            }
+        }
+        return nil
     }
 }
 

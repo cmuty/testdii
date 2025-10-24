@@ -76,10 +76,10 @@ struct TaxCardFront: View {
                 // Заголовок
                 VStack(alignment: .leading, spacing: 2) {
                     Text("Картка платника")
-                        .font(.system(size: 22, weight: .regular))
+                        .font(.system(size: 22, weight: .regular, design: .default))
                         .foregroundColor(.black)
                     Text("податків")
-                        .font(.system(size: 22, weight: .regular))
+                        .font(.system(size: 22, weight: .regular, design: .default))
                         .foregroundColor(.black)
                 }
                 .padding(.bottom, 20)
@@ -89,27 +89,27 @@ struct TaxCardFront: View {
                 // РНОКПП заголовок
                 VStack(alignment: .leading, spacing: 16) {
                     Text("РНОКПП")
-                        .font(.system(size: 13, weight: .regular))
+                        .font(.system(size: 17, weight: .regular, design: .default))
                         .foregroundColor(.black)
                     
                     // ФІО
                     VStack(alignment: .leading, spacing: 4) {
                         Text(user.lastName)
-                            .font(.system(size: 20, weight: .regular))
+                            .font(.system(size: 18, weight: .regular, design: .default))
                         Text(user.firstName)
-                            .font(.system(size: 20, weight: .regular))
+                            .font(.system(size: 18, weight: .regular, design: .default))
                         Text(user.patronymic)
-                            .font(.system(size: 20, weight: .regular))
+                            .font(.system(size: 18, weight: .regular, design: .default))
                     }
                     .foregroundColor(.black)
                     
                     // Дата народження
                     VStack(alignment: .leading, spacing: 4) {
                         Text("Дата народження:")
-                            .font(.system(size: 15, weight: .regular))
+                            .font(.system(size: 15, weight: .regular, design: .default))
                             .foregroundColor(.black)
                         Text(user.birthDate)
-                            .font(.system(size: 15, weight: .regular))
+                            .font(.system(size: 15, weight: .regular, design: .default))
                             .foregroundColor(.black)
                     }
                 }
@@ -124,7 +124,7 @@ struct TaxCardFront: View {
                 // РНОКПП внизу
                 HStack(alignment: .center) {
                     Text(user.taxId)
-                        .font(.system(size: 36, weight: .medium))
+                        .font(.system(size: 36, weight: .regular, design: .default))
                         .foregroundColor(.black)
                     
                     Button(action: {
