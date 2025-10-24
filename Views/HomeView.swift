@@ -41,6 +41,7 @@ struct HomeView: View {
                                     Text("Мапа Пунктів Незламності та укриттів.\nЗаява про відсутній зв'язок.")
                                         .font(.system(size: 16, weight: .regular, design: .default))
                                         .foregroundColor(.black)
+                                        .multilineTextAlignment(.leading)
                                         .lineLimit(3)
                                     
                                     HStack(spacing: -8) {
@@ -143,7 +144,7 @@ struct HomeView: View {
                         Text("Що нового?")
                             .font(.system(size: 22, weight: .regular, design: .default))
                         
-                        ZStack(alignment: .bottom) {
+                        VStack(spacing: 16) {
                             TabView(selection: $currentNewsIndex) {
                                 NewsCard(
                                     emoji: "🚗🚫",
@@ -171,7 +172,6 @@ struct HomeView: View {
                                         .animation(.spring(response: 0.3), value: currentNewsIndex)
                                 }
                             }
-                            .padding(.bottom, 12)
                         }
                     }
                     
@@ -282,7 +282,7 @@ struct NewsCard: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(Color.white.opacity(0.9))
         }
-        .cornerRadius(16)
+        .clipShape(RoundedRectangle(cornerRadius: 16))
         .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
     }
 }
