@@ -88,22 +88,22 @@ struct DocumentCardFront: View {
                         VStack(alignment: .leading, spacing: 14) {
                             VStack(alignment: .leading, spacing: 3) {
                                 Text("Дата")
-                                    .font(.system(size: 16, weight: .regular, design: .default))
+                                    .font(.system(size: 14, weight: .regular, design: .default))
                                     .foregroundColor(.black)
                                 Text("народження:")
-                                    .font(.system(size: 16, weight: .regular, design: .default))
+                                    .font(.system(size: 14, weight: .regular, design: .default))
                                     .foregroundColor(.black)
                                 Text(user.birthDate)
-                                    .font(.system(size: 16, weight: .regular, design: .default))
+                                    .font(.system(size: 14, weight: .regular, design: .default))
                                     .foregroundColor(.black)
                             }
                             
                             VStack(alignment: .leading, spacing: 3) {
                                 Text("РНОКПП:")
-                                    .font(.system(size: 16, weight: .regular, design: .default))
+                                    .font(.system(size: 14, weight: .regular, design: .default))
                                     .foregroundColor(.black)
                                 Text(user.taxId)
-                                    .font(.system(size: 16, weight: .regular, design: .default))
+                                    .font(.system(size: 14, weight: .regular, design: .default))
                                     .foregroundColor(.black)
                             }
                         }
@@ -208,14 +208,13 @@ struct DocumentCardBack: View {
                 VStack(spacing: 0) {
                     Spacer()
                     
-                    // Штрихкод
-                    if let barcodeImage = generateBarcode(from: barcodeNumber.isEmpty ? "1234567890123" : barcodeNumber) {
-                        Image(uiImage: barcodeImage)
+                    // QR-код
+                    if let qrImage = generateQRCode(from: barcodeNumber.isEmpty ? "https://diia.gov.ua" : "https://diia.gov.ua/\(barcodeNumber)") {
+                        Image(uiImage: qrImage)
                             .interpolation(.none)
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 320, height: 150)
-                            .padding(.horizontal, 20)
+                            .frame(width: 250, height: 250)
                     }
                     
                     Spacer()
@@ -225,13 +224,14 @@ struct DocumentCardBack: View {
             .shadow(color: Color.black.opacity(0.1), radius: 20, x: 0, y: 10)
     }
     
-    func generateBarcode(from string: String) -> UIImage? {
+    func generateQRCode(from string: String) -> UIImage? {
         let context = CIContext()
-        let filter = CIFilter.code128BarcodeGenerator()
+        let filter = CIFilter.qrCodeGenerator()
         filter.message = Data(string.utf8)
+        filter.correctionLevel = "M"
         
         if let outputImage = filter.outputImage {
-            let transform = CGAffineTransform(scaleX: 3, y: 3)
+            let transform = CGAffineTransform(scaleX: 10, y: 10)
             let scaledImage = outputImage.transformed(by: transform)
             
             if let cgImage = context.createCGImage(scaledImage, from: scaledImage.extent) {

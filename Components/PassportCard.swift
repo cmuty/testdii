@@ -111,22 +111,22 @@ struct PassportCardFront: View {
                         VStack(alignment: .leading, spacing: 14) {
                             VStack(alignment: .leading, spacing: 3) {
                                 Text("Дата")
-                                    .font(.system(size: 16, weight: .regular, design: .default))
+                                    .font(.system(size: 14, weight: .regular, design: .default))
                                     .foregroundColor(.black)
                                 Text("народження:")
-                                    .font(.system(size: 16, weight: .regular, design: .default))
+                                    .font(.system(size: 14, weight: .regular, design: .default))
                                     .foregroundColor(.black)
                                 Text(user.birthDate)
-                                    .font(.system(size: 16, weight: .regular, design: .default))
+                                    .font(.system(size: 14, weight: .regular, design: .default))
                                     .foregroundColor(.black)
                             }
                             
                             VStack(alignment: .leading, spacing: 3) {
                                 Text("Номер:")
-                                    .font(.system(size: 16, weight: .regular, design: .default))
+                                    .font(.system(size: 14, weight: .regular, design: .default))
                                     .foregroundColor(.black)
                                 Text(StaticDataGenerator.shared.getPassportNumber())
-                                    .font(.system(size: 16, weight: .regular, design: .default))
+                                    .font(.system(size: 14, weight: .regular, design: .default))
                                     .foregroundColor(.black)
                             }
                             
