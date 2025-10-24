@@ -39,8 +39,8 @@ struct HomeView: View {
                                         .font(.system(size: 22, weight: .regular, design: .default))
                                         .foregroundColor(.black)
                                     Text("Мапа Пунктів Незламності та укриттів.\nЗаява про відсутній зв'язок.")
-                                        .font(.system(size: 14, weight: .regular, design: .default))
-                                        .foregroundColor(.gray)
+                                        .font(.system(size: 16, weight: .regular, design: .default))
+                                        .foregroundColor(.black)
                                         .lineLimit(3)
                                     
                                     HStack(spacing: -8) {
@@ -139,28 +139,40 @@ struct HomeView: View {
                     }
                     
                     // Що нового
-                    VStack(alignment: .leading, spacing: 12) {
+                    VStack(alignment: .leading, spacing: 8) {
                         Text("Що нового?")
                             .font(.system(size: 22, weight: .regular, design: .default))
                         
-                        TabView(selection: $currentNewsIndex) {
-                            NewsCard(
-                                emoji: "🚗🚫",
-                                time: "Сьогодні, 17:15",
-                                title: "Заміна водійського посвідчення тимчасово на паузі"
-                            )
-                            .tag(0)
+                        ZStack(alignment: .bottom) {
+                            TabView(selection: $currentNewsIndex) {
+                                NewsCard(
+                                    emoji: "🚗🚫",
+                                    time: "23 жовтня, 17:15",
+                                    title: "Заміна водійського посвідчення\nтимчасово на паузі"
+                                )
+                                .tag(0)
+                                
+                                NewsCard(
+                                    emoji: "🧳🏠📄",
+                                    time: "Сьогодні, 10:30",
+                                    title: "Долучайтесь до бета-тесту нової\nкатегорії Реєстру збитків"
+                                )
+                                .tag(1)
+                            }
+                            .tabViewStyle(.page(indexDisplayMode: .never))
+                            .frame(height: 200)
                             
-                            NewsCard(
-                                emoji: "🧳🏠📄",
-                                time: "Сьогодні, 10:30",
-                                title: "Долучайтесь до бета-тесту нової категорії Реєстру збитків"
-                            )
-                            .tag(1)
+                            // Custom page indicator
+                            HStack(spacing: 8) {
+                                ForEach(0..<2) { index in
+                                    Circle()
+                                        .fill(index == currentNewsIndex ? Color.black : Color.gray.opacity(0.3))
+                                        .frame(width: 8, height: 8)
+                                        .animation(.spring(response: 0.3), value: currentNewsIndex)
+                                }
+                            }
+                            .padding(.bottom, 12)
                         }
-                        .tabViewStyle(.page(indexDisplayMode: .always))
-                        .frame(height: 200)
-                        .indexViewStyle(.page(backgroundDisplayMode: .always))
                     }
                     
                     // Популярні послуги
@@ -263,6 +275,8 @@ struct NewsCard: View {
                     .font(.system(size: 17, weight: .regular, design: .default))
                     .foregroundColor(.black)
                     .lineLimit(2)
+                    .multilineTextAlignment(.leading)
+                    .fixedSize(horizontal: false, vertical: true)
             }
             .padding(16)
             .frame(maxWidth: .infinity, alignment: .leading)
