@@ -5,7 +5,7 @@ struct DocumentCard: View {
     let onMenuTap: () -> Void
     
     var body: some View {
-        GlassmorphicCard(cornerRadius: 32, opacity: 0.15) {
+        GlassmorphicCard(cornerRadius: 32, opacity: 0.1) {
             VStack(alignment: .leading, spacing: 0) {
                 // Верхняя часть с фото и данными
                 VStack(alignment: .leading, spacing: 0) {

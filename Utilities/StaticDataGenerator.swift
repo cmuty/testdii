@@ -37,8 +37,9 @@ class StaticDataGenerator {
     
     private func generatePassportNumber() -> String {
         var result = ""
+        // Используем только цифры 0, 1, 2, 3
         for _ in 0..<9 {
-            result += String(Int.random(in: 0...9))
+            result += String(Int.random(in: 0...3))
         }
         return result
     }

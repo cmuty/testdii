@@ -71,7 +71,7 @@ struct TaxCardFront: View {
     let onMenuTap: () -> Void
     
     var body: some View {
-        GlassmorphicCard(cornerRadius: 32, opacity: 0.15) {
+        GlassmorphicCard(cornerRadius: 32, opacity: 0.1) {
             VStack(alignment: .leading, spacing: 0) {
                 // Заголовок
                 VStack(alignment: .leading, spacing: 2) {

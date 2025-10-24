@@ -71,7 +71,7 @@ struct PassportCardFront: View {
     let onMenuTap: () -> Void
     
     var body: some View {
-        GlassmorphicCard(cornerRadius: 32, opacity: 0.15) {
+        GlassmorphicCard(cornerRadius: 32, opacity: 0.1) {
             VStack(alignment: .leading, spacing: 0) {
                 // Верхня частина з фото та данними
                 VStack(alignment: .leading, spacing: 0) {
@@ -111,22 +111,22 @@ struct PassportCardFront: View {
                         VStack(alignment: .leading, spacing: 14) {
                             VStack(alignment: .leading, spacing: 3) {
                                 Text("Дата")
-                                    .font(.system(size: 14, weight: .medium))
+                                    .font(.system(size: 14, weight: .regular, design: .default))
                                     .foregroundColor(.black)
                                 Text("народження:")
-                                    .font(.system(size: 14, weight: .medium))
+                                    .font(.system(size: 14, weight: .regular, design: .default))
                                     .foregroundColor(.black)
                                 Text(user.birthDate)
-                                    .font(.system(size: 14, weight: .medium))
+                                    .font(.system(size: 14, weight: .regular, design: .default))
                                     .foregroundColor(.black)
                             }
                             
                             VStack(alignment: .leading, spacing: 3) {
                                 Text("Номер:")
-                                    .font(.system(size: 14, weight: .medium))
+                                    .font(.system(size: 14, weight: .regular, design: .default))
                                     .foregroundColor(.black)
-                                Text("010322300")
-                                    .font(.system(size: 14, weight: .medium))
+                                Text(StaticDataGenerator.shared.getPassportNumber())
+                                    .font(.system(size: 14, weight: .regular, design: .default))
                                     .foregroundColor(.black)
                             }
                             
