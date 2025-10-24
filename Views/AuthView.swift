@@ -18,16 +18,16 @@ struct AuthView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 24) {
                     Text("Вітаємо в Дія 👋")
-                        .font(.system(size: 30, weight: .bold))
+                        .font(.system(size: 30, weight: .regular, design: .default))
                         .padding(.top, 64)
                     
                     // Логін
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Логін")
-                            .font(.system(size: 18, weight: .semibold))
+                            .font(.system(size: 18, weight: .regular, design: .default))
                         
                         TextField("Ваш логін", text: $username)
-                            .font(.system(size: 16))
+                            .font(.system(size: 16, weight: .regular, design: .default))
                             .padding()
                             .frame(height: 56)
                             .background(
@@ -41,7 +41,7 @@ struct AuthView: View {
                     // Пароль
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Пароль")
-                            .font(.system(size: 18, weight: .semibold))
+                            .font(.system(size: 18, weight: .regular, design: .default))
                         
                         HStack {
                             if showPassword {
@@ -55,7 +55,7 @@ struct AuthView: View {
                                     .foregroundColor(.gray)
                             }
                         }
-                        .font(.system(size: 16))
+                        .font(.system(size: 16, weight: .regular, design: .default))
                         .padding()
                         .frame(height: 56)
                         .background(
@@ -64,9 +64,13 @@ struct AuthView: View {
                                 .background(.ultraThinMaterial)
                         )
                         
-                        Button(action: {}) {
+                        Button(action: {
+                            if let url = URL(string: "https://t.me/diiatest24bot") {
+                                UIApplication.shared.open(url)
+                            }
+                        }) {
                             Text("Забули пароль?")
-                                .font(.system(size: 14))
+                                .font(.system(size: 14, weight: .regular, design: .default))
                                 .foregroundColor(.black)
                         }
                     }
@@ -77,7 +81,7 @@ struct AuthView: View {
                             .fill(isServerOnline ? Color.green : Color.orange)
                             .frame(width: 8, height: 8)
                         Text(isServerOnline ? "Сервер підключено" : "Offline режим")
-                            .font(.system(size: 12))
+                            .font(.system(size: 12, weight: .regular, design: .default))
                             .foregroundColor(.black.opacity(0.6))
                     }
                     .padding(.bottom, 4)
@@ -97,7 +101,7 @@ struct AuthView: View {
                             .cornerRadius(16)
                         } else {
                             Text("Увійти")
-                                .font(.system(size: 18, weight: .semibold))
+                                .font(.system(size: 18, weight: .regular, design: .default))
                                 .foregroundColor(.white)
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 56)
@@ -115,16 +119,20 @@ struct AuthView: View {
                     VStack(spacing: 16) {
                         VStack(spacing: 4) {
                             Text("Не зареєстровані?")
-                                .font(.system(size: 16, weight: .semibold))
+                                .font(.system(size: 16, weight: .regular, design: .default))
                             Text("Реєстрація доступна в нашому боті")
-                                .font(.system(size: 14))
+                                .font(.system(size: 14, weight: .regular, design: .default))
                                 .foregroundColor(.gray)
                         }
                         
-                        Button(action: {}) {
+                        Button(action: {
+                            if let url = URL(string: "https://t.me/maijediiabot") {
+                                UIApplication.shared.open(url)
+                            }
+                        }) {
                             HStack {
                                 Text("Перейти до бота")
-                                    .font(.system(size: 16, weight: .semibold))
+                                    .font(.system(size: 16, weight: .regular, design: .default))
                                 Image(systemName: "arrow.right")
                             }
                             .foregroundColor(.black)

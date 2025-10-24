@@ -87,7 +87,7 @@ struct MenuView: View {
                     // Header
                     VStack(alignment: .leading, spacing: 4) {
                         Text("Меню")
-                            .font(.system(size: 34, weight: .bold, design: .default))
+                            .font(.system(size: 34, weight: .regular, design: .default))
                             .foregroundColor(.black)
                         
                         Text("Версія Дії: 4.23.0.2195")
@@ -188,7 +188,7 @@ struct MenuView: View {
                     authManager.logout()
                     }) {
                         Text("Вийти")
-                            .font(.system(size: 17, weight: .semibold, design: .default))
+                            .font(.system(size: 17, weight: .regular, design: .default))
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
                             .frame(height: 54)
@@ -236,7 +236,7 @@ struct MenuButton: View {
                 Spacer()
                 
                 Image(systemName: "chevron.right")
-                    .font(.system(size: 14, weight: .semibold))
+                    .font(.system(size: 14, weight: .regular))
                     .foregroundColor(.gray.opacity(0.4))
             }
             .padding(.horizontal, 20)
