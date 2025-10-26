@@ -7,7 +7,7 @@ class NetworkManager: ObservableObject {
     // Щоб дізнатись IP: відкрийте PowerShell і введіть: ipconfig
     // Або використовуйте ngrok URL (без :8000 на кінці!)
     // private let baseURL = "http://192.168.0.104:8000"  // локальна мережа
-    private let baseURL = "https://962a16b88968.ngrok-free.app"  // ngrok - працює!
+    private let baseURL = "https://diia-backend.onrender.com"  // ngrok - працює!
     
     // Fallback credentials для offline режиму
     private let offlineCredentials: [String: String] = [
