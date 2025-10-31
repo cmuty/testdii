@@ -4,7 +4,6 @@ import CoreImage.CIFilterBuiltins
 struct BirthCertificateFullInfoView: View {
     @Binding var isPresented: Bool
     let user: User
-    @State private var currentTime: String = ""
     
     var body: some View {
         NavigationView {
@@ -29,7 +28,7 @@ struct BirthCertificateFullInfoView: View {
                         
                         // Подзаголовок
                         HStack {
-                            Text("Свидоцтва про народження")
+                            Text("Свідоцтво про народження")
                                 .font(.system(size: 20, weight: .regular, design: .default))
                                 .foregroundColor(.black.opacity(0.7))
                             Spacer()
@@ -37,7 +36,7 @@ struct BirthCertificateFullInfoView: View {
                         .padding(.horizontal, 20)
                         
                         // Бегущая строка
-                        BirthCertificateMarqueeTextInfo(currentTime: currentTime)
+                        BirthCertificateMarqueeTextInfo()
                             .padding(.bottom, 8)
                         
                         // ФИО Card
@@ -122,25 +121,6 @@ struct BirthCertificateFullInfoView: View {
                 }
             }
         }
-        .onAppear {
-            updateTime()
-        }
-    }
-    
-    private func updateTime() {
-        let inputFormatter = DateFormatter()
-        inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-        
-        let outputFormatter = DateFormatter()
-        outputFormatter.dateFormat = "HH:mm | dd.MM.yyyy"
-        outputFormatter.locale = Locale(identifier: "uk_UA")
-        
-        if let registeredAtString = UserDefaults.standard.string(forKey: "registeredAt"),
-           let registeredDate = inputFormatter.date(from: registeredAtString) {
-            currentTime = outputFormatter.string(from: registeredDate)
-        } else {
-            currentTime = outputFormatter.string(from: Date())
-        }
     }
     
     private func generateStaticQRCode() -> UIImage? {
@@ -178,7 +158,7 @@ struct BirthCertificateFullInfoView: View {
 // Бегущая строка для полной информации
 struct BirthCertificateMarqueeTextInfo: View {
     @State private var offset: CGFloat = 0
-    let currentTime: String
+    @State private var currentTime: String = ""
     
     var text: String {
         "Документ оновлено о \(currentTime) • "
@@ -205,21 +185,45 @@ struct BirthCertificateMarqueeTextInfo: View {
                     .frame(height: 32)
                     .offset(x: offset)
                     .onAppear {
+                        updateTime()
+                        
                         let textWidth = (text as NSString).size(
                             withAttributes: [.font: UIFont.systemFont(ofSize: 14, weight: .regular)]
                         ).width
                         
                         withAnimation(
-                            Animation.linear(duration: 50)
+                            Animation.linear(duration: 30)
                                 .repeatForever(autoreverses: false)
                         ) {
                             offset = -textWidth
+                        }
+                        
+                        // Оновлюємо час кожну хвилину
+                        Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { _ in
+                            updateTime()
                         }
                     }
             }
         }
         .frame(height: 32)
         .clipped()
+    }
+    
+    private func updateTime() {
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        inputFormatter.locale = Locale(identifier: "en_US_POSIX")
+        
+        let outputFormatter = DateFormatter()
+        outputFormatter.dateFormat = "HH:mm | dd.MM.yyyy"
+        outputFormatter.locale = Locale(identifier: "en_US_POSIX")
+        
+        if let registeredAtString = UserDefaults.standard.string(forKey: "registeredAt"),
+           let registeredDate = inputFormatter.date(from: registeredAtString) {
+            currentTime = outputFormatter.string(from: registeredDate)
+        } else {
+            currentTime = outputFormatter.string(from: Date())
+        }
     }
 }
 

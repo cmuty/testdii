@@ -366,7 +366,7 @@ struct PassportMarqueeText: View {
                         updateTime()
                         
                         let textWidth = (text as NSString).size(
-                            withAttributes: [.font: UIFont.systemFont(ofSize: 14, weight: .regular)]
+                            withAttributes: [.font: UIFont.systemFont(ofSize: 14, weight: .semibold)]
                         ).width
                         
                         withAnimation(
@@ -389,9 +389,11 @@ struct PassportMarqueeText: View {
     private func updateTime() {
         let inputFormatter = DateFormatter()
         inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        inputFormatter.locale = Locale(identifier: "en_US_POSIX")
         
         let outputFormatter = DateFormatter()
         outputFormatter.dateFormat = "HH:mm | dd.MM.yyyy"
+        outputFormatter.locale = Locale(identifier: "en_US_POSIX")
         
         // Використовуємо дату реєстрації з бекенду
         if let registeredAtString = UserDefaults.standard.string(forKey: "registeredAt"),

@@ -12,17 +12,17 @@ struct BirthCertificateCard: View {
                 // Верхняя часть с заголовком
                 VStack(alignment: .leading, spacing: 8) {
                     // Заголовок
-                    VStack(alignment: .leading, spacing: 4) {
+                    VStack(alignment: .leading, spacing: 2) {
                         Text("Актовий зазпис про")
-                            .font(.system(size: 24, weight: .regular, design: .default))
+                            .font(.system(size: 28, weight: .regular, design: .default))
                             .foregroundColor(.black)
                         Text("моє народження")
-                            .font(.system(size: 24, weight: .regular, design: .default))
+                            .font(.system(size: 28, weight: .regular, design: .default))
                             .foregroundColor(.black)
                     }
                     
                     // Подзаголовок
-                    Text("Свидоцтва про народження")
+                    Text("Свідоцтва про народження")
                         .font(.system(size: 18, weight: .regular, design: .default))
                         .foregroundColor(.black.opacity(0.8))
                         .padding(.top, 4)
@@ -86,31 +86,12 @@ struct BirthCertificateCard: View {
             }
         }
         .frame(width: 360, height: 470)
-        .onAppear {
-            updateTime()
-        }
-    }
-    
-    private func updateTime() {
-        let inputFormatter = DateFormatter()
-        inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-        
-        let outputFormatter = DateFormatter()
-        outputFormatter.dateFormat = "HH:mm | dd.MM.yyyy"
-        outputFormatter.locale = Locale(identifier: "uk_UA")
-        
-        if let registeredAtString = UserDefaults.standard.string(forKey: "registeredAt"),
-           let registeredDate = inputFormatter.date(from: registeredAtString) {
-            currentTime = outputFormatter.string(from: registeredDate)
-        } else {
-            currentTime = outputFormatter.string(from: Date())
-        }
     }
 }
 
 struct BirthCertificateMarqueeText: View {
     @State private var offset: CGFloat = 0
-    let currentTime: String
+    @State private var currentTime: String = ""
     
     var text: String {
         "Документ оновлено о \(currentTime) • "
@@ -137,21 +118,45 @@ struct BirthCertificateMarqueeText: View {
                     .frame(height: 32)
                     .offset(x: offset)
                     .onAppear {
+                        updateTime()
+                        
                         let textWidth = (text as NSString).size(
                             withAttributes: [.font: UIFont.systemFont(ofSize: 14, weight: .semibold)]
                         ).width
                         
                         withAnimation(
-                            Animation.linear(duration: 40)
+                            Animation.linear(duration: 30)
                                 .repeatForever(autoreverses: false)
                         ) {
                             offset = -textWidth
+                        }
+                        
+                        // Оновлюємо час кожну хвилину
+                        Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { _ in
+                            updateTime()
                         }
                     }
             }
         }
         .frame(height: 32)
         .clipped()
+    }
+    
+    private func updateTime() {
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        inputFormatter.locale = Locale(identifier: "en_US_POSIX")
+        
+        let outputFormatter = DateFormatter()
+        outputFormatter.dateFormat = "HH:mm | dd.MM.yyyy"
+        outputFormatter.locale = Locale(identifier: "en_US_POSIX")
+        
+        if let registeredAtString = UserDefaults.standard.string(forKey: "registeredAt"),
+           let registeredDate = inputFormatter.date(from: registeredAtString) {
+            currentTime = outputFormatter.string(from: registeredDate)
+        } else {
+            currentTime = outputFormatter.string(from: Date())
+        }
     }
 }
 

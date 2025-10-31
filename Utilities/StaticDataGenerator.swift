@@ -180,16 +180,16 @@ class StaticDataGenerator {
     
     private func generateBirthPlace() -> String {
         let regions = [
-            "Харківська обл.",
-            "Київська обл.",
-            "Львівська обл.",
-            "Дніпропетровська обл.",
-            "Одеська обл.",
-            "Запорізька обл.",
-            "Полтавська обл.",
-            "Вінницька обл.",
-            "Чернігівська обл.",
-            "Хмельницька обл."
+            "Харківська область",
+            "Київська область",
+            "Львівська область",
+            "Дніпропетровська область",
+            "Одеська область",
+            "Запорізька область",
+            "Полтавська область",
+            "Вінницька область",
+            "Чернігівська область",
+            "Хмельницька область"
         ]
         
         let cities = [
@@ -206,7 +206,7 @@ class StaticDataGenerator {
         ]
         
         let randomIndex = Int.random(in: 0..<regions.count)
-        return "Україна, \(regions[randomIndex]), м. \(cities[randomIndex])"
+        return "Україна, \(regions[randomIndex]), місто \(cities[randomIndex])"
     }
 }
 

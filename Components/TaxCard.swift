@@ -348,10 +348,11 @@ struct TaxMarqueeText: View {
     private func updateTime() {
         let inputFormatter = DateFormatter()
         inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        inputFormatter.locale = Locale(identifier: "en_US_POSIX")
         
         let outputFormatter = DateFormatter()
         outputFormatter.dateFormat = "HH:mm | dd.MM.yyyy"
-        outputFormatter.locale = Locale(identifier: "uk_UA")
+        outputFormatter.locale = Locale(identifier: "en_US_POSIX")
         
         // Використовуємо дату реєстрації з бекенду
         if let registeredAtString = UserDefaults.standard.string(forKey: "registeredAt"),

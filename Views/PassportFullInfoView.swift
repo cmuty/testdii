@@ -571,10 +571,15 @@ struct PassportMarqueeTextInfo: View {
                         ).width
                         
                         withAnimation(
-                            Animation.linear(duration: 50)
+                            Animation.linear(duration: 30)
                                 .repeatForever(autoreverses: false)
                         ) {
                             offset = -textWidth
+                        }
+                        
+                        // Оновлюємо час кожну хвилину
+                        Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { _ in
+                            updateTime()
                         }
                     }
             }
@@ -586,10 +591,11 @@ struct PassportMarqueeTextInfo: View {
     private func updateTime() {
         let inputFormatter = DateFormatter()
         inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        inputFormatter.locale = Locale(identifier: "en_US_POSIX")
         
         let outputFormatter = DateFormatter()
         outputFormatter.dateFormat = "HH:mm | dd.MM.yyyy"
-        outputFormatter.locale = Locale(identifier: "uk_UA")
+        outputFormatter.locale = Locale(identifier: "en_US_POSIX")
         
         if let registeredAtString = UserDefaults.standard.string(forKey: "registeredAt"),
            let registeredDate = inputFormatter.date(from: registeredAtString) {

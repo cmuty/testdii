@@ -184,7 +184,7 @@ struct MarqueeText: View {
                         ).width
                         
                         withAnimation(
-                            Animation.linear(duration: 40)
+                            Animation.linear(duration: 30)
                                 .repeatForever(autoreverses: false)
                         ) {
                             offset = -textWidth
