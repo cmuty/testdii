@@ -75,6 +75,7 @@ struct BirthCertificateFullInfoView: View {
                             HStack {
                                 Text("Стать:")
                                     .font(.system(size: 16, weight: .regular, design: .default))
+                                Spacer()
                                 Text(generator.getGender())
                                     .font(.system(size: 16, weight: .regular, design: .default))
                             }
@@ -201,18 +202,21 @@ struct BirthCertificateFullInfoView: View {
                                 .padding(.bottom, 4)
                             
                             // ПІБ (формат: ПІБ: Прізвище Ім'я\nПо батькові)
-                            VStack(alignment: .leading, spacing: 4) {
+                            HStack {
                                 Text("ПІБ:")
                                     .font(.system(size: 16, weight: .regular, design: .default))
+                                Spacer()
                                 Group {
                                     let nameParts = motherData.fullName.components(separatedBy: " ")
                                     if nameParts.count >= 3 {
-                                        Text("\(nameParts[0]) \(nameParts[1])")
-                                            .font(.system(size: 16, weight: .regular, design: .default))
-                                            .foregroundColor(.black.opacity(0.8))
-                                        Text(nameParts[2...].joined(separator: " "))
-                                            .font(.system(size: 16, weight: .regular, design: .default))
-                                            .foregroundColor(.black.opacity(0.8))
+                                        VStack(alignment: .trailing, spacing: 0) {
+                                            Text("\(nameParts[0]) \(nameParts[1])")
+                                                .font(.system(size: 16, weight: .regular, design: .default))
+                                                .foregroundColor(.black.opacity(0.8))
+                                            Text(nameParts[2...].joined(separator: " "))
+                                                .font(.system(size: 16, weight: .regular, design: .default))
+                                                .foregroundColor(.black.opacity(0.8))
+                                        }
                                     } else {
                                         Text(motherData.fullName)
                                             .font(.system(size: 16, weight: .regular, design: .default))
