@@ -32,7 +32,7 @@ struct PassportCard: View {
                 axis: (x: 0, y: 1, z: 0)
             )
         }
-        .frame(width: 360, height: 450)
+        .frame(width: 360, height: 520)
         .onTapGesture {
             withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
                 isFlipped.toggle()
@@ -294,7 +294,7 @@ struct PassportCardBack: View {
                     .padding(.bottom, 40)
                 }
             )
-            .frame(width: 360, height: 450)
+            .frame(width: 360, height: 520)
             .shadow(color: Color.black.opacity(0.1), radius: 20, x: 0, y: 10)
     }
     
@@ -339,7 +339,7 @@ struct PassportMarqueeText: View {
     @State private var currentDateTime: String = ""
     
     var text: String {
-        "Документ оновлено о \(currentDateTime) "
+        "• Документ оновлено о \(currentDateTime) "
     }
     
     var body: some View {
@@ -366,7 +366,7 @@ struct PassportMarqueeText: View {
                         updateTime()
                         
                         let textWidth = (text as NSString).size(
-                            withAttributes: [.font: UIFont.systemFont(ofSize: 14, weight: .semibold)]
+                            withAttributes: [.font: UIFont.systemFont(ofSize: 14, weight: .regular)]
                         ).width
                         
                         withAnimation(
@@ -387,18 +387,13 @@ struct PassportMarqueeText: View {
     }
     
     private func updateTime() {
-        let inputFormatter = DateFormatter()
-        inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-        inputFormatter.locale = Locale(identifier: "en_US_POSIX")
-        
         let outputFormatter = DateFormatter()
         outputFormatter.dateFormat = "HH:mm | dd.MM.yyyy"
         outputFormatter.locale = Locale(identifier: "en_US_POSIX")
         
-        // Використовуємо дату реєстрації з бекенду
-        if let registeredAtString = UserDefaults.standard.string(forKey: "registeredAt"),
-           let registeredDate = inputFormatter.date(from: registeredAtString) {
-            currentDateTime = outputFormatter.string(from: registeredDate)
+        // Використовуємо дату останнього входу
+        if let lastLoginDate = UserDefaults.standard.object(forKey: "lastLoginDate") as? Date {
+            currentDateTime = outputFormatter.string(from: lastLoginDate)
         } else {
             currentDateTime = outputFormatter.string(from: Date())
         }

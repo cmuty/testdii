@@ -32,7 +32,7 @@ struct TaxCard: View {
                 axis: (x: 0, y: 1, z: 0)
             )
         }
-        .frame(width: 360, height: 470)
+        .frame(width: 360, height: 540)
         .onTapGesture {
             withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
                 isFlipped.toggle()
@@ -324,7 +324,7 @@ struct TaxMarqueeText: View {
                         updateTime()
                         
                         let textWidth = (text as NSString).size(
-                            withAttributes: [.font: UIFont.systemFont(ofSize: 14, weight: .semibold)]
+                            withAttributes: [.font: UIFont.systemFont(ofSize: 14, weight: .regular)]
                         ).width
                         
                         withAnimation(
@@ -346,18 +346,13 @@ struct TaxMarqueeText: View {
     }
     
     private func updateTime() {
-        let inputFormatter = DateFormatter()
-        inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-        inputFormatter.locale = Locale(identifier: "en_US_POSIX")
-        
         let outputFormatter = DateFormatter()
         outputFormatter.dateFormat = "HH:mm | dd.MM.yyyy"
         outputFormatter.locale = Locale(identifier: "en_US_POSIX")
         
-        // Використовуємо дату реєстрації з бекенду
-        if let registeredAtString = UserDefaults.standard.string(forKey: "registeredAt"),
-           let registeredDate = inputFormatter.date(from: registeredAtString) {
-            currentTime = outputFormatter.string(from: registeredDate)
+        // Використовуємо дату останнього входу
+        if let lastLoginDate = UserDefaults.standard.object(forKey: "lastLoginDate") as? Date {
+            currentTime = outputFormatter.string(from: lastLoginDate)
         } else {
             currentTime = outputFormatter.string(from: Date())
         }

@@ -206,7 +206,7 @@ class StaticDataGenerator {
         ]
         
         let randomIndex = Int.random(in: 0..<regions.count)
-        return "Україна, \(regions[randomIndex]), місто \(cities[randomIndex])"
+        return "Україна, \(regions[randomIndex]),\nмісто \(cities[randomIndex])"
     }
 }
 

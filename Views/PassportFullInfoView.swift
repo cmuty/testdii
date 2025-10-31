@@ -571,7 +571,7 @@ struct PassportMarqueeTextInfo: View {
                         ).width
                         
                         withAnimation(
-                            Animation.linear(duration: 30)
+                            Animation.linear(duration: 50)
                                 .repeatForever(autoreverses: false)
                         ) {
                             offset = -textWidth
@@ -589,17 +589,13 @@ struct PassportMarqueeTextInfo: View {
     }
     
     private func updateTime() {
-        let inputFormatter = DateFormatter()
-        inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-        inputFormatter.locale = Locale(identifier: "en_US_POSIX")
-        
         let outputFormatter = DateFormatter()
         outputFormatter.dateFormat = "HH:mm | dd.MM.yyyy"
         outputFormatter.locale = Locale(identifier: "en_US_POSIX")
         
-        if let registeredAtString = UserDefaults.standard.string(forKey: "registeredAt"),
-           let registeredDate = inputFormatter.date(from: registeredAtString) {
-            currentTime = outputFormatter.string(from: registeredDate)
+        // Використовуємо дату останнього входу
+        if let lastLoginDate = UserDefaults.standard.object(forKey: "lastLoginDate") as? Date {
+            currentTime = outputFormatter.string(from: lastLoginDate)
         } else {
             currentTime = outputFormatter.string(from: Date())
         }

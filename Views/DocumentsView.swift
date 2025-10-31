@@ -95,7 +95,7 @@ struct DocumentsView: View {
                         .tag(3)
                     }
                     .tabViewStyle(.page(indexDisplayMode: .never))
-                    .frame(height: 550)
+                    .frame(height: 620)
                     .blur(radius: showMenu ? 1 : 0)
                     
                     // Page indicator (точки)

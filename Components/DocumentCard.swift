@@ -25,7 +25,7 @@ struct DocumentCard: View {
                     axis: (x: 0, y: 1, z: 0)
                 )
         }
-        .frame(width: 360, height: 470)
+        .frame(width: 360, height: 540)
         .onTapGesture {
             withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
                 isFlipped.toggle()
@@ -149,7 +149,7 @@ struct DocumentCardFront: View {
                 .padding(.bottom, 24)
             }
         }
-        .frame(width: 360, height: 470)
+        .frame(width: 360, height: 540)
     }
 }
 
@@ -180,7 +180,7 @@ struct MarqueeText: View {
                     .offset(x: offset)
                     .onAppear {
                         let textWidth = (text as NSString).size(
-                            withAttributes: [.font: UIFont.systemFont(ofSize: 14, weight: .semibold)]
+                            withAttributes: [.font: UIFont.systemFont(ofSize: 14, weight: .regular)]
                         ).width
                         
                         withAnimation(
@@ -220,7 +220,7 @@ struct DocumentCardBack: View {
                     Spacer()
                 }
             )
-            .frame(width: 360, height: 470)
+            .frame(width: 360, height: 540)
             .shadow(color: Color.black.opacity(0.1), radius: 20, x: 0, y: 10)
     }
     
