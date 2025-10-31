@@ -208,5 +208,178 @@ class StaticDataGenerator {
         let randomIndex = Int.random(in: 0..<regions.count)
         return "Україна, \(regions[randomIndex]),\nмісто \(cities[randomIndex])"
     }
+    
+    // Структура адреса проживания
+    struct ResidenceAddress {
+        let region: String
+        let city: String
+        let district: String
+        let streetType: String // провулок, вулиця, бульвар, проспект
+        let streetName: String
+        let buildingNumber: String
+    }
+    
+    // Генерация адреса проживания (один раз при входе)
+    func getResidenceAddress() -> ResidenceAddress {
+        if let savedRegion = UserDefaults.standard.string(forKey: "userResidenceRegion"),
+           let savedCity = UserDefaults.standard.string(forKey: "userResidenceCity"),
+           let savedDistrict = UserDefaults.standard.string(forKey: "userResidenceDistrict"),
+           let savedStreetType = UserDefaults.standard.string(forKey: "userResidenceStreetType"),
+           let savedStreetName = UserDefaults.standard.string(forKey: "userResidenceStreetName"),
+           let savedBuildingNumber = UserDefaults.standard.string(forKey: "userResidenceBuildingNumber") {
+            return ResidenceAddress(
+                region: savedRegion,
+                city: savedCity,
+                district: savedDistrict,
+                streetType: savedStreetType,
+                streetName: savedStreetName,
+                buildingNumber: savedBuildingNumber
+            )
+        }
+        
+        let address = generateResidenceAddress()
+        UserDefaults.standard.set(address.region, forKey: "userResidenceRegion")
+        UserDefaults.standard.set(address.city, forKey: "userResidenceCity")
+        UserDefaults.standard.set(address.district, forKey: "userResidenceDistrict")
+        UserDefaults.standard.set(address.streetType, forKey: "userResidenceStreetType")
+        UserDefaults.standard.set(address.streetName, forKey: "userResidenceStreetName")
+        UserDefaults.standard.set(address.buildingNumber, forKey: "userResidenceBuildingNumber")
+        return address
+    }
+    
+    private func generateResidenceAddress() -> ResidenceAddress {
+        // Взаимосвязанные данные по областям
+        let regionsData: [(region: String, city: String, districts: [String], streets: [(type: String, name: String)])] = [
+            (
+                region: "Харківська",
+                city: "Харків",
+                districts: ["Харківський", "Салтівський", "Немишлянський", "Холодногірський"],
+                streets: [
+                    (type: "пров.", name: "Білостоцький"),
+                    (type: "пров.", name: "Грушевський"),
+                    (type: "вул.", name: "Сумська"),
+                    (type: "вул.", name: "Московський проспект"),
+                    (type: "пров.", name: "Шевченка"),
+                    (type: "вул.", name: "Полтавський шлях")
+                ]
+            ),
+            (
+                region: "Київська",
+                city: "Київ",
+                districts: ["Київський", "Печерський", "Шевченківський", "Подільський"],
+                streets: [
+                    (type: "вул.", name: "Хрещатик"),
+                    (type: "вул.", name: "Майдан Незалежності"),
+                    (type: "пров.", name: "Тарасів"),
+                    (type: "вул.", name: "Золотоворітська"),
+                    (type: "пров.", name: "Михайлівський"),
+                    (type: "бул.", name: "Шевченка")
+                ]
+            ),
+            (
+                region: "Львівська",
+                city: "Львів",
+                districts: ["Львівський", "Залізничний", "Франківський", "Сихівський"],
+                streets: [
+                    (type: "вул.", name: "Проспект Свободи"),
+                    (type: "вул.", name: "Стрийська"),
+                    (type: "пров.", name: "Ринок"),
+                    (type: "вул.", name: "Грушевського"),
+                    (type: "пров.", name: "Дорошенка"),
+                    (type: "вул.", name: "Городоцька")
+                ]
+            ),
+            (
+                region: "Дніпропетровська",
+                city: "Дніпро",
+                districts: ["Дніпровський", "Соборний", "Шевченківський", "Центральний"],
+                streets: [
+                    (type: "просп.", name: "Дмитра Яворницького"),
+                    (type: "вул.", name: "Січеславська"),
+                    (type: "пров.", name: "Грушевського"),
+                    (type: "вул.", name: "Карла Маркса"),
+                    (type: "пров.", name: "Михайла Грушевського"),
+                    (type: "вул.", name: "Набережна Перемоги")
+                ]
+            ),
+            (
+                region: "Одеська",
+                city: "Одеса",
+                districts: ["Одеський", "Приморський", "Малиновський", "Суворовський"],
+                streets: [
+                    (type: "вул.", name: "Дерибасівська"),
+                    (type: "пров.", name: "Приморський"),
+                    (type: "вул.", name: "Пушкінська"),
+                    (type: "пров.", name: "Морський"),
+                    (type: "вул.", name: "Італійська"),
+                    (type: "пров.", name: "Грецький")
+                ]
+            )
+        ]
+        
+        let randomIndex = Int.random(in: 0..<regionsData.count)
+        let regionData = regionsData[randomIndex]
+        
+        let randomDistrictIndex = Int.random(in: 0..<regionData.districts.count)
+        let district = regionData.districts[randomDistrictIndex]
+        
+        let randomStreetIndex = Int.random(in: 0..<regionData.streets.count)
+        let street = regionData.streets[randomStreetIndex]
+        
+        let buildingNumber = String(Int.random(in: 1...150))
+        
+        return ResidenceAddress(
+            region: regionData.region,
+            city: regionData.city,
+            district: district,
+            streetType: street.type,
+            streetName: street.name,
+            buildingNumber: buildingNumber
+        )
+    }
+    
+    // Форматированный адрес для єДокумента
+    func getFormattedResidenceAddress() -> String {
+        let address = getResidenceAddress()
+        return "Україна, область \(address.region), місто \(address.city), \(address.streetType) \(address.streetName), буд \(address.buildingNumber)"
+    }
+    
+    // Форматированный адрес места рождения для паспорта (капс, две строки)
+    func getFormattedBirthPlaceForPassport() -> (line1: String, line2: String) {
+        let birthPlace = getBirthPlace()
+        // Парсим место рождения (формат: "Україна, Харківська область,\nмісто Харків")
+        let cleaned = birthPlace.replacingOccurrences(of: "\n", with: " ")
+        let components = cleaned.components(separatedBy: ", ")
+        if components.count >= 2 {
+            // components[0] = "Україна"
+            // components[1] = "Харківська область"
+            // components[2] = "місто Харків" (если есть)
+            let regionFull = components[1]
+            let regionName = regionFull.replacingOccurrences(of: " область", with: "").uppercased()
+            
+            var cityName = "ХАРКІВ" // fallback
+            if components.count >= 3 {
+                cityName = components[2].replacingOccurrences(of: "місто ", with: "").uppercased()
+            } else {
+                // Если города нет в третьей части, попробуем извлечь из региона (для некоторых форматов)
+                // Можно использовать первую часть города из базы
+                cityName = "ХАРКІВ" // fallback
+            }
+            
+            return ("М. \(cityName) \(regionName)", "ОБЛАСТЬ УКРАЇНА")
+        }
+        // Fallback
+        return ("М. ХАРКІВ ХАРКІВСЬКА", "ОБЛАСТЬ УКРАЇНА")
+    }
+    
+    // Форматированный адрес проживания для паспорта (капс, многострочный)
+    func getFormattedResidenceForPassport() -> [String] {
+        let address = getResidenceAddress()
+        return [
+            "УКРАЇНА \(address.region.uppercased()) ОБЛАСТЬ",
+            "\(address.district.uppercased()) РАЙОН М. \(address.city.uppercased())",
+            "\(address.streetType.uppercased()) \(address.streetName.uppercased()) БУД \(address.buildingNumber)"
+        ]
+    }
 }
 

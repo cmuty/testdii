@@ -150,7 +150,7 @@ struct DocumentFullInfoView: View {
                             Text("Місце проживання зазначене в банку:")
                                 .font(.system(size: 15, weight: .regular, design: .default))
                             
-                            Text("Україна, область Харківська, місто Харків, провулок Білостоцький, буд 47")
+                            Text(StaticDataGenerator.shared.getFormattedResidenceAddress())
                                 .font(.system(size: 15, weight: .regular, design: .default))
                                 .foregroundColor(.black.opacity(0.8))
                         }

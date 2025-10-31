@@ -12,7 +12,7 @@ struct BirthCertificateCard: View {
                 VStack(alignment: .leading, spacing: 8) {
                     // Заголовок
                     VStack(alignment: .leading, spacing: 2) {
-                        Text("Актовий зазпис про")
+                        Text("Актовий запис про")
                             .font(.system(size: 28, weight: .regular, design: .default))
                             .foregroundColor(.black)
                         Text("моє народження")

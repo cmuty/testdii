@@ -17,6 +17,14 @@ struct PassportFullInfoView: View {
         return String(format: "%d:%02d", minutes, seconds)
     }
     
+    var birthPlaceLines: (line1: String, line2: String) {
+        StaticDataGenerator.shared.getFormattedBirthPlaceForPassport()
+    }
+    
+    var residenceLines: [String] {
+        StaticDataGenerator.shared.getFormattedResidenceForPassport()
+    }
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -303,9 +311,9 @@ struct PassportFullInfoView: View {
                                 Text("Place of birth")
                                     .font(.system(size: 14, weight: .regular, design: .default))
                                     .foregroundColor(.gray)
-                                Text("М. ХАРКІВ ХАРКІВСЬКА")
+                                Text(birthPlaceLines.line1)
                                     .font(.system(size: 15, weight: .regular, design: .default))
-                                Text("ОБЛАСТЬ УКРАЇНА")
+                                Text(birthPlaceLines.line2)
                                     .font(.system(size: 15, weight: .regular, design: .default))
                             }
                             
@@ -318,12 +326,10 @@ struct PassportFullInfoView: View {
                                 Text("Legal address")
                                     .font(.system(size: 14, weight: .regular, design: .default))
                                     .foregroundColor(.gray)
-                                Text("УКРАЇНА ХАРКІВСЬКА ОБЛАСТЬ")
-                                    .font(.system(size: 15, weight: .regular, design: .default))
-                                Text("ХАРКІВСЬКИЙ РАЙОН М. ХАРКІВ")
-                                    .font(.system(size: 15, weight: .regular, design: .default))
-                                Text("ПРОВ. БІЛОСТОЦЬКИЙ БУД 47")
-                                    .font(.system(size: 15, weight: .regular, design: .default))
+                                ForEach(residenceLines, id: \.self) { line in
+                                    Text(line)
+                                        .font(.system(size: 15, weight: .regular, design: .default))
+                                }
                             }
                             
                             Divider()

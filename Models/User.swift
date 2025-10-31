@@ -8,6 +8,7 @@ struct User {
     let taxId: String
     let photoName: String
     let birthPlace: String
+    let residenceAddress: StaticDataGenerator.ResidenceAddress
     
     // Создаём User из данных AuthManager
     init(from authManager: AuthManager) {
@@ -36,17 +37,26 @@ struct User {
         self.birthDate = authManager.userBirthDate
         self.taxId = StaticDataGenerator.shared.getRNOKPP()
         self.birthPlace = StaticDataGenerator.shared.getBirthPlace()
+        self.residenceAddress = StaticDataGenerator.shared.getResidenceAddress()
         self.photoName = "user_photo"
     }
     
     // Direct initializer для тестов и fallback
-    init(firstName: String, lastName: String, patronymic: String, birthDate: String, taxId: String, photoName: String, birthPlace: String = "Україна, Харківська обл., м. Харків") {
+    init(firstName: String, lastName: String, patronymic: String, birthDate: String, taxId: String, photoName: String, birthPlace: String = "Україна, Харківська обл., м. Харків", residenceAddress: StaticDataGenerator.ResidenceAddress? = nil) {
         self.firstName = firstName
         self.lastName = lastName
         self.patronymic = patronymic
         self.birthDate = birthDate
         self.taxId = taxId
         self.birthPlace = birthPlace
+        self.residenceAddress = residenceAddress ?? StaticDataGenerator.ResidenceAddress(
+            region: "Харківська",
+            city: "Харків",
+            district: "Харківський",
+            streetType: "пров.",
+            streetName: "Білостоцький",
+            buildingNumber: "47"
+        )
         self.photoName = photoName
     }
     
