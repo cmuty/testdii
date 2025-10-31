@@ -308,7 +308,7 @@ struct BirthCertificateFullInfoView: View {
                                 
                                 HStack {
                                     Text(generator.getCertificateNumber())
-                                        .font(.system(size: 20, weight: .regular, design: .default))
+                                        .font(.system(size: 24, weight: .regular, design: .default))
                                     Spacer()
                                     Button(action: {
                                         UIPasteboard.general.string = generator.getCertificateNumber()
@@ -321,15 +321,12 @@ struct BirthCertificateFullInfoView: View {
                             }
                             
                             // Дата видачі
-                            VStack(alignment: .leading, spacing: 4) {
+                            HStack {
                                 Text("Дата видачі:")
                                     .font(.system(size: 14, weight: .regular, design: .default))
-                                HStack {
-                                    Spacer()
-                                    Text(generator.getIssueDate(birthDate: user.birthDate))
-                                        .font(.system(size: 16, weight: .regular, design: .default))
-                                    Spacer()
-                                }
+                                Spacer()
+                                Text(generator.getIssueDate(birthDate: user.birthDate))
+                                    .font(.system(size: 16, weight: .regular, design: .default))
                             }
                         }
                         .padding(16)
