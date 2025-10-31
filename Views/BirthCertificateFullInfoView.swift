@@ -38,7 +38,6 @@ struct BirthCertificateFullInfoView: View {
                         
                         // Номер запису
                         HStack {
-                            Spacer()
                             Text(generator.getBirthRecordNumber())
                                 .font(.system(size: 28, weight: .regular, design: .default))
                             
@@ -49,6 +48,7 @@ struct BirthCertificateFullInfoView: View {
                                     .font(.system(size: 18))
                                     .foregroundColor(.black)
                             }
+                            
                             Spacer()
                         }
                         .padding(.horizontal, 20)
@@ -81,13 +81,8 @@ struct BirthCertificateFullInfoView: View {
                             
                             // Дата народження
                             HStack {
-                                VStack(alignment: .leading, spacing: 2) {
-                                    Text("Дата народження:")
-                                        .font(.system(size: 16, weight: .regular, design: .default))
-                                    Text("Date of birth")
-                                        .font(.system(size: 14, weight: .regular, design: .default))
-                                        .foregroundColor(.gray)
-                                }
+                                Text("Дата народження:")
+                                    .font(.system(size: 16, weight: .regular, design: .default))
                                 Spacer()
                                 Text(user.birthDate)
                                     .font(.system(size: 16, weight: .regular, design: .default))
@@ -113,9 +108,6 @@ struct BirthCertificateFullInfoView: View {
                             VStack(alignment: .leading, spacing: 4) {
                                 Text("Місце народження:")
                                     .font(.system(size: 16, weight: .regular, design: .default))
-                                Text("Place of birth")
-                                    .font(.system(size: 14, weight: .regular, design: .default))
-                                    .foregroundColor(.gray)
                                 Text(user.birthPlace)
                                     .font(.system(size: 15, weight: .regular, design: .default))
                                     .foregroundColor(.black.opacity(0.8))
@@ -135,48 +127,63 @@ struct BirthCertificateFullInfoView: View {
                                 .padding(.bottom, 4)
                             
                             // ПІБ
-                            VStack(alignment: .leading, spacing: 4) {
+                            HStack {
                                 Text("ПІБ:")
                                     .font(.system(size: 16, weight: .regular, design: .default))
-                                Text(fatherData.fullName)
-                                    .font(.system(size: 16, weight: .regular, design: .default))
-                                    .foregroundColor(.black.opacity(0.8))
+                                Spacer()
+                                Group {
+                                    let nameParts = fatherData.fullName.components(separatedBy: " ")
+                                    if nameParts.count >= 3 {
+                                        VStack(alignment: .trailing, spacing: 0) {
+                                            Text("\(nameParts[0]) \(nameParts[1])")
+                                                .font(.system(size: 16, weight: .regular, design: .default))
+                                                .foregroundColor(.black.opacity(0.8))
+                                            Text(nameParts[2...].joined(separator: " "))
+                                                .font(.system(size: 16, weight: .regular, design: .default))
+                                                .foregroundColor(.black.opacity(0.8))
+                                        }
+                                    } else {
+                                        Text(fatherData.fullName)
+                                            .font(.system(size: 16, weight: .regular, design: .default))
+                                            .foregroundColor(.black.opacity(0.8))
+                                    }
+                                }
                             }
                             
                             // Громадянство
-                            VStack(alignment: .leading, spacing: 4) {
+                            HStack {
                                 Text("Громадянство:")
                                     .font(.system(size: 16, weight: .regular, design: .default))
+                                Spacer()
                                 Text("Громадянин України")
                                     .font(.system(size: 16, weight: .regular, design: .default))
                                     .foregroundColor(.black.opacity(0.8))
                             }
                             
                             // РНОКПП батька
-                            VStack(alignment: .leading, spacing: 4) {
+                            HStack {
                                 Text("РНОКПП:")
                                     .font(.system(size: 16, weight: .regular, design: .default))
+                                Spacer()
                                 if let fatherRnokpp = fatherData.rnokpp {
-                                    HStack {
-                                        Text(fatherRnokpp)
-                                            .font(.system(size: 16, weight: .regular, design: .default))
-                                            .foregroundColor(.black.opacity(0.8))
-                                        Spacer()
-                                        Button(action: {
-                                            UIPasteboard.general.string = fatherRnokpp
-                                        }) {
-                                            Image(systemName: "doc.on.doc")
-                                                .font(.system(size: 16))
-                                                .foregroundColor(.black)
-                                        }
+                                    Text(fatherRnokpp)
+                                        .font(.system(size: 16, weight: .regular, design: .default))
+                                        .foregroundColor(.black.opacity(0.8))
+                                    Button(action: {
+                                        UIPasteboard.general.string = fatherRnokpp
+                                    }) {
+                                        Image(systemName: "doc.on.doc")
+                                            .font(.system(size: 16))
+                                            .foregroundColor(.black)
                                     }
                                 }
                             }
                             
                             // Дата народження батька
-                            VStack(alignment: .leading, spacing: 4) {
+                            HStack {
                                 Text("Дата народження:")
                                     .font(.system(size: 16, weight: .regular, design: .default))
+                                Spacer()
                                 Text(fatherData.birthDate)
                                     .font(.system(size: 16, weight: .regular, design: .default))
                                     .foregroundColor(.black.opacity(0.8))
@@ -193,28 +200,42 @@ struct BirthCertificateFullInfoView: View {
                                 .font(.system(size: 20, weight: .regular, design: .default))
                                 .padding(.bottom, 4)
                             
-                            // ПІБ
+                            // ПІБ (формат: ПІБ: Прізвище Ім'я\nПо батькові)
                             VStack(alignment: .leading, spacing: 4) {
                                 Text("ПІБ:")
                                     .font(.system(size: 16, weight: .regular, design: .default))
-                                Text(motherData.fullName)
-                                    .font(.system(size: 16, weight: .regular, design: .default))
-                                    .foregroundColor(.black.opacity(0.8))
+                                Group {
+                                    let nameParts = motherData.fullName.components(separatedBy: " ")
+                                    if nameParts.count >= 3 {
+                                        Text("\(nameParts[0]) \(nameParts[1])")
+                                            .font(.system(size: 16, weight: .regular, design: .default))
+                                            .foregroundColor(.black.opacity(0.8))
+                                        Text(nameParts[2...].joined(separator: " "))
+                                            .font(.system(size: 16, weight: .regular, design: .default))
+                                            .foregroundColor(.black.opacity(0.8))
+                                    } else {
+                                        Text(motherData.fullName)
+                                            .font(.system(size: 16, weight: .regular, design: .default))
+                                            .foregroundColor(.black.opacity(0.8))
+                                    }
+                                }
                             }
                             
                             // Громадянство
-                            VStack(alignment: .leading, spacing: 4) {
+                            HStack {
                                 Text("Громадянство:")
                                     .font(.system(size: 16, weight: .regular, design: .default))
+                                Spacer()
                                 Text("Громадянка України")
                                     .font(.system(size: 16, weight: .regular, design: .default))
                                     .foregroundColor(.black.opacity(0.8))
                             }
                             
                             // Дата народження матері
-                            VStack(alignment: .leading, spacing: 4) {
+                            HStack {
                                 Text("Дата народження:")
                                     .font(.system(size: 16, weight: .regular, design: .default))
+                                Spacer()
                                 Text(motherData.birthDate)
                                     .font(.system(size: 16, weight: .regular, design: .default))
                                     .foregroundColor(.black.opacity(0.8))
