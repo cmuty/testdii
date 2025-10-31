@@ -38,6 +38,7 @@ struct BirthCertificateFullInfoView: View {
                         
                         // Номер запису
                         HStack {
+                            Spacer()
                             Text(generator.getBirthRecordNumber())
                                 .font(.system(size: 28, weight: .regular, design: .default))
                             
@@ -48,7 +49,6 @@ struct BirthCertificateFullInfoView: View {
                                     .font(.system(size: 18))
                                     .foregroundColor(.black)
                             }
-                            
                             Spacer()
                         }
                         .padding(.horizontal, 20)
@@ -58,8 +58,9 @@ struct BirthCertificateFullInfoView: View {
                         BirthCertificateMarqueeTextInfo()
                             .padding(.bottom, 8)
                         
-                        // ФИО Card
+                        // ФИО, Стать, Дата народження, РНОКПП, Місце народження
                         VStack(alignment: .leading, spacing: 16) {
+                            // ФИО (слева)
                             VStack(alignment: .leading, spacing: 4) {
                                 Text(user.lastName)
                                     .font(.system(size: 22, weight: .regular, design: .default))
@@ -69,25 +70,14 @@ struct BirthCertificateFullInfoView: View {
                                     .font(.system(size: 22, weight: .regular, design: .default))
                             }
                             .foregroundColor(.black)
-                        }
-                        .padding(20)
-                        .background(Color.white.opacity(0.6))
-                        .cornerRadius(12)
-                        .padding(.horizontal, 20)
-                        
-                        // Стать, Дата народження, РНОКПП, Місце народження
-                        VStack(alignment: .leading, spacing: 12) {
+                            
                             // Стать
                             HStack {
                                 Text("Стать:")
                                     .font(.system(size: 16, weight: .regular, design: .default))
-                                Spacer()
                                 Text(generator.getGender())
                                     .font(.system(size: 16, weight: .regular, design: .default))
                             }
-                            
-                            Divider()
-                                .padding(.vertical, 4)
                             
                             // Дата народження
                             HStack {
@@ -98,28 +88,18 @@ struct BirthCertificateFullInfoView: View {
                                         .font(.system(size: 14, weight: .regular, design: .default))
                                         .foregroundColor(.gray)
                                 }
-                                
                                 Spacer()
-                                
                                 Text(user.birthDate)
                                     .font(.system(size: 16, weight: .regular, design: .default))
                             }
                             
-                            Divider()
-                                .padding(.vertical, 4)
-                            
                             // РНОКПП
                             HStack {
-                                VStack(alignment: .leading, spacing: 2) {
-                                    Text("РНОКПП:")
-                                        .font(.system(size: 16, weight: .regular, design: .default))
-                                }
-                                
+                                Text("РНОКПП:")
+                                    .font(.system(size: 16, weight: .regular, design: .default))
                                 Spacer()
-                                
                                 Text(user.taxId)
                                     .font(.system(size: 16, weight: .regular, design: .default))
-                                
                                 Button(action: {
                                     UIPasteboard.general.string = user.taxId
                                 }) {
@@ -128,9 +108,6 @@ struct BirthCertificateFullInfoView: View {
                                         .foregroundColor(.black)
                                 }
                             }
-                            
-                            Divider()
-                                .padding(.vertical, 4)
                             
                             // Місце народження
                             VStack(alignment: .leading, spacing: 4) {
@@ -154,7 +131,7 @@ struct BirthCertificateFullInfoView: View {
                         // Інформація про батька
                         VStack(alignment: .leading, spacing: 12) {
                             Text("Інформація про батька")
-                                .font(.system(size: 18, weight: .regular, design: .default))
+                                .font(.system(size: 20, weight: .regular, design: .default))
                                 .padding(.bottom, 4)
                             
                             // ПІБ
@@ -166,9 +143,6 @@ struct BirthCertificateFullInfoView: View {
                                     .foregroundColor(.black.opacity(0.8))
                             }
                             
-                            Divider()
-                                .padding(.vertical, 4)
-                            
                             // Громадянство
                             VStack(alignment: .leading, spacing: 4) {
                                 Text("Громадянство:")
@@ -177,9 +151,6 @@ struct BirthCertificateFullInfoView: View {
                                     .font(.system(size: 16, weight: .regular, design: .default))
                                     .foregroundColor(.black.opacity(0.8))
                             }
-                            
-                            Divider()
-                                .padding(.vertical, 4)
                             
                             // РНОКПП батька
                             VStack(alignment: .leading, spacing: 4) {
@@ -190,7 +161,7 @@ struct BirthCertificateFullInfoView: View {
                                         Text(fatherRnokpp)
                                             .font(.system(size: 16, weight: .regular, design: .default))
                                             .foregroundColor(.black.opacity(0.8))
-                                        
+                                        Spacer()
                                         Button(action: {
                                             UIPasteboard.general.string = fatherRnokpp
                                         }) {
@@ -201,9 +172,6 @@ struct BirthCertificateFullInfoView: View {
                                     }
                                 }
                             }
-                            
-                            Divider()
-                                .padding(.vertical, 4)
                             
                             // Дата народження батька
                             VStack(alignment: .leading, spacing: 4) {
@@ -222,7 +190,7 @@ struct BirthCertificateFullInfoView: View {
                         // Інформація про матір
                         VStack(alignment: .leading, spacing: 12) {
                             Text("Інформація про матір")
-                                .font(.system(size: 18, weight: .regular, design: .default))
+                                .font(.system(size: 20, weight: .regular, design: .default))
                                 .padding(.bottom, 4)
                             
                             // ПІБ
@@ -234,9 +202,6 @@ struct BirthCertificateFullInfoView: View {
                                     .foregroundColor(.black.opacity(0.8))
                             }
                             
-                            Divider()
-                                .padding(.vertical, 4)
-                            
                             // Громадянство
                             VStack(alignment: .leading, spacing: 4) {
                                 Text("Громадянство:")
@@ -245,9 +210,6 @@ struct BirthCertificateFullInfoView: View {
                                     .font(.system(size: 16, weight: .regular, design: .default))
                                     .foregroundColor(.black.opacity(0.8))
                             }
-                            
-                            Divider()
-                                .padding(.vertical, 4)
                             
                             // Дата народження матері
                             VStack(alignment: .leading, spacing: 4) {
@@ -266,21 +228,16 @@ struct BirthCertificateFullInfoView: View {
                         // Актовий запис
                         VStack(alignment: .leading, spacing: 12) {
                             Text("Актовий запис")
-                                .font(.system(size: 18, weight: .regular, design: .default))
+                                .font(.system(size: 20, weight: .regular, design: .default))
                                 .padding(.bottom, 4)
                             
                             // Номер запису
                             HStack {
-                                VStack(alignment: .leading, spacing: 2) {
-                                    Text("Номер запису:")
-                                        .font(.system(size: 16, weight: .regular, design: .default))
-                                }
-                                
+                                Text("Номер запису:")
+                                    .font(.system(size: 16, weight: .regular, design: .default))
                                 Spacer()
-                                
                                 Text(generator.getBirthRecordNumber())
                                     .font(.system(size: 16, weight: .regular, design: .default))
-                                
                                 Button(action: {
                                     UIPasteboard.general.string = generator.getBirthRecordNumber()
                                 }) {
@@ -289,9 +246,6 @@ struct BirthCertificateFullInfoView: View {
                                         .foregroundColor(.black)
                                 }
                             }
-                            
-                            Divider()
-                                .padding(.vertical, 4)
                             
                             // Орган державної реєстрації
                             VStack(alignment: .leading, spacing: 4) {
@@ -307,9 +261,6 @@ struct BirthCertificateFullInfoView: View {
                                     .fixedSize(horizontal: false, vertical: true)
                             }
                             
-                            Divider()
-                                .padding(.vertical, 4)
-                            
                             // Дата складання
                             HStack {
                                 Text("Дата складання:")
@@ -324,43 +275,40 @@ struct BirthCertificateFullInfoView: View {
                         .cornerRadius(12)
                         .padding(.horizontal, 20)
                         
-                        // Видані свідоцтва
+                        // Видані свідоцтва (особый формат)
                         VStack(alignment: .leading, spacing: 12) {
                             Text("Видані свідоцтва")
-                                .font(.system(size: 18, weight: .regular, design: .default))
-                                .padding(.bottom, 4)
+                                .font(.system(size: 20, weight: .regular, design: .default))
                             
-                            // Номер свідоцтва
-                            HStack {
-                                VStack(alignment: .leading, spacing: 2) {
-                                    Text("Номер свідоцтва:")
-                                        .font(.system(size: 16, weight: .regular, design: .default))
-                                }
+                            // Номер свідоцтва (маленький шрифт для label)
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text("Номер свідоцтва:")
+                                    .font(.system(size: 14, weight: .regular, design: .default))
                                 
-                                Spacer()
-                                
-                                Text(generator.getCertificateNumber())
-                                    .font(.system(size: 16, weight: .regular, design: .default))
-                                
-                                Button(action: {
-                                    UIPasteboard.general.string = generator.getCertificateNumber()
-                                }) {
-                                    Image(systemName: "doc.on.doc")
-                                        .font(.system(size: 16))
-                                        .foregroundColor(.black)
+                                HStack {
+                                    Text(generator.getCertificateNumber())
+                                        .font(.system(size: 20, weight: .regular, design: .default))
+                                    Spacer()
+                                    Button(action: {
+                                        UIPasteboard.general.string = generator.getCertificateNumber()
+                                    }) {
+                                        Image(systemName: "doc.on.doc")
+                                            .font(.system(size: 16))
+                                            .foregroundColor(.black)
+                                    }
                                 }
                             }
                             
-                            Divider()
-                                .padding(.vertical, 4)
-                            
                             // Дата видачі
-                            HStack {
+                            VStack(alignment: .leading, spacing: 4) {
                                 Text("Дата видачі:")
-                                    .font(.system(size: 16, weight: .regular, design: .default))
-                                Spacer()
-                                Text(generator.getIssueDate(birthDate: user.birthDate))
-                                    .font(.system(size: 16, weight: .regular, design: .default))
+                                    .font(.system(size: 14, weight: .regular, design: .default))
+                                HStack {
+                                    Spacer()
+                                    Text(generator.getIssueDate(birthDate: user.birthDate))
+                                        .font(.system(size: 16, weight: .regular, design: .default))
+                                    Spacer()
+                                }
                             }
                         }
                         .padding(16)
