@@ -4,7 +4,6 @@ import UIKit
 struct BirthCertificateCard: View {
     let user: User
     let onMenuTap: () -> Void
-    @State private var currentTime: String = ""
     
     var body: some View {
         GlassmorphicCard(cornerRadius: 32, opacity: 0.1) {
@@ -56,7 +55,7 @@ struct BirthCertificateCard: View {
                 Spacer()
                 
                 // Бегущая строка
-                BirthCertificateMarqueeText(currentTime: currentTime)
+                BirthCertificateMarqueeText()
                 
                 // ФИО и кнопка
                 HStack(alignment: .bottom) {
