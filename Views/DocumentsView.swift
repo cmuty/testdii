@@ -7,6 +7,7 @@ struct DocumentsView: View {
     @State private var showMenu = false
     @State private var showFullInfo = false
     @State private var showPassportFullInfo = false
+    @State private var showBirthCertificateFullInfo = false
     @State private var currentDocumentName = ""
     @State private var taxCardFlipped = false
     @State private var taxCardShowingQR = true
@@ -21,6 +22,7 @@ struct DocumentsView: View {
         switch currentPage {
         case 1: return .taxCard
         case 2: return .passport
+        case 3: return .birthCertificate
         default: return .standard
         }
     }
@@ -78,6 +80,19 @@ struct DocumentsView: View {
                         .opacity(currentPage == 2 ? 1.0 : 0.7)
                         .animation(.spring(response: 0.5, dampingFraction: 0.75), value: currentPage)
                         .tag(2)
+                        
+                        // Актовий зазпис про народження
+                        BirthCertificateCard(user: user) {
+                            currentDocumentName = "Актовий зазпис про народження"
+                            withAnimation(.spring(response: 0.3)) {
+                                showMenu = true
+                            }
+                        }
+                        .padding(.horizontal, 30)
+                        .scaleEffect(currentPage == 3 ? 1.0 : 0.88)
+                        .opacity(currentPage == 3 ? 1.0 : 0.7)
+                        .animation(.spring(response: 0.5, dampingFraction: 0.75), value: currentPage)
+                        .tag(3)
                     }
                     .tabViewStyle(.page(indexDisplayMode: .never))
                     .frame(height: 550)
@@ -85,7 +100,7 @@ struct DocumentsView: View {
                     
                     // Page indicator (точки)
                     HStack(spacing: 8) {
-                        ForEach(0..<3) { index in
+                        ForEach(0..<4) { index in
                             Circle()
                                 .fill(Color.white.opacity(index == currentPage ? 0.9 : 0.4))
                                 .frame(width: 8, height: 8)
@@ -106,6 +121,8 @@ struct DocumentsView: View {
                 onFullInfoTap: {
                     if currentPage == 2 {
                         showPassportFullInfo = true
+                    } else if currentPage == 3 {
+                        showBirthCertificateFullInfo = true
                     } else {
                         showFullInfo = true
                     }
@@ -134,6 +151,12 @@ struct DocumentsView: View {
         .sheet(isPresented: $showPassportFullInfo) {
             PassportFullInfoView(
                 isPresented: $showPassportFullInfo,
+                user: user
+            )
+        }
+        .sheet(isPresented: $showBirthCertificateFullInfo) {
+            BirthCertificateFullInfoView(
+                isPresented: $showBirthCertificateFullInfo,
                 user: user
             )
         }

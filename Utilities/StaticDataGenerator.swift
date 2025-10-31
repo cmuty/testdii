@@ -166,5 +166,47 @@ class StaticDataGenerator {
         
         return formatter.string(from: regDate)
     }
+    
+    // Генерация места рождения (один раз при входе)
+    func getBirthPlace() -> String {
+        if let saved = UserDefaults.standard.string(forKey: "userBirthPlace") {
+            return saved
+        }
+        
+        let birthPlace = generateBirthPlace()
+        UserDefaults.standard.set(birthPlace, forKey: "userBirthPlace")
+        return birthPlace
+    }
+    
+    private func generateBirthPlace() -> String {
+        let regions = [
+            "Харківська обл.",
+            "Київська обл.",
+            "Львівська обл.",
+            "Дніпропетровська обл.",
+            "Одеська обл.",
+            "Запорізька обл.",
+            "Полтавська обл.",
+            "Вінницька обл.",
+            "Чернігівська обл.",
+            "Хмельницька обл."
+        ]
+        
+        let cities = [
+            "Харків",
+            "Київ",
+            "Львів",
+            "Дніпро",
+            "Одеса",
+            "Запоріжжя",
+            "Полтава",
+            "Вінниця",
+            "Чернігів",
+            "Хмельницький"
+        ]
+        
+        let randomIndex = Int.random(in: 0..<regions.count)
+        return "Україна, \(regions[randomIndex]), м. \(cities[randomIndex])"
+    }
 }
 
