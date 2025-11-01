@@ -26,6 +26,7 @@ struct WelcomeView: View {
                 // Іконка Дія внизу по середині
                 Image("DiiaIcon")
                     .resizable()
+                    .aspectRatio(contentMode: .fit)
                     .frame(width: 120, height: 120)
                     .cornerRadius(28)
                     .padding(.bottom, 60)
