@@ -8,11 +8,23 @@ struct BirthCertificateFullInfoView: View {
     private let generator = StaticDataGenerator.shared
     
     var fatherData: StaticDataGenerator.ParentData {
-        generator.getFatherData()
+        generator.getFatherData(userLastName: user.lastName, userPatronymic: user.patronymic)
+    }
+    
+    var fatherFirstName: String {
+        // Извлекаем имя отца из отчества пользователя
+        if user.patronymic.hasSuffix("ович") {
+            let baseName = String(user.patronymic.dropLast(5))
+            return baseName.isEmpty ? "Олег" : baseName
+        } else if user.patronymic.hasSuffix("овича") {
+            let baseName = String(user.patronymic.dropLast(6))
+            return baseName.isEmpty ? "Олег" : baseName
+        }
+        return "Олег"
     }
     
     var motherData: StaticDataGenerator.ParentData {
-        generator.getMotherData()
+        generator.getMotherData(userLastName: user.lastName, fatherFirstName: fatherFirstName)
     }
     
     var body: some View {

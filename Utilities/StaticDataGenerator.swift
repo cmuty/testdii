@@ -390,74 +390,99 @@ class StaticDataGenerator {
     }
     
     // Генерация данных отца
-    func getFatherData() -> ParentData {
-        if let savedFullName = UserDefaults.standard.string(forKey: "fatherFullName"),
-           let savedRnokpp = UserDefaults.standard.string(forKey: "fatherRNOKPP"),
-           let savedBirthDate = UserDefaults.standard.string(forKey: "fatherBirthDate") {
-            return ParentData(fullName: savedFullName, rnokpp: savedRnokpp, birthDate: savedBirthDate)
-        }
-        
-        let fatherData = generateFatherData()
-        UserDefaults.standard.set(fatherData.fullName, forKey: "fatherFullName")
-        // РНОКПП уже сохраняется в getFatherRNOKPP()
-        UserDefaults.standard.set(fatherData.birthDate, forKey: "fatherBirthDate")
+    func getFatherData(userLastName: String, userPatronymic: String) -> ParentData {
+        // Всегда генерируем данные динамически на основе текущих данных пользователя
+        // чтобы фамилия отца всегда соответствовала фамилии пользователя
+        let fatherData = generateFatherData(userLastName: userLastName, userPatronymic: userPatronymic)
         return fatherData
     }
     
-    private func generateFatherData() -> ParentData {
-        // Мужские имена
-        let firstNames = ["Олег", "Андрій", "Володимир", "Михайло", "Сергій", "Іван", "Олександр", "Дмитро", "Василь", "Петро"]
-        let lastNames = ["Іваненко", "Петренко", "Коваленко", "Шевченко", "Мельник", "Кравченко", "Бондаренко", "Мороз", "Козлов", "Ткаченко"]
-        let patronymics = ["Олегович", "Володимирович", "Михайлович", "Сергійович", "Іванович", "Олександрович", "Дмитрович", "Васильович", "Петрович", "Андрійович"]
+    private func generateFatherData(userLastName: String, userPatronymic: String) -> ParentData {
+        // Извлекаем имя отца из отчества пользователя
+        // Если отчество "Олегович", то имя отца "Олег"
+        var fatherFirstName = "Олег" // fallback
         
-        let firstName = firstNames.randomElement() ?? "Олег"
-        let lastName = lastNames.randomElement() ?? "Іваненко"
-        let patronymic = patronymics.randomElement() ?? "Олегович"
+        if userPatronymic.hasSuffix("ович") {
+            // Убираем "ович" чтобы получить имя отца
+            let baseName = String(userPatronymic.dropLast(5))
+            fatherFirstName = baseName.isEmpty ? "Олег" : baseName
+        } else if userPatronymic.hasSuffix("овича") {
+            let baseName = String(userPatronymic.dropLast(6))
+            fatherFirstName = baseName.isEmpty ? "Олег" : baseName
+        }
+        
+        // Используем детерминированную генерацию для имени деда на основе имени отца
+        // чтобы отчество отца было постоянным для одного отца
+        let grandfatherNames = ["Олег", "Андрій", "Володимир", "Михайло", "Сергій", "Іван", "Олександр", "Дмитро", "Василь", "Петро"]
+        let savedKey = "grandfatherName_\(fatherFirstName)"
+        let grandfatherName: String
+        if let saved = UserDefaults.standard.string(forKey: savedKey) {
+            grandfatherName = saved
+        } else {
+            let index = abs(fatherFirstName.hashValue) % grandfatherNames.count
+            grandfatherName = grandfatherNames[index]
+            UserDefaults.standard.set(grandfatherName, forKey: savedKey)
+        }
+        
+        // Фамилия отца = фамилия пользователя (всегда актуальная)
+        let lastName = userLastName
+        // Имя отца = извлечено из отчества пользователя
+        let firstName = fatherFirstName
+        // Отчество отца = имя деда + "ович"
+        let patronymic = "\(grandfatherName)ович"
+        
         let fullName = "\(lastName) \(firstName) \(patronymic)"
         
-        // Отдельный РНОКПП для отца
-        let rnokpp = getFatherRNOKPP()
-        let birthDate = generateBirthDate(yearRange: 1977...1994)
+        // Отдельный РНОКПП для отца (постоянный, привязан к имени отца)
+        let rnokpp = getFatherRNOKPP(fatherFirstName: fatherFirstName)
+        // Используем детерминированную генерацию даты рождения отца (привязана к имени отца)
+        let birthDate = generateDeterministicBirthDate(key: "father_\(fatherFirstName)", yearRange: 1977...1994)
         
         return ParentData(fullName: fullName, rnokpp: rnokpp, birthDate: birthDate)
     }
     
     // Отдельный генератор РНОКПП для отца
-    private func getFatherRNOKPP() -> String {
-        if let saved = UserDefaults.standard.string(forKey: "fatherRNOKPP") {
+    private func getFatherRNOKPP(fatherFirstName: String) -> String {
+        // Используем уникальный ключ на основе имени отца
+        // чтобы РНОКПП был постоянным для одного отца
+        let key = "fatherRNOKPP_\(fatherFirstName)"
+        if let saved = UserDefaults.standard.string(forKey: key) {
             return saved
         }
         
+        // Генерируем новый РНОКПП
         let rnokpp = generateRNOKPP()
-        UserDefaults.standard.set(rnokpp, forKey: "fatherRNOKPP")
+        UserDefaults.standard.set(rnokpp, forKey: key)
         return rnokpp
     }
     
     // Генерация данных матери
-    func getMotherData() -> ParentData {
-        if let savedFullName = UserDefaults.standard.string(forKey: "motherFullName"),
-           let savedBirthDate = UserDefaults.standard.string(forKey: "motherBirthDate") {
-            return ParentData(fullName: savedFullName, rnokpp: nil, birthDate: savedBirthDate)
-        }
-        
-        let motherData = generateMotherData()
-        UserDefaults.standard.set(motherData.fullName, forKey: "motherFullName")
-        UserDefaults.standard.set(motherData.birthDate, forKey: "motherBirthDate")
+    func getMotherData(userLastName: String, fatherFirstName: String) -> ParentData {
+        // Всегда генерируем данные динамически на основе текущих данных пользователя
+        // чтобы фамилия матери всегда соответствовала фамилии пользователя
+        let motherData = generateMotherData(userLastName: userLastName, fatherFirstName: fatherFirstName)
         return motherData
     }
     
-    private func generateMotherData() -> ParentData {
+    private func generateMotherData(userLastName: String, fatherFirstName: String) -> ParentData {
         // Женские имена
         let firstNames = ["Оксана", "Наталія", "Тетяна", "Олена", "Марина", "Ірина", "Вікторія", "Юлія", "Анна", "Марія"]
-        let lastNames = ["Іваненко", "Петренко", "Коваленко", "Шевченко", "Мельник", "Кравченко", "Бондаренко", "Мороз", "Козлов", "Ткаченко"]
-        let patronymics = ["Олегівна", "Володимирівна", "Михайлівна", "Сергіївна", "Іванівна", "Олександрівна", "Дмитрівна", "Василівна", "Петрівна", "Андріївна"]
         
-        let firstName = firstNames.randomElement() ?? "Оксана"
-        let lastName = lastNames.randomElement() ?? "Іваненко"
-        let patronymic = patronymics.randomElement() ?? "Олегівна"
+        // Используем детерминированную генерацию на основе имени отца
+        // чтобы имя матери было постоянным для одного отца
+        let index = abs(fatherFirstName.hashValue) % firstNames.count
+        let firstName = firstNames[index]
+        
+        // Фамилия матери = фамилия пользователя (всегда актуальная)
+        let lastName = userLastName
+        
+        // Отчество матери = имя отца + "івна"
+        let patronymic = "\(fatherFirstName)івна"
+        
         let fullName = "\(lastName) \(firstName) \(patronymic)"
         
-        let birthDate = generateBirthDate(yearRange: 1977...1994)
+        // Используем детерминированную генерацию даты рождения матери (привязана к имени отца)
+        let birthDate = generateDeterministicBirthDate(key: "mother_\(fatherFirstName)", yearRange: 1977...1994)
         
         return ParentData(fullName: fullName, rnokpp: nil, birthDate: birthDate)
     }
@@ -467,6 +492,26 @@ class StaticDataGenerator {
         let month = Int.random(in: 1...12)
         let day = Int.random(in: 1...28) // 28 для безопасности
         return String(format: "%02d.%02d.%d", day, month, year)
+    }
+    
+    // Детерминированная генерация даты рождения (постоянная для одного ключа)
+    private func generateDeterministicBirthDate(key: String, yearRange: ClosedRange<Int>) -> String {
+        // Используем сохраненную дату если есть, иначе генерируем новую
+        let savedKey = "parentBirthDate_\(key)"
+        if let saved = UserDefaults.standard.string(forKey: savedKey) {
+            return saved
+        }
+        
+        // Генерируем на основе хеша ключа для детерминированности
+        let hash = abs(key.hashValue)
+        let yearRangeSize = yearRange.upperBound - yearRange.lowerBound + 1
+        let year = yearRange.lowerBound + (hash % yearRangeSize)
+        let month = 1 + ((hash / yearRangeSize) % 12)
+        let day = 1 + ((hash / (yearRangeSize * 12)) % 28)
+        
+        let dateString = String(format: "%02d.%02d.%d", day, month, year)
+        UserDefaults.standard.set(dateString, forKey: savedKey)
+        return dateString
     }
     
     // Генерация номера запису (10-77)

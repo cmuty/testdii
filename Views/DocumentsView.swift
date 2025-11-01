@@ -45,8 +45,8 @@ struct DocumentsView: View {
                             }
                         }
                         .padding(.horizontal, 30)
-                        .scaleEffect(currentPage == 0 ? 1.0 : 0.88)
-                        .opacity(currentPage == 0 ? 1.0 : 0.7)
+                        .scaleEffect(currentPage == 0 ? 1.0 : 0.85)
+                        .opacity(currentPage == 0 ? 1.0 : 0.65)
                         .animation(.spring(response: 0.5, dampingFraction: 0.75), value: currentPage)
                         .tag(0)
                         
@@ -63,8 +63,8 @@ struct DocumentsView: View {
                             showingQR: $taxCardShowingQR
                         )
                         .padding(.horizontal, 30)
-                        .scaleEffect(currentPage == 1 ? 1.0 : 0.88)
-                        .opacity(currentPage == 1 ? 1.0 : 0.7)
+                        .scaleEffect(currentPage == 1 ? 1.0 : 0.85)
+                        .opacity(currentPage == 1 ? 1.0 : 0.65)
                         .animation(.spring(response: 0.5, dampingFraction: 0.75), value: currentPage)
                         .tag(1)
                         
@@ -76,8 +76,8 @@ struct DocumentsView: View {
                             }
                         }
                         .padding(.horizontal, 30)
-                        .scaleEffect(currentPage == 2 ? 1.0 : 0.88)
-                        .opacity(currentPage == 2 ? 1.0 : 0.7)
+                        .scaleEffect(currentPage == 2 ? 1.0 : 0.85)
+                        .opacity(currentPage == 2 ? 1.0 : 0.65)
                         .animation(.spring(response: 0.5, dampingFraction: 0.75), value: currentPage)
                         .tag(2)
                         
@@ -89,14 +89,15 @@ struct DocumentsView: View {
                             }
                         }
                         .padding(.horizontal, 30)
-                        .scaleEffect(currentPage == 3 ? 1.0 : 0.88)
-                        .opacity(currentPage == 3 ? 1.0 : 0.7)
+                        .scaleEffect(currentPage == 3 ? 1.0 : 0.85)
+                        .opacity(currentPage == 3 ? 1.0 : 0.65)
                         .animation(.spring(response: 0.5, dampingFraction: 0.75), value: currentPage)
                         .tag(3)
                     }
                     .tabViewStyle(.page(indexDisplayMode: .never))
                     .frame(height: 620)
                     .blur(radius: showMenu ? 1 : 0)
+                    .animation(.spring(response: 0.5, dampingFraction: 0.75), value: currentPage)
                     
                     // Page indicator (точки)
                     HStack(spacing: 8) {
