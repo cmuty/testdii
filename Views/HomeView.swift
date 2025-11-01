@@ -99,7 +99,7 @@ struct HomeView: View {
                     Button(action: {
                         print("Лінія дронів")
                     }) {
-                        ZStack {
+                        ZStack(alignment: .bottom) {
                             // Background image
                             Image("liniya-droniv")
                                 .resizable()
@@ -112,31 +112,28 @@ struct HomeView: View {
                                 .fill(Color.black.opacity(0.3))
                             
                             // Content
-                            VStack {
+                            HStack {
+                                Text("Змінити хід подій")
+                                    .font(.system(size: 17, weight: .regular, design: .default))
+                                    .foregroundColor(.white)
+                                
                                 Spacer()
                                 
-                                HStack {
-                                    Text("Змінити хід подій")
-                                        .font(.system(size: 17, weight: .regular, design: .default))
-                                        .foregroundColor(.white)
-                                    
-                                    Spacer()
-                                    
-                                    Circle()
-                                        .fill(Color.white)
-                                        .frame(width: 32, height: 32)
-                                        .overlay(
-                                            Image(systemName: "arrow.right")
-                                                .font(.system(size: 14, weight: .semibold))
-                                                .foregroundColor(.black)
-                                        )
-                                }
-                                .padding(16)
-                                .background(Color.black.opacity(0.5))
+                                Circle()
+                                    .fill(Color.white)
+                                    .frame(width: 32, height: 32)
+                                    .overlay(
+                                        Image(systemName: "arrow.right")
+                                            .font(.system(size: 14, weight: .semibold))
+                                            .foregroundColor(.black)
+                                    )
                             }
+                            .padding(16)
+                            .background(Color.black.opacity(0.5))
                         }
                         .frame(height: 180)
                         .cornerRadius(16)
+                        .clipped()
                     }
                     
                     // Що нового
@@ -156,7 +153,7 @@ struct HomeView: View {
                                 
                                 NewsCard(
                                     emoji: "🧳🏠📄",
-                                    time: "Сьогодні, 10:30",
+                                    time: "23 жовтня, 12:15",
                                     title: "Долучайтесь до бета-тесту нової\nкатегорії Реєстру збитків"
                                 )
                                 .padding(.horizontal, 2)
