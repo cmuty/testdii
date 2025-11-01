@@ -14,10 +14,12 @@ struct BirthCertificateFullInfoView: View {
     var fatherFirstName: String {
         // Извлекаем имя отца из отчества пользователя
         if user.patronymic.hasSuffix("ович") {
-            let baseName = String(user.patronymic.dropLast(5))
+            // Убираем "ович" (4 символа) чтобы получить имя отца
+            let baseName = String(user.patronymic.dropLast(4))
             return baseName.isEmpty ? "Олег" : baseName
         } else if user.patronymic.hasSuffix("овича") {
-            let baseName = String(user.patronymic.dropLast(6))
+            // Убираем "овича" (5 символов)
+            let baseName = String(user.patronymic.dropLast(5))
             return baseName.isEmpty ? "Олег" : baseName
         }
         return "Олег"

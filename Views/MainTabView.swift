@@ -68,6 +68,8 @@ struct MainTabView: View {
 
 struct MenuView: View {
     @EnvironmentObject var authManager: AuthManager
+    @State private var showSignatureView = false
+    @State private var showSignatureHistory = false
     
     var body: some View {
         ZStack {
@@ -112,19 +114,28 @@ struct MenuView: View {
                     // Дія.Підпис section
                     VStack(spacing: 0) {
                         MenuButton(icon: "key.fill", title: "Дія.Підпис") {
-                            print("Дія.Підпис")
+                            showSignatureView = true
                         }
                         
                         Divider()
                             .padding(.leading, 60)
                         
                         MenuButton(icon: "doc.text", title: "Історія підписань") {
-                            print("Історія підписань")
+                            showSignatureHistory = true
                         }
                     }
                     .background(Color.white)
                     .cornerRadius(12)
                     .padding(.horizontal, 16)
+                    .sheet(isPresented: $showSignatureView) {
+                        SignatureView(isFromMenu: true) {
+                            showSignatureView = false
+                        }
+                        .environmentObject(authManager)
+                    }
+                    .sheet(isPresented: $showSignatureHistory) {
+                        SignatureHistoryView(isPresented: $showSignatureHistory)
+                    }
                     
                     // Spacer
                     Color.clear.frame(height: 16)

@@ -403,11 +403,12 @@ class StaticDataGenerator {
         var fatherFirstName = "Олег" // fallback
         
         if userPatronymic.hasSuffix("ович") {
-            // Убираем "ович" чтобы получить имя отца
-            let baseName = String(userPatronymic.dropLast(5))
+            // Убираем "ович" (4 символа) чтобы получить имя отца
+            let baseName = String(userPatronymic.dropLast(4))
             fatherFirstName = baseName.isEmpty ? "Олег" : baseName
         } else if userPatronymic.hasSuffix("овича") {
-            let baseName = String(userPatronymic.dropLast(6))
+            // Убираем "овича" (5 символов)
+            let baseName = String(userPatronymic.dropLast(5))
             fatherFirstName = baseName.isEmpty ? "Олег" : baseName
         }
         

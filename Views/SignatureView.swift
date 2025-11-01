@@ -4,6 +4,13 @@ struct SignatureView: View {
     @EnvironmentObject var authManager: AuthManager
     @State private var paths: [Path] = []
     @State private var currentPath = Path()
+    var isFromMenu: Bool = false
+    var onComplete: (() -> Void)? = nil
+    
+    init(isFromMenu: Bool = false, onComplete: (() -> Void)? = nil) {
+        self.isFromMenu = isFromMenu
+        self.onComplete = onComplete
+    }
     
     var body: some View {
         ZStack {
@@ -13,7 +20,7 @@ struct SignatureView: View {
                 Spacer()
                 
                 Text("Створіть свій підпис")
-                    .font(.system(size: 28, weight: .bold))
+                    .font(.system(size: 28, weight: .regular, design: .default))
                     .foregroundColor(.black)
                 
                 // Canvas для малювання
@@ -62,7 +69,7 @@ struct SignatureView: View {
                         currentPath = Path()
                     }) {
                         Text("Спробувати ще раз")
-                            .font(.system(size: 18, weight: .semibold))
+                            .font(.system(size: 18, weight: .regular, design: .default))
                             .foregroundColor(.black)
                             .frame(maxWidth: .infinity)
                             .frame(height: 56)
@@ -75,10 +82,14 @@ struct SignatureView: View {
                     
                     Button(action: {
                         saveSignature()
-                        authManager.completeSignature()
+                        if isFromMenu {
+                            onComplete?()
+                        } else {
+                            authManager.completeSignature()
+                        }
                     }) {
                         Text("Продовжити")
-                            .font(.system(size: 18, weight: .semibold))
+                            .font(.system(size: 18, weight: .regular, design: .default))
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
                             .frame(height: 56)
@@ -115,6 +126,29 @@ struct SignatureView: View {
         
         if let pngData = image.pngData() {
             UserDefaults.standard.set(pngData, forKey: "userSignature")
+            
+            // Сохраняем в историю
+            saveSignatureToHistory(image: image)
+        }
+    }
+    
+    func saveSignatureToHistory(image: UIImage) {
+        var history: [[String: Any]] = []
+        if let saved = UserDefaults.standard.array(forKey: "signatureHistory") as? [[String: Any]] {
+            history = saved
+        }
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let dateString = dateFormatter.string(from: Date())
+        
+        if let imageData = image.pngData() {
+            let signatureData: [String: Any] = [
+                "image": imageData,
+                "date": dateString
+            ]
+            history.append(signatureData)
+            UserDefaults.standard.set(history, forKey: "signatureHistory")
         }
     }
 }

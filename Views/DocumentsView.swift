@@ -1,5 +1,29 @@
 import SwiftUI
 
+// Helper view для анимированных карточек
+struct AnimatedCard<Content: View>: View {
+    let content: Content
+    @Binding var currentPage: Int
+    let pageIndex: Int
+    
+    init(currentPage: Binding<Int>, pageIndex: Int, @ViewBuilder content: () -> Content) {
+        self.content = content()
+        self._currentPage = currentPage
+        self.pageIndex = pageIndex
+    }
+    
+    private var isSelected: Bool {
+        currentPage == pageIndex
+    }
+    
+    var body: some View {
+        content
+            .scaleEffect(isSelected ? 1.0 : 0.85)
+            .opacity(isSelected ? 1.0 : 0.65)
+            .animation(.spring(response: 0.5, dampingFraction: 0.75), value: currentPage)
+    }
+}
+
 struct DocumentsView: View {
     @EnvironmentObject var authManager: AuthManager
     @State private var currentPage = 0
@@ -38,66 +62,61 @@ struct DocumentsView: View {
                     // Carousel з документами
                     TabView(selection: $currentPage) {
                         // єДокумент
-                        DocumentCard(user: user) {
-                            currentDocumentName = "єДокумент"
-                            withAnimation(.spring(response: 0.3)) {
-                                showMenu = true
-                            }
-                        }
-                        .padding(.horizontal, 30)
-                        .scaleEffect(currentPage == 0 ? 1.0 : 0.85)
-                        .opacity(currentPage == 0 ? 1.0 : 0.65)
-                        .animation(.spring(response: 0.5, dampingFraction: 0.75), value: currentPage)
-                        .tag(0)
-                        
-                        // Картка платника податків
-                        TaxCard(
-                            user: user,
-                            onMenuTap: {
-                                currentDocumentName = "Картка платника податків"
+                        AnimatedCard(currentPage: $currentPage, pageIndex: 0) {
+                            DocumentCard(user: user) {
+                                currentDocumentName = "єДокумент"
                                 withAnimation(.spring(response: 0.3)) {
                                     showMenu = true
                                 }
-                            },
-                            isFlipped: $taxCardFlipped,
-                            showingQR: $taxCardShowingQR
-                        )
-                        .padding(.horizontal, 30)
-                        .scaleEffect(currentPage == 1 ? 1.0 : 0.85)
-                        .opacity(currentPage == 1 ? 1.0 : 0.65)
-                        .animation(.spring(response: 0.5, dampingFraction: 0.75), value: currentPage)
+                            }
+                            .padding(.horizontal, 30)
+                        }
+                        .tag(0)
+                        
+                        // Картка платника податків
+                        AnimatedCard(currentPage: $currentPage, pageIndex: 1) {
+                            TaxCard(
+                                user: user,
+                                onMenuTap: {
+                                    currentDocumentName = "Картка платника податків"
+                                    withAnimation(.spring(response: 0.3)) {
+                                        showMenu = true
+                                    }
+                                },
+                                isFlipped: $taxCardFlipped,
+                                showingQR: $taxCardShowingQR
+                            )
+                            .padding(.horizontal, 30)
+                        }
                         .tag(1)
                         
                         // Паспорт громадянина України
-                        PassportCard(user: user) {
-                            currentDocumentName = "Паспорт громадянина України"
-                            withAnimation(.spring(response: 0.3)) {
-                                showMenu = true
+                        AnimatedCard(currentPage: $currentPage, pageIndex: 2) {
+                            PassportCard(user: user) {
+                                currentDocumentName = "Паспорт громадянина України"
+                                withAnimation(.spring(response: 0.3)) {
+                                    showMenu = true
+                                }
                             }
+                            .padding(.horizontal, 30)
                         }
-                        .padding(.horizontal, 30)
-                        .scaleEffect(currentPage == 2 ? 1.0 : 0.85)
-                        .opacity(currentPage == 2 ? 1.0 : 0.65)
-                        .animation(.spring(response: 0.5, dampingFraction: 0.75), value: currentPage)
                         .tag(2)
                         
                         // Актовий зазпис про народження
-                        BirthCertificateCard(user: user) {
-                            currentDocumentName = "Актовий зазпис про народження"
-                            withAnimation(.spring(response: 0.3)) {
-                                showMenu = true
+                        AnimatedCard(currentPage: $currentPage, pageIndex: 3) {
+                            BirthCertificateCard(user: user) {
+                                currentDocumentName = "Актовий зазпис про народження"
+                                withAnimation(.spring(response: 0.3)) {
+                                    showMenu = true
+                                }
                             }
+                            .padding(.horizontal, 30)
                         }
-                        .padding(.horizontal, 30)
-                        .scaleEffect(currentPage == 3 ? 1.0 : 0.85)
-                        .opacity(currentPage == 3 ? 1.0 : 0.65)
-                        .animation(.spring(response: 0.5, dampingFraction: 0.75), value: currentPage)
                         .tag(3)
                     }
                     .tabViewStyle(.page(indexDisplayMode: .never))
                     .frame(height: 620)
                     .blur(radius: showMenu ? 1 : 0)
-                    .animation(.spring(response: 0.5, dampingFraction: 0.75), value: currentPage)
                     
                     // Page indicator (точки)
                     HStack(spacing: 8) {
