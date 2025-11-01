@@ -33,6 +33,7 @@
 		2A0000000000000000000019 /* PassportFullInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0000000000000000000019 /* PassportFullInfoView.swift */; };
 		2A000000000000000000001A /* BirthCertificateCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B000000000000000000001A /* BirthCertificateCard.swift */; };
 		2A000000000000000000001B /* BirthCertificateFullInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B000000000000000000001B /* BirthCertificateFullInfoView.swift */; };
+		2A000000000000000000001C /* SignatureHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B000000000000000000001C /* SignatureHistoryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +64,7 @@
 		2B0000000000000000000019 /* PassportFullInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportFullInfoView.swift; sourceTree = "<group>"; };
 		2B000000000000000000001A /* BirthCertificateCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthCertificateCard.swift; sourceTree = "<group>"; };
 		2B000000000000000000001B /* BirthCertificateFullInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthCertificateFullInfoView.swift; sourceTree = "<group>"; };
+		2B000000000000000000001C /* SignatureHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignatureHistoryView.swift; sourceTree = "<group>"; };
 		2C0000000000000000000001 /* DiiaApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiiaApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -139,6 +141,7 @@
 				2B0000000000000000000016 /* DocumentFullInfoView.swift */,
 				2B0000000000000000000019 /* PassportFullInfoView.swift */,
 				2B000000000000000000001B /* BirthCertificateFullInfoView.swift */,
+				2B000000000000000000001C /* SignatureHistoryView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				2A0000000000000000000019 /* PassportFullInfoView.swift in Sources */,
 				2A000000000000000000001A /* BirthCertificateCard.swift in Sources */,
 				2A000000000000000000001B /* BirthCertificateFullInfoView.swift in Sources */,
+				2A000000000000000000001C /* SignatureHistoryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
