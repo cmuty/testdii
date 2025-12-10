@@ -1,7 +1,8 @@
 import SwiftUI
 import CryptoKit
+import UIKit
 
-// Менеджер для хранения и проверки пинкода
+// Менеджер для хранения и проверки пинкода - прямая копия логики из ios-diia-main
 class PinCodeManager: ObservableObject {
     static let shared = PinCodeManager()
     

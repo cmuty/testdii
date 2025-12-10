@@ -35,6 +35,10 @@
 		2A000000000000000000001B /* BirthCertificateFullInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B000000000000000000001B /* BirthCertificateFullInfoView.swift */; };
 		2A000000000000000000001C /* SignatureHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B000000000000000000001C /* SignatureHistoryView.swift */; };
 		2A000000000000000000001D /* PinCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B000000000000000000001D /* PinCodeView.swift */; };
+		2A000000000000000000001E /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B000000000000000000001E /* SplashScreenViewController.swift */; };
+		2A000000000000000000001F /* EnterPinCodeAuthDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B000000000000000000001F /* EnterPinCodeAuthDelegate.swift */; };
+		2A0000000000000000000020 /* PinCodeModuleWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0000000000000000000020 /* PinCodeModuleWrappers.swift */; };
+		2A0000000000000000000021 /* EnterPinCodeModuleContext+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0000000000000000000021 /* EnterPinCodeModuleContext+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +71,10 @@
 		2B000000000000000000001B /* BirthCertificateFullInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthCertificateFullInfoView.swift; sourceTree = "<group>"; };
 		2B000000000000000000001C /* SignatureHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignatureHistoryView.swift; sourceTree = "<group>"; };
 		2B000000000000000000001D /* PinCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinCodeView.swift; sourceTree = "<group>"; };
+		2B000000000000000000001E /* SplashScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
+		2B000000000000000000001F /* EnterPinCodeAuthDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPinCodeAuthDelegate.swift; sourceTree = "<group>"; };
+		2B0000000000000000000020 /* PinCodeModuleWrappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinCodeModuleWrappers.swift; sourceTree = "<group>"; };
+		2B0000000000000000000021 /* EnterPinCodeModuleContext+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EnterPinCodeModuleContext+Extension.swift"; sourceTree = "<group>"; };
 		2C0000000000000000000001 /* DiiaApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiiaApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -145,6 +153,10 @@
 				2B000000000000000000001B /* BirthCertificateFullInfoView.swift */,
 				2B000000000000000000001C /* SignatureHistoryView.swift */,
 				2B000000000000000000001D /* PinCodeView.swift */,
+				2B000000000000000000001E /* SplashScreenViewController.swift */,
+				2B000000000000000000001F /* EnterPinCodeAuthDelegate.swift */,
+				2B0000000000000000000020 /* PinCodeModuleWrappers.swift */,
+				2B0000000000000000000021 /* EnterPinCodeModuleContext+Extension.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -268,6 +280,10 @@
 				2A000000000000000000001B /* BirthCertificateFullInfoView.swift in Sources */,
 				2A000000000000000000001C /* SignatureHistoryView.swift in Sources */,
 				2A000000000000000000001D /* PinCodeView.swift in Sources */,
+				2A000000000000000000001E /* SplashScreenViewController.swift in Sources */,
+				2A000000000000000000001F /* EnterPinCodeAuthDelegate.swift in Sources */,
+				2A0000000000000000000020 /* PinCodeModuleWrappers.swift in Sources */,
+				2A0000000000000000000021 /* EnterPinCodeModuleContext+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

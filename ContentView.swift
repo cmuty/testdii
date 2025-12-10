@@ -18,24 +18,40 @@ struct ContentView: View {
                 WelcomeView()
             } else if showWelcome && authManager.isAuthenticated && !welcomeFinished {
                 // Показываем приветствие при каждом открытии для авторизованных пользователей
+                // После приветствия показываем пинкод
                 WelcomeView(onAnimationComplete: {
                     welcomeFinished = true
                 })
             } else if !authManager.isAuthenticated {
                 AuthView()
             } else if authManager.shouldShowCreatePinCode {
-                // Показываем экран создания пинкода после первой авторизации
+                // Показываем экран создания пинкода после первой авторизации (без приветствия)
+                // Используем оригинальные модули если доступны
+                #if canImport(DiiaAuthorizationPinCode)
+                CreatePinCodeModuleWrapper(onComplete: {
+                    authManager.shouldShowCreatePinCode = false
+                    pinCodeEntered = true
+                })
+                #else
                 CreatePinCodeView {
                     authManager.shouldShowCreatePinCode = false
                     pinCodeEntered = true
                 }
                 .environmentObject(authManager)
+                #endif
             } else if authManager.isAuthenticated && pinCodeManager.hasPinCode() && !pinCodeEntered && welcomeFinished {
-                // Показываем экран ввода пинкода после приветствия
+                // Показываем экран ввода пинкода после приветствия (для авторизованных при каждом открытии)
+                // Используем оригинальные модули если доступны
+                #if canImport(DiiaAuthorizationPinCode)
+                EnterPinCodeModuleWrapper(onSuccess: {
+                    pinCodeEntered = true
+                })
+                #else
                 EnterPinCodeView {
                     pinCodeEntered = true
                 }
                 .environmentObject(authManager)
+                #endif
             } else if !authManager.subscriptionActive {
                 // Блокуємо доступ якщо немає підписки
                 ZStack {
@@ -69,11 +85,13 @@ struct ContentView: View {
         .animation(.easeInOut, value: showWelcome)
         .animation(.easeInOut, value: welcomeFinished)
         .onAppear {
-            // При запуске приложения для авторизованных пользователей показываем приветствие
-            checkAndShowWelcome()
+            // При запуске приложения для авторизованных пользователей показываем приветствие, затем пинкод
+            if authManager.isAuthenticated {
+                checkAndShowWelcome()
+            }
         }
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
-            // При возврате из фона для авторизованных пользователей показываем приветствие и пинкод
+            // При возврате из фона для авторизованных пользователей показываем приветствие, затем пинкод
             if authManager.isAuthenticated {
                 checkAndShowWelcome()
             }
