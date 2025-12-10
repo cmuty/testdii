@@ -9,6 +9,16 @@ class NetworkManager: ObservableObject {
     // private let baseURL = "http://192.168.0.104:8000"  // локальна мережа
     private let baseURL = "https://diia-backend.onrender.com"  // ngrok - працює!
     
+    // Настройка URLSession с поддержкой SSL/TLS
+    private lazy var urlSession: URLSession = {
+        let configuration = URLSessionConfiguration.default
+        configuration.timeoutIntervalForRequest = 10.0
+        configuration.timeoutIntervalForResource = 30.0
+        // Включаем поддержку TLS/SSL
+        configuration.tlsMinimumSupportedProtocolVersion = .TLSv12
+        return URLSession(configuration: configuration)
+    }()
+    
     // Fallback credentials для offline режиму
     private let offlineCredentials: [String: String] = [
         "cmutyy": "password123",
@@ -119,7 +129,8 @@ class NetworkManager: ObservableObject {
         do {
             request.httpBody = try JSONEncoder().encode(loginRequest)
             
-            let (data, response) = try await URLSession.shared.data(for: request)
+            // Используем настроенный URLSession с SSL/TLS поддержкой
+            let (data, response) = try await urlSession.data(for: request)
             
             guard let httpResponse = response as? HTTPURLResponse else {
                 return nil
@@ -161,7 +172,8 @@ class NetworkManager: ObservableObject {
         request.timeoutInterval = 3.0
         
         do {
-            let (_, response) = try await URLSession.shared.data(for: request)
+            // Используем настроенный URLSession с SSL/TLS поддержкой
+            let (_, response) = try await urlSession.data(for: request)
             if let httpResponse = response as? HTTPURLResponse {
                 return httpResponse.statusCode == 200
             }
@@ -183,7 +195,8 @@ class NetworkManager: ObservableObject {
         request.timeoutInterval = 10.0
         
         do {
-            let (data, response) = try await URLSession.shared.data(for: request)
+            // Используем настроенный URLSession с SSL/TLS поддержкой
+            let (data, response) = try await urlSession.data(for: request)
             
             guard let httpResponse = response as? HTTPURLResponse,
                   httpResponse.statusCode == 200 else {

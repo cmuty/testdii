@@ -194,10 +194,6 @@ struct AuthView: View {
                     }
                 }
                 
-                // Показуємо экран создания пинкода, если его еще нет
-                if !PinCodeManager.shared.hasPinCode() {
-                    authManager.shouldShowCreatePinCode = true
-                }
             } else {
                 errorMessage = result.message
                 showError = true

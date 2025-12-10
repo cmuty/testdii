@@ -12,8 +12,6 @@ class AuthManager: ObservableObject {
     @Published var subscriptionActive: Bool = false
     @Published var subscriptionType: String = ""
     @Published var registeredAt: String = ""
-    @Published var shouldShowCreatePinCode: Bool = false
-    @Published var shouldShowEnterPinCode: Bool = false
     
     private let userDefaults = UserDefaults.standard
     
@@ -77,8 +75,6 @@ class AuthManager: ObservableObject {
         userId = nil
         subscriptionActive = false
         subscriptionType = ""
-        shouldShowCreatePinCode = false
-        shouldShowEnterPinCode = false
         
         userDefaults.set(false, forKey: "isAuthenticated")
         userDefaults.removeObject(forKey: "userName")
