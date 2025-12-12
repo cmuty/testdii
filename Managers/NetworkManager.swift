@@ -164,21 +164,32 @@ class NetworkManager: ObservableObject {
     
     func checkServerHealth() async -> Bool {
         guard let url = URL(string: "\(baseURL)/api/health") else {
+            print("❌ Invalid health check URL")
             return false
         }
         
         var request = URLRequest(url: url)
         request.setValue("1", forHTTPHeaderField: "ngrok-skip-browser-warning")
-        request.timeoutInterval = 3.0
+        request.timeoutInterval = 10.0  // Увеличиваем timeout до 10 секунд для Render
         
         do {
+            print("🔄 Checking server health at: \(url.absoluteString)")
             // Используем настроенный URLSession с SSL/TLS поддержкой
-            let (_, response) = try await urlSession.data(for: request)
+            let (data, response) = try await urlSession.data(for: request)
+            
             if let httpResponse = response as? HTTPURLResponse {
+                print("✅ Health check response: \(httpResponse.statusCode)")
+                if let dataString = String(data: data, encoding: .utf8) {
+                    print("📄 Response data: \(dataString)")
+                }
                 return httpResponse.statusCode == 200
             }
         } catch {
-            print("Server health check failed: \(error.localizedDescription)")
+            print("❌ Server health check failed: \(error.localizedDescription)")
+            if let urlError = error as? URLError {
+                print("   URL Error code: \(urlError.code.rawValue)")
+                print("   URL Error description: \(urlError.localizedDescription)")
+            }
         }
         
         return false
