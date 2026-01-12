@@ -39,6 +39,7 @@
 		2A000000000000000000001F /* EnterPinCodeAuthDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B000000000000000000001F /* EnterPinCodeAuthDelegate.swift */; };
 		2A0000000000000000000020 /* PinCodeModuleWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0000000000000000000020 /* PinCodeModuleWrappers.swift */; };
 		2A0000000000000000000021 /* EnterPinCodeModuleContext+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0000000000000000000021 /* EnterPinCodeModuleContext+Extension.swift */; };
+		2A0000000000000000000022 /* SubscriptionValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0000000000000000000022 /* SubscriptionValidator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +76,7 @@
 		2B000000000000000000001F /* EnterPinCodeAuthDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPinCodeAuthDelegate.swift; sourceTree = "<group>"; };
 		2B0000000000000000000020 /* PinCodeModuleWrappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinCodeModuleWrappers.swift; sourceTree = "<group>"; };
 		2B0000000000000000000021 /* EnterPinCodeModuleContext+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EnterPinCodeModuleContext+Extension.swift"; sourceTree = "<group>"; };
+		2B0000000000000000000022 /* SubscriptionValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionValidator.swift; sourceTree = "<group>"; };
 		2C0000000000000000000001 /* DiiaApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiiaApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -125,6 +127,7 @@
 			children = (
 				2B0000000000000000000004 /* AuthManager.swift */,
 				2B0000000000000000000013 /* NetworkManager.swift */,
+				2B0000000000000000000022 /* SubscriptionValidator.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 				2A000000000000000000001F /* EnterPinCodeAuthDelegate.swift in Sources */,
 				2A0000000000000000000020 /* PinCodeModuleWrappers.swift in Sources */,
 				2A0000000000000000000021 /* EnterPinCodeModuleContext+Extension.swift in Sources */,
+				2A0000000000000000000022 /* SubscriptionValidator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
