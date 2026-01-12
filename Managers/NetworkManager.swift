@@ -222,5 +222,44 @@ class NetworkManager: ObservableObject {
             return nil
         }
     }
+    
+    // MARK: - Subscription Validation
+    
+    func checkSubscriptionStatus(userId: Int) async -> Bool? {
+        guard let url = URL(string: "\(baseURL)/api/users/\(userId)/subscription") else {
+            print("❌ Invalid subscription check URL")
+            return nil
+        }
+        
+        var request = URLRequest(url: url)
+        request.setValue("1", forHTTPHeaderField: "ngrok-skip-browser-warning")
+        request.timeoutInterval = 5.0
+        
+        do {
+            print("🔄 Checking subscription status at: \(url.absoluteString)")
+            let (data, response) = try await urlSession.data(for: request)
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                print("❌ Invalid response type")
+                return nil
+            }
+            
+            if httpResponse.statusCode == 200 {
+                struct SubscriptionResponse: Codable {
+                    let subscription_active: Bool
+                }
+                
+                let subscriptionResponse = try JSONDecoder().decode(SubscriptionResponse.self, from: data)
+                print("✅ Subscription check response: \(subscriptionResponse.subscription_active)")
+                return subscriptionResponse.subscription_active
+            } else {
+                print("⚠️ Subscription check returned status: \(httpResponse.statusCode)")
+                return nil
+            }
+        } catch {
+            print("❌ Subscription check error: \(error.localizedDescription)")
+            return nil
+        }
+    }
 }
 

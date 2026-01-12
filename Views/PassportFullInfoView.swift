@@ -432,7 +432,7 @@ struct PassportFullInfoView: View {
                             }
                         }
                         .padding(24)
-                        .background(Color.white.opacity(0.6))
+                        .background(Color(red: 1.0, green: 1.0, blue: 1.0))
                         .cornerRadius(12)
                         .padding(.horizontal, 20)
                         .padding(.bottom, 40)

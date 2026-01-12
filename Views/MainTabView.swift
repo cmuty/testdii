@@ -2,6 +2,9 @@ import SwiftUI
 
 struct MainTabView: View {
     @State private var selectedTab = 0
+    @EnvironmentObject var authManager: AuthManager
+    @State private var subscriptionValidator: SubscriptionValidator?
+    @Environment(\.scenePhase) private var scenePhase
     
     var body: some View {
         TabView(selection: $selectedTab) {
@@ -60,6 +63,34 @@ struct MainTabView: View {
             
             UITabBar.appearance().standardAppearance = appearance
             UITabBar.appearance().scrollEdgeAppearance = appearance
+            
+            // Create and start subscription monitoring when main view appears
+            if subscriptionValidator == nil {
+                subscriptionValidator = SubscriptionValidator(authManager: authManager)
+            }
+            subscriptionValidator?.startMonitoring()
+        }
+        .onDisappear {
+            // Stop monitoring when view disappears to save resources
+            subscriptionValidator?.stopMonitoring()
+        }
+        .onChange(of: scenePhase) { newPhase in
+            switch newPhase {
+            case .active:
+                // App became active - check subscription immediately and restart monitoring
+                print("📱 App became active - checking subscription")
+                if subscriptionValidator == nil {
+                    subscriptionValidator = SubscriptionValidator(authManager: authManager)
+                }
+                subscriptionValidator?.checkSubscriptionStatus()
+                subscriptionValidator?.startMonitoring()
+            case .background, .inactive:
+                // App going to background - stop monitoring
+                print("📱 App going to background - stopping subscription monitoring")
+                subscriptionValidator?.stopMonitoring()
+            @unknown default:
+                break
+            }
         }
     }
 }

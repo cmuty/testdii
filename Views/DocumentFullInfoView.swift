@@ -159,18 +159,23 @@ struct DocumentFullInfoView: View {
                         .cornerRadius(12)
                         .padding(.horizontal, 20)
                         
-                        // QR Code Card
-                        VStack(spacing: 16) {
-                            if let qrImage = generateStaticQRCode() {
-                                Image(uiImage: qrImage)
+                        // Barcode Card
+                        VStack(spacing: 20) {
+                            if let barcodeImage = generateBarcode(from: generateBarcodeNumber()) {
+                                Image(uiImage: barcodeImage)
                                     .interpolation(.none)
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(width: 280, height: 280)
+                                    .frame(width: 320, height: 100)
                             }
+                            
+                            Text(formatBarcodeNumber(generateBarcodeNumber()))
+                                .font(.system(size: 22, weight: .medium))
+                                .foregroundColor(.black)
+                                .tracking(5)
                         }
                         .padding(24)
-                        .background(Color.white.opacity(0.6))
+                        .background(Color(red: 1.0, green: 1.0, blue: 1.0))
                         .cornerRadius(12)
                         .padding(.horizontal, 20)
                         .padding(.bottom, 40)
@@ -208,28 +213,31 @@ struct DocumentFullInfoView: View {
         return StaticDataGenerator.shared.getPassportNumber()
     }
     
-    private func generateStaticQRCode() -> UIImage? {
-        // Генерируем URL для QR
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyyMMdd"
-        let dateString = dateFormatter.string(from: Date())
-        
-        let randomNum = Int.random(in: 10000...99999)
-        
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let fullDate = dateFormatter.string(from: Date())
-        
-        let datePart = "\(dateString)-\(randomNum)-\(fullDate)"
-        let verifyPart = UUID().uuidString.lowercased()
-        let url = "https://diia.app/documents/internal-passport/\(datePart)/verify/\(verifyPart)"
-        
+    private func generateBarcodeNumber() -> String {
+        // Generate a random 13-digit barcode number
+        let randomNum = (0..<13).map { _ in String(Int.random(in: 0...9)) }.joined()
+        return randomNum
+    }
+    
+    private func formatBarcodeNumber(_ number: String) -> String {
+        // Format barcode number with spaces for readability
+        var formatted = ""
+        for (index, char) in number.enumerated() {
+            if index > 0 && index % 4 == 0 {
+                formatted += " "
+            }
+            formatted.append(char)
+        }
+        return formatted
+    }
+    
+    func generateBarcode(from string: String) -> UIImage? {
         let context = CIContext()
-        let filter = CIFilter.qrCodeGenerator()
-        filter.message = Data(url.utf8)
-        filter.correctionLevel = "M"
+        let filter = CIFilter.code128BarcodeGenerator()
+        filter.message = Data(string.utf8)
         
         if let outputImage = filter.outputImage {
-            let transform = CGAffineTransform(scaleX: 10, y: 10)
+            let transform = CGAffineTransform(scaleX: 3, y: 3)
             let scaledImage = outputImage.transformed(by: transform)
             
             if let cgImage = context.createCGImage(scaledImage, from: scaledImage.extent) {

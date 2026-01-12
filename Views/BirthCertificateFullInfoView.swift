@@ -4,8 +4,18 @@ import CoreImage.CIFilterBuiltins
 struct BirthCertificateFullInfoView: View {
     @Binding var isPresented: Bool
     let user: User
+    @State private var verificationData = VerificationData()
+    @State private var timeRemaining: TimeInterval = 180
+    @State private var timer: Timer?
+    @State private var showingQR = true
     
     private let generator = StaticDataGenerator.shared
+    
+    var timeString: String {
+        let minutes = Int(timeRemaining) / 60
+        let seconds = Int(timeRemaining) % 60
+        return String(format: "%d:%02d", minutes, seconds)
+    }
     
     var fatherData: StaticDataGenerator.ParentData {
         generator.getFatherData(userLastName: user.lastName, userPatronymic: user.patronymic)
@@ -352,18 +362,84 @@ struct BirthCertificateFullInfoView: View {
                         .cornerRadius(12)
                         .padding(.horizontal, 20)
                         
-                        // QR Code Card
+                        // QR/Barcode Card with toggle
                         VStack(spacing: 16) {
-                            if let qrImage = generateStaticQRCode() {
-                                Image(uiImage: qrImage)
-                                    .interpolation(.none)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 280, height: 280)
+                            Text("Код діятиме ще \(timeString) хв")
+                                .font(.system(size: 16, weight: .regular))
+                                .foregroundColor(.gray)
+                            
+                            if showingQR {
+                                if let qrImage = generateQRCode(from: verificationData.url) {
+                                    Image(uiImage: qrImage)
+                                        .interpolation(.none)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 250, height: 250)
+                                }
+                            } else {
+                                VStack(spacing: 20) {
+                                    if let barcodeImage = generateBarcode(from: verificationData.barcodeNumber) {
+                                        Image(uiImage: barcodeImage)
+                                            .interpolation(.none)
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 320, height: 100)
+                                    }
+                                    
+                                    Text(verificationData.barcodeFormatted)
+                                        .font(.system(size: 22, weight: .medium))
+                                        .foregroundColor(.black)
+                                        .tracking(5)
+                                }
+                            }
+                            
+                            // Toggle buttons
+                            HStack(spacing: 40) {
+                                Button(action: {
+                                    withAnimation(.spring(response: 0.3)) {
+                                        showingQR = true
+                                    }
+                                }) {
+                                    VStack(spacing: 8) {
+                                        Circle()
+                                            .fill(showingQR ? Color.black : Color.gray.opacity(0.3))
+                                            .frame(width: 56, height: 56)
+                                            .overlay(
+                                                Image(systemName: "qrcode")
+                                                    .font(.system(size: 24))
+                                                    .foregroundColor(.white)
+                                            )
+                                        
+                                        Text("QR-код")
+                                            .font(.system(size: 15, weight: .regular))
+                                            .foregroundColor(.black)
+                                    }
+                                }
+                                
+                                Button(action: {
+                                    withAnimation(.spring(response: 0.3)) {
+                                        showingQR = false
+                                    }
+                                }) {
+                                    VStack(spacing: 8) {
+                                        Circle()
+                                            .fill(!showingQR ? Color.black : Color.gray.opacity(0.3))
+                                            .frame(width: 56, height: 56)
+                                            .overlay(
+                                                Image(systemName: "barcode")
+                                                    .font(.system(size: 24))
+                                                    .foregroundColor(.white)
+                                            )
+                                        
+                                        Text("Штрихкод")
+                                            .font(.system(size: 15, weight: .regular))
+                                            .foregroundColor(.black)
+                                    }
+                                }
                             }
                         }
                         .padding(24)
-                        .background(Color.white.opacity(0.6))
+                        .background(Color(red: 1.0, green: 1.0, blue: 1.0))
                         .cornerRadius(12)
                         .padding(.horizontal, 20)
                         .padding(.bottom, 40)
@@ -379,30 +455,49 @@ struct BirthCertificateFullInfoView: View {
                 }
             }
         }
+        .onAppear {
+            startTimer()
+        }
+        .onDisappear {
+            timer?.invalidate()
+        }
     }
     
-    private func generateStaticQRCode() -> UIImage? {
-        // Генерируем URL для QR
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyyMMdd"
-        let dateString = dateFormatter.string(from: Date())
-        
-        let randomNum = Int.random(in: 10000...99999)
-        
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let fullDate = dateFormatter.string(from: Date())
-        
-        let datePart = "\(dateString)-\(randomNum)-\(fullDate)"
-        let verifyPart = UUID().uuidString.lowercased()
-        let url = "https://diia.app/documents/birth-certificate/\(datePart)/verify/\(verifyPart)"
-        
+    private func startTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            if timeRemaining > 0 {
+                timeRemaining -= 1
+            } else {
+                verificationData = VerificationData()
+                timeRemaining = 180
+            }
+        }
+    }
+    
+    func generateQRCode(from string: String) -> UIImage? {
         let context = CIContext()
         let filter = CIFilter.qrCodeGenerator()
-        filter.message = Data(url.utf8)
+        filter.message = Data(string.utf8)
         filter.correctionLevel = "M"
         
         if let outputImage = filter.outputImage {
             let transform = CGAffineTransform(scaleX: 10, y: 10)
+            let scaledImage = outputImage.transformed(by: transform)
+            
+            if let cgImage = context.createCGImage(scaledImage, from: scaledImage.extent) {
+                return UIImage(cgImage: cgImage)
+            }
+        }
+        return nil
+    }
+    
+    func generateBarcode(from string: String) -> UIImage? {
+        let context = CIContext()
+        let filter = CIFilter.code128BarcodeGenerator()
+        filter.message = Data(string.utf8)
+        
+        if let outputImage = filter.outputImage {
+            let transform = CGAffineTransform(scaleX: 3, y: 3)
             let scaledImage = outputImage.transformed(by: transform)
             
             if let cgImage = context.createCGImage(scaledImage, from: scaledImage.extent) {
