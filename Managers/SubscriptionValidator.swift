@@ -96,6 +96,6 @@ class SubscriptionValidator: ObservableObject {
     
     private func handleSubscriptionExpired() {
         print("🚪 Handling subscription expiry - performing logout")
-        authManager.logout()
+        authManager?.logout()
     }
 }
